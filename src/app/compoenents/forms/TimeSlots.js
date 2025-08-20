@@ -1,0 +1,225 @@
+// app/components/forms/TimeSlots.js
+'use client';
+
+import { useState } from 'react';
+import { Clock, Plus, Trash2, RotateCcw } from 'lucide-react';
+import { generateId } from '../../utils/dataStructure';
+
+export default function TimeSlots({ data, onChange, universityData }) {
+  const [timeSlots, setTimeSlots] = useState(data || []);
+
+  const updateTimeSlots = (newSlots) => {
+    setTimeSlots(newSlots);
+    onChange(newSlots);
+  };
+
+  const addTimeSlot = () => {
+    const lastSlot = timeSlots[timeSlots.length - 1];
+    const newStartTime = lastSlot ? lastSlot.endTime : "08:00";
+    
+    const newSlot = {
+      id: generateId(),
+      startTime: newStartTime,
+      endTime: addMinutes(newStartTime, universityData.basicInfo.periodDuration || 60),
+      name: `Period ${timeSlots.length + 1}`
+    };
+    
+    updateTimeSlots([...timeSlots, newSlot]);
+  };
+
+  const removeTimeSlot = (id) => {
+    updateTimeSlots(timeSlots.filter(slot => slot.id !== id));
+  };
+
+  const updateTimeSlot = (id, field, value) => {
+    updateTimeSlots(timeSlots.map(slot => 
+      slot.id === id ? { ...slot, [field]: value } : slot
+    ));
+  };
+
+  const generateDefaultSlots = () => {
+    const { dailyPeriods = 8, periodDuration = 60, lunchBreakStart = "12:00", lunchBreakEnd = "13:00" } = universityData.basicInfo;
+    const slots = [];
+    let currentTime = "08:00";
+    
+    for (let i = 1; i <= dailyPeriods; i++) {
+      // Skip lunch break period
+      if (currentTime >= lunchBreakStart && currentTime < lunchBreakEnd) {
+        currentTime = lunchBreakEnd;
+      }
+      
+      const endTime = addMinutes(currentTime, periodDuration);
+      slots.push({
+        id: generateId(),
+        startTime: currentTime,
+        endTime: endTime,
+        name: `Period ${i}`
+      });
+      
+      currentTime = endTime;
+    }
+    
+    updateTimeSlots(slots);
+  };
+
+  // Helper function to add minutes to time string
+  function addMinutes(timeStr, minutes) {
+    const [hours, mins] = timeStr.split(':').map(Number);
+    const totalMinutes = hours * 60 + mins + minutes;
+    const newHours = Math.floor(totalMinutes / 60);
+    const newMins = totalMinutes % 60;
+    return `${newHours.toString().padStart(2, '0')}:${newMins.toString().padStart(2, '0')}`;
+  }
+
+  return (
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <Clock className="text-blue-600" size={24} />
+          <div>
+            <h3 className="text-xl font-semibold text-gray-900">Time Slots Configuration</h3>
+            <p className="text-gray-600">Define the daily time periods for classes</p>
+          </div>
+        </div>
+        
+        <div className="flex gap-2">
+          <button
+            onClick={generateDefaultSlots}
+            className="flex items-center gap-2 btn-secondary"
+          >
+            <RotateCcw size={16} />
+            Auto Generate
+          </button>
+          <button
+            onClick={addTimeSlot}
+            className="flex items-center gap-2 btn-primary"
+          >
+            <Plus size={16} />
+            Add Slot
+          </button>
+        </div>
+      </div>
+
+      {/* Time Slots List */}
+      <div className="card">
+        {timeSlots.length === 0 ? (
+          <div className="text-center py-8">
+            <Clock size={48} className="mx-auto text-gray-400 mb-4" />
+            <h4 className="text-lg font-medium text-gray-900 mb-2">No Time Slots Configured</h4>
+            <p className="text-gray-600 mb-4">Add time slots manually or use auto-generate to create default slots</p>
+            <button onClick={generateDefaultSlots} className="btn-primary">
+              Generate Default Slots
+            </button>
+          </div>
+        ) : (
+          <div className="space-y-4">
+            <div className="grid grid-cols-12 gap-4 text-sm font-medium text-gray-700 border-b pb-2">
+              <div className="col-span-3">Period Name</div>
+              <div className="col-span-3">Start Time</div>
+              <div className="col-span-3">End Time</div>
+              <div className="col-span-2">Duration</div>
+              <div className="col-span-1">Actions</div>
+            </div>
+            
+            {timeSlots.map((slot, index) => {
+              const duration = calculateDuration(slot.startTime, slot.endTime);
+              return (
+                <div key={slot.id} className="grid grid-cols-12 gap-4 items-center py-2 border-b border-gray-100 last:border-b-0">
+                  <div className="col-span-3">
+                    <input
+                      type="text"
+                      value={slot.name}
+                      onChange={(e) => updateTimeSlot(slot.id, 'name', e.target.value)}
+                      className="input-field"
+                      placeholder="Period name"
+                    />
+                  </div>
+                  
+                  <div className="col-span-3">
+                    <input
+                      type="time"
+                      value={slot.startTime}
+                      onChange={(e) => updateTimeSlot(slot.id, 'startTime', e.target.value)}
+                      className="input-field"
+                    />
+                  </div>
+                  
+                  <div className="col-span-3">
+                    <input
+                      type="time"
+                      value={slot.endTime}
+                      onChange={(e) => updateTimeSlot(slot.id, 'endTime', e.target.value)}
+                      className="input-field"
+                    />
+                  </div>
+                  
+                  <div className="col-span-2">
+                    <span className="text-sm text-gray-600">{duration} min</span>
+                  </div>
+                  
+                  <div className="col-span-1">
+                    <button
+                      onClick={() => removeTimeSlot(slot.id)}
+                      className="text-red-600 hover:text-red-800 p-1"
+                      title="Remove time slot"
+                    >
+                      <Trash2 size={16} />
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+
+      {/* Summary */}
+      {timeSlots.length > 0 && (
+        <div className="card bg-gray-50">
+          <h4 className="text-lg font-medium text-gray-900 mb-4">Schedule Summary</h4>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+            <div>
+              <span className="font-medium text-gray-700">Total Periods:</span>
+              <div className="text-lg font-bold text-blue-600">{timeSlots.length}</div>
+            </div>
+            <div>
+              <span className="font-medium text-gray-700">First Period:</span>
+              <div className="text-lg font-bold text-green-600">
+                {timeSlots[0]?.startTime || 'N/A'}
+              </div>
+            </div>
+            <div>
+              <span className="font-medium text-gray-700">Last Period:</span>
+              <div className="text-lg font-bold text-purple-600">
+                {timeSlots[timeSlots.length - 1]?.endTime || 'N/A'}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Tips */}
+      <div className="card border-l-4 border-l-blue-500 bg-blue-50">
+        <h4 className="text-sm font-medium text-blue-900 mb-2">💡 Tips for Time Slot Configuration</h4>
+        <ul className="text-sm text-blue-800 space-y-1">
+          <li>• Ensure time slots don't overlap with lunch break periods</li>
+          <li>• Consider 15-minute breaks between periods for student movement</li>
+          <li>• Standard periods are usually 50-60 minutes long</li>
+          <li>• Lab sessions typically require 2-3 consecutive periods</li>
+          <li>• Morning periods usually have better attendance</li>
+        </ul>
+      </div>
+    </div>
+  );
+
+  function calculateDuration(startTime, endTime) {
+    const [startHours, startMins] = startTime.split(':').map(Number);
+    const [endHours, endMins] = endTime.split(':').map(Number);
+    
+    const startTotal = startHours * 60 + startMins;
+    const endTotal = endHours * 60 + endMins;
+    
+    return endTotal - startTotal;
+  }
+}
