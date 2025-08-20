@@ -203,7 +203,7 @@ export default function TimeSlots({ data, onChange, universityData }) {
       <div className="card border-l-4 border-l-blue-500 bg-blue-50">
         <h4 className="text-sm font-medium text-blue-900 mb-2">💡 Tips for Time Slot Configuration</h4>
         <ul className="text-sm text-blue-800 space-y-1">
-          <li>• Ensure time slots don't overlap with lunch break periods</li>
+          <li>• Ensure time slots don&apos;t overlap with lunch break periods</li>
           <li>• Consider 15-minute breaks between periods for student movement</li>
           <li>• Standard periods are usually 50-60 minutes long</li>
           <li>• Lab sessions typically require 2-3 consecutive periods</li>
