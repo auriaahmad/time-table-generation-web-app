@@ -1,6 +1,6 @@
 // app/utils/dataStructure.js
 
-// Default data structure for university resources
+// Clean slate - no default values
 export const defaultUniversityData = {
   basicInfo: {
     universityName: "",
@@ -15,103 +15,17 @@ export const defaultUniversityData = {
     lunchBreakEnd: "13:00"
   },
   
-  timeSlots: [
-    { id: 1, startTime: "08:00", endTime: "09:00", name: "Period 1" },
-    { id: 2, startTime: "09:00", endTime: "10:00", name: "Period 2" },
-    { id: 3, startTime: "10:00", endTime: "11:00", name: "Period 3" },
-    { id: 4, startTime: "11:00", endTime: "12:00", name: "Period 4" },
-    { id: 5, startTime: "13:00", endTime: "14:00", name: "Period 5" },
-    { id: 6, startTime: "14:00", endTime: "15:00", name: "Period 6" },
-    { id: 7, startTime: "15:00", endTime: "16:00", name: "Period 7" },
-    { id: 8, startTime: "16:00", endTime: "17:00", name: "Period 8" }
-  ],
+  timeSlots: [], // Empty - no default time slots
   
-  departments: [
-    {
-      id: 1,
-      name: "",
-      code: "",
-      head: "",
-      programs: []
-    }
-  ],
+  departments: [], // Empty - no default departments
   
-  teachers: [
-    {
-      id: 1,
-      name: "",
-      employeeId: "",
-      department: "",
-      designation: "Lecturer", // Lecturer, Assistant Professor, Associate Professor, Professor
-      email: "",
-      phone: "",
-      qualifications: [],
-      subjectsCanTeach: [],
-      maxHoursPerWeek: 18,
-      minHoursPerWeek: 12,
-      preferredTimeSlots: [],
-      unavailableSlots: [],
-      preferredDays: [],
-      researchDays: [],
-      maxConsecutiveHours: 4,
-      maxGapHours: 2
-    }
-  ],
+  teachers: [], // Empty - no default teachers
   
-  subjects: [
-    {
-      id: 1,
-      name: "",
-      code: "",
-      department: "",
-      credits: 3,
-      type: "Theory", // Theory, Lab, Tutorial, Practical
-      hoursPerWeek: 3,
-      duration: 60, // minutes per session
-      semester: 1,
-      year: 1,
-      isElective: false,
-      prerequisites: [],
-      maxStudents: 60,
-      requiredRoomType: "Classroom",
-      equipmentRequired: [],
-      description: ""
-    }
-  ],
+  subjects: [], // Empty - no default subjects
   
-  rooms: [
-    {
-      id: 1,
-      name: "",
-      building: "",
-      floor: 1,
-      type: "Classroom", // Classroom, Laboratory, Auditorium, Seminar Room, Studio
-      capacity: 50,
-      equipment: [], // Projector, Computer, Whiteboard, etc.
-      isAccessible: false,
-      hasAC: false,
-      unavailableSlots: [],
-      preferredFor: [], // Subject types or departments
-      maintenanceSlots: []
-    }
-  ],
+  rooms: [], // Empty - no default rooms
   
-  students: [
-    {
-      id: 1,
-      batch: "",
-      department: "",
-      year: 1,
-      semester: 1,
-      section: "A",
-      totalStudents: 60,
-      subjects: [], // Subject IDs they are enrolled in
-      type: "Full-time", // Full-time, Part-time, Evening
-      maxHoursPerDay: 8,
-      preferredTimeSlots: [],
-      unavailableSlots: []
-    }
-  ],
+  students: [], // Empty - no default students
   
   constraints: {
     hard: {
@@ -143,7 +57,107 @@ export const defaultUniversityData = {
   }
 };
 
-// Validation functions
+// Global counters for consistent ID generation
+let idCounters = {
+  teachers: 0,
+  subjects: 0,
+  rooms: 0,
+  students: 0,
+  departments: 0,
+  timeSlots: 0
+};
+
+// Simple ID generator that uses incrementing numbers
+export const generateId = (type = 'general') => {
+  if (idCounters[type] !== undefined) {
+    idCounters[type]++;
+    return idCounters[type];
+  }
+  // For general use, return timestamp-based but shorter
+  return Date.now();
+};
+
+// Reset ID counters
+export const resetIdCounters = () => {
+  idCounters = {
+    teachers: 0,
+    subjects: 0,
+    rooms: 0,
+    students: 0,
+    departments: 0,
+    timeSlots: 0
+  };
+};
+
+// Initialize ID counters based on existing data
+export const initializeIdCounters = (data) => {
+  if (data.teachers) {
+    idCounters.teachers = Math.max(0, ...data.teachers.map(t => typeof t.id === 'number' ? t.id : 0));
+  }
+  if (data.subjects) {
+    idCounters.subjects = Math.max(0, ...data.subjects.map(s => typeof s.id === 'number' ? s.id : 0));
+  }
+  if (data.rooms) {
+    idCounters.rooms = Math.max(0, ...data.rooms.map(r => typeof r.id === 'number' ? r.id : 0));
+  }
+  if (data.students) {
+    idCounters.students = Math.max(0, ...data.students.map(s => typeof s.id === 'number' ? s.id : 0));
+  }
+  if (data.departments) {
+    idCounters.departments = Math.max(0, ...data.departments.map(d => typeof d.id === 'number' ? d.id : 0));
+  }
+  if (data.timeSlots) {
+    idCounters.timeSlots = Math.max(0, ...data.timeSlots.map(t => typeof t.id === 'number' ? t.id : 0));
+  }
+};
+
+export const exportToJSON = (data) => {
+  const validatedData = {
+    ...data,
+    metadata: {
+      ...data.metadata,
+      lastModified: new Date().toISOString(),
+      exportedAt: new Date().toISOString()
+    }
+  };
+  
+  const blob = new Blob([JSON.stringify(validatedData, null, 2)], {
+    type: 'application/json'
+  });
+  
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `university-resources-${new Date().toISOString().split('T')[0]}.json`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+};
+
+export const importFromJSON = (file) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const data = JSON.parse(e.target.result);
+        // Validate imported data structure
+        if (data.basicInfo !== undefined && data.teachers !== undefined && data.subjects !== undefined && data.rooms !== undefined) {
+          // Initialize ID counters based on imported data
+          initializeIdCounters(data);
+          resolve(data);
+        } else {
+          reject(new Error('Invalid file format'));
+        }
+      } catch (error) {
+        reject(new Error('Invalid JSON file'));
+      }
+    };
+    reader.onerror = () => reject(new Error('Error reading file'));
+    reader.readAsText(file);
+  });
+};
+
 export const validateUniversityData = (data) => {
   const errors = [];
   
@@ -193,54 +207,4 @@ export const validateUniversityData = (data) => {
   });
   
   return errors;
-};
-
-// Helper functions
-export const generateId = () => {
-  return Date.now() + Math.random().toString(36).substr(2, 9);
-};
-
-export const exportToJSON = (data) => {
-  const validatedData = {
-    ...data,
-    metadata: {
-      ...data.metadata,
-      lastModified: new Date().toISOString(),
-      exportedAt: new Date().toISOString()
-    }
-  };
-  
-  const blob = new Blob([JSON.stringify(validatedData, null, 2)], {
-    type: 'application/json'
-  });
-  
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = `university-resources-${new Date().toISOString().split('T')[0]}.json`;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-  URL.revokeObjectURL(url);
-};
-
-export const importFromJSON = (file) => {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      try {
-        const data = JSON.parse(e.target.result);
-        // Validate imported data structure
-        if (data.basicInfo && data.teachers && data.subjects && data.rooms) {
-          resolve(data);
-        } else {
-          reject(new Error('Invalid file format'));
-        }
-      } catch (error) {
-        reject(new Error('Invalid JSON file'));
-      }
-    };
-    reader.onerror = () => reject(new Error('Error reading file'));
-    reader.readAsText(file);
-  });
 };

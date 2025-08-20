@@ -18,10 +18,9 @@ export default function TimeSlots({ data, onChange, universityData }) {
     const newStartTime = lastSlot ? lastSlot.endTime : "08:00";
     
     const newSlot = {
-      id: generateId(),
+      id: generateId('timeSlots'),
       startTime: newStartTime,
-      endTime: addMinutes(newStartTime, universityData.basicInfo.periodDuration || 60),
-      name: `Period ${timeSlots.length + 1}`
+      endTime: addMinutes(newStartTime, universityData.basicInfo?.periodDuration || 60)
     };
     
     updateTimeSlots([...timeSlots, newSlot]);
@@ -38,7 +37,7 @@ export default function TimeSlots({ data, onChange, universityData }) {
   };
 
   const generateDefaultSlots = () => {
-    const { dailyPeriods = 8, periodDuration = 60, lunchBreakStart = "12:00", lunchBreakEnd = "13:00" } = universityData.basicInfo;
+    const { dailyPeriods = 8, periodDuration = 60, lunchBreakStart = "12:00", lunchBreakEnd = "13:00" } = universityData.basicInfo || {};
     const slots = [];
     let currentTime = "08:00";
     
@@ -50,10 +49,9 @@ export default function TimeSlots({ data, onChange, universityData }) {
       
       const endTime = addMinutes(currentTime, periodDuration);
       slots.push({
-        id: generateId(),
+        id: generateId('timeSlots'),
         startTime: currentTime,
-        endTime: endTime,
-        name: `Period ${i}`
+        endTime: endTime
       });
       
       currentTime = endTime;
@@ -69,6 +67,17 @@ export default function TimeSlots({ data, onChange, universityData }) {
     const newHours = Math.floor(totalMinutes / 60);
     const newMins = totalMinutes % 60;
     return `${newHours.toString().padStart(2, '0')}:${newMins.toString().padStart(2, '0')}`;
+  }
+
+  // Calculate duration between two times
+  function calculateDuration(startTime, endTime) {
+    const [startHours, startMins] = startTime.split(':').map(Number);
+    const [endHours, endMins] = endTime.split(':').map(Number);
+    
+    const startTotal = startHours * 60 + startMins;
+    const endTotal = endHours * 60 + endMins;
+    
+    return endTotal - startTotal;
   }
 
   return (
@@ -114,26 +123,24 @@ export default function TimeSlots({ data, onChange, universityData }) {
           </div>
         ) : (
           <div className="space-y-4">
-            <div className="grid grid-cols-12 gap-4 text-sm font-medium text-gray-700 border-b pb-2">
-              <div className="col-span-3">Period Name</div>
+            {/* Header Row */}
+            <div className="grid grid-cols-10 gap-4 text-sm font-medium text-gray-700 border-b pb-2">
+              <div className="col-span-1">Slot #</div>
               <div className="col-span-3">Start Time</div>
               <div className="col-span-3">End Time</div>
               <div className="col-span-2">Duration</div>
               <div className="col-span-1">Actions</div>
             </div>
             
+            {/* Time Slot Rows */}
             {timeSlots.map((slot, index) => {
               const duration = calculateDuration(slot.startTime, slot.endTime);
               return (
-                <div key={slot.id} className="grid grid-cols-12 gap-4 items-center py-2 border-b border-gray-100 last:border-b-0">
-                  <div className="col-span-3">
-                    <input
-                      type="text"
-                      value={slot.name}
-                      onChange={(e) => updateTimeSlot(slot.id, 'name', e.target.value)}
-                      className="input-field"
-                      placeholder="Period name"
-                    />
+                <div key={slot.id} className="grid grid-cols-10 gap-4 items-center py-2 border-b border-gray-100 last:border-b-0">
+                  <div className="col-span-1">
+                    <span className="text-sm font-medium text-gray-600">
+                      {index + 1}
+                    </span>
                   </div>
                   
                   <div className="col-span-3">
@@ -155,7 +162,9 @@ export default function TimeSlots({ data, onChange, universityData }) {
                   </div>
                   
                   <div className="col-span-2">
-                    <span className="text-sm text-gray-600">{duration} min</span>
+                    <span className="text-sm text-gray-600 font-medium">
+                      {duration > 0 ? `${duration} min` : 'Invalid'}
+                    </span>
                   </div>
                   
                   <div className="col-span-1">
@@ -178,7 +187,7 @@ export default function TimeSlots({ data, onChange, universityData }) {
       {timeSlots.length > 0 && (
         <div className="card bg-gray-50">
           <h4 className="text-lg font-medium text-gray-900 mb-4">Schedule Summary</h4>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
             <div>
               <span className="font-medium text-gray-700">Total Periods:</span>
               <div className="text-lg font-bold text-blue-600">{timeSlots.length}</div>
@@ -195,6 +204,15 @@ export default function TimeSlots({ data, onChange, universityData }) {
                 {timeSlots[timeSlots.length - 1]?.endTime || 'N/A'}
               </div>
             </div>
+            <div>
+              <span className="font-medium text-gray-700">Total Duration:</span>
+              <div className="text-lg font-bold text-orange-600">
+                {timeSlots.length > 0 && timeSlots[0]?.startTime && timeSlots[timeSlots.length - 1]?.endTime
+                  ? `${calculateDuration(timeSlots[0].startTime, timeSlots[timeSlots.length - 1].endTime)} min`
+                  : 'N/A'
+                }
+              </div>
+            </div>
           </div>
         </div>
       )}
@@ -203,23 +221,14 @@ export default function TimeSlots({ data, onChange, universityData }) {
       <div className="card border-l-4 border-l-blue-500 bg-blue-50">
         <h4 className="text-sm font-medium text-blue-900 mb-2">💡 Tips for Time Slot Configuration</h4>
         <ul className="text-sm text-blue-800 space-y-1">
-          <li>• Ensure time slots don&apos;t overlap with lunch break periods</li>
+          <li>• Ensure time slots dont overlap with lunch break periods</li>
           <li>• Consider 15-minute breaks between periods for student movement</li>
           <li>• Standard periods are usually 50-60 minutes long</li>
           <li>• Lab sessions typically require 2-3 consecutive periods</li>
           <li>• Morning periods usually have better attendance</li>
+          <li>• Subjects will be automatically assigned to these time slots during timetable generation</li>
         </ul>
       </div>
     </div>
   );
-
-  function calculateDuration(startTime, endTime) {
-    const [startHours, startMins] = startTime.split(':').map(Number);
-    const [endHours, endMins] = endTime.split(':').map(Number);
-    
-    const startTotal = startHours * 60 + startMins;
-    const endTotal = endHours * 60 + endMins;
-    
-    return endTotal - startTotal;
-  }
 }

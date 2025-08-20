@@ -2,8 +2,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Download, Upload, Save, Eye, AlertCircle, CheckCircle } from 'lucide-react';
-import { defaultUniversityData, exportToJSON, importFromJSON, validateUniversityData } from '../utils/dataStructure';
+import { Download, Upload, Save, Eye, AlertCircle, CheckCircle, Trash, RotateCcw } from 'lucide-react';
+import { defaultUniversityData, exportToJSON, importFromJSON, validateUniversityData, resetIdCounters, initializeIdCounters } from '../utils/dataStructure';
 
 import BasicInfo from './forms/BasicInfo';
 import Departments from './forms/Departments';
@@ -18,6 +18,8 @@ export default function ResourceManager() {
   const [universityData, setUniversityData] = useState(defaultUniversityData);
   const [activeTab, setActiveTab] = useState('basicInfo');
   const [showFileUpload, setShowFileUpload] = useState(false);
+  const [showClearConfirm, setShowClearConfirm] = useState(false);
+  const [clearType, setClearType] = useState('all'); // 'all' or 'current'
   const [validationErrors, setValidationErrors] = useState([]);
   const [saveStatus, setSaveStatus] = useState('');
 
@@ -47,7 +49,9 @@ export default function ResourceManager() {
     const saved = localStorage.getItem('universityData');
     if (saved) {
       try {
-        setUniversityData(JSON.parse(saved));
+        const data = JSON.parse(saved);
+        setUniversityData(data);
+        initializeIdCounters(data);
       } catch (error) {
         console.error('Error loading saved data:', error);
       }
@@ -92,6 +96,29 @@ export default function ResourceManager() {
     setTimeout(() => setSaveStatus(''), 3000);
   };
 
+  const handleClear = (type) => {
+    setClearType(type);
+    setShowClearConfirm(true);
+  };
+
+  const confirmClear = () => {
+    if (clearType === 'all') {
+      // Clear everything
+      setUniversityData(defaultUniversityData);
+      resetIdCounters();
+      localStorage.removeItem('universityData');
+      setSaveStatus('All data cleared');
+    } else {
+      // Clear current tab only
+      const defaultSection = defaultUniversityData[activeTab];
+      handleDataChange(activeTab, defaultSection);
+      setSaveStatus(`${tabs.find(t => t.id === activeTab)?.name} cleared`);
+    }
+    
+    setShowClearConfirm(false);
+    setTimeout(() => setSaveStatus(''), 3000);
+  };
+
   const ActiveComponent = tabs.find(tab => tab.id === activeTab)?.component;
 
   return (
@@ -122,6 +149,22 @@ export default function ResourceManager() {
             >
               <Eye size={16} />
               Validate Data
+            </button>
+
+            <button
+              onClick={() => handleClear('current')}
+              className="flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-lg transition-colors"
+            >
+              <RotateCcw size={16} />
+              Clear Current
+            </button>
+
+            <button
+              onClick={() => handleClear('all')}
+              className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-colors"
+            >
+              <Trash size={16} />
+              Clear All
             </button>
           </div>
           
@@ -221,6 +264,38 @@ export default function ResourceManager() {
           onFileUpload={handleFileUpload}
           onClose={() => setShowFileUpload(false)}
         />
+      )}
+
+      {/* Clear Confirmation Modal */}
+      {showClearConfirm && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-lg max-w-md w-full p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <AlertCircle className="text-red-600" size={24} />
+              <h3 className="text-lg font-semibold text-gray-900">Confirm Clear</h3>
+            </div>
+            
+            <p className="text-gray-700 mb-6">
+              Are you sure you want to clear {clearType === 'all' ? 'all data' : `${tabs.find(t => t.id === activeTab)?.name} data`}? 
+              This action cannot be undone.
+            </p>
+            
+            <div className="flex gap-3">
+              <button
+                onClick={() => setShowClearConfirm(false)}
+                className="flex-1 px-4 py-2 text-gray-700 bg-gray-200 hover:bg-gray-300 rounded-lg transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={confirmClear}
+                className="flex-1 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors"
+              >
+                Clear {clearType === 'all' ? 'All' : 'Current'}
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

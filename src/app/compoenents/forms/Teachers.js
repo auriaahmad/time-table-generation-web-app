@@ -8,7 +8,6 @@ import { generateId } from '../../utils/dataStructure';
 export default function Teachers({ data, onChange, universityData }) {
   const [teachers, setTeachers] = useState(data || []);
   const [editingId, setEditingId] = useState(null);
-  const [showAddForm, setShowAddForm] = useState(false);
 
   const designations = [
     { value: 'Lecturer', minHours: 12, maxHours: 18 },
@@ -26,7 +25,7 @@ export default function Teachers({ data, onChange, universityData }) {
 
   const addTeacher = () => {
     const newTeacher = {
-      id: generateId(),
+      id: generateId('teachers'),
       name: "",
       employeeId: "",
       department: "",
@@ -47,7 +46,6 @@ export default function Teachers({ data, onChange, universityData }) {
     
     updateTeachers([...teachers, newTeacher]);
     setEditingId(newTeacher.id);
-    setShowAddForm(false);
   };
 
   const removeTeacher = (id) => {
@@ -60,11 +58,20 @@ export default function Teachers({ data, onChange, universityData }) {
     ));
   };
 
+  // Fixed designation change handler
   const handleDesignationChange = (id, designation) => {
     const designationInfo = designations.find(d => d.value === designation);
-    updateTeacher(id, 'designation', designation);
-    updateTeacher(id, 'minHoursPerWeek', designationInfo.minHours);
-    updateTeacher(id, 'maxHoursPerWeek', designationInfo.maxHours);
+    if (designationInfo) {
+      // Update all related fields at once to prevent conflicts
+      updateTeachers(teachers.map(teacher => 
+        teacher.id === id ? {
+          ...teacher,
+          designation: designation,
+          minHoursPerWeek: designationInfo.minHours,
+          maxHoursPerWeek: designationInfo.maxHours
+        } : teacher
+      ));
+    }
   };
 
   const toggleArrayItem = (id, field, item) => {
@@ -318,7 +325,7 @@ function TeacherCard({
               <label key={day} className="flex items-center space-x-2 cursor-pointer">
                 <input
                   type="checkbox"
-                  checked={teacher.preferredDays.includes(day)}
+                  checked={teacher.preferredDays?.includes(day) || false}
                   onChange={() => onToggleArrayItem('preferredDays', day)}
                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
                 />
@@ -336,7 +343,7 @@ function TeacherCard({
               <label key={day} className="flex items-center space-x-2 cursor-pointer">
                 <input
                   type="checkbox"
-                  checked={teacher.researchDays.includes(day)}
+                  checked={teacher.researchDays?.includes(day) || false}
                   onChange={() => onToggleArrayItem('researchDays', day)}
                   className="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 rounded focus:ring-red-500"
                 />
@@ -355,7 +362,7 @@ function TeacherCard({
                 <label key={subject} className="flex items-center space-x-2 cursor-pointer">
                   <input
                     type="checkbox"
-                    checked={teacher.subjectsCanTeach.includes(subject)}
+                    checked={teacher.subjectsCanTeach?.includes(subject) || false}
                     onChange={() => onToggleArrayItem('subjectsCanTeach', subject)}
                     className="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500"
                   />
