@@ -15,8 +15,16 @@ export default function RootLayout({ children }) {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex justify-between items-center py-4">
                 <div className="flex items-center">
-                  <div className="flex-shrink-0">
-                    <h1 className="text-2xl font-bold text-gray-900">
+                  <div className="flex-shrink-0 flex items-center space-x-3">
+                    <img
+                      src="/logo.png"
+                      alt="University Logo"
+                      className="h-10 w-auto object-contain"
+                    />
+                    <h1
+                      className="text-2xl font-bold text-gray-900 cursor-help"
+                      title="Configure all university resources needed for automated timetable generation. Upload existing configuration or create from scratch."
+                    >
                       University Timetable Manager
                     </h1>
                   </div>
@@ -29,11 +37,11 @@ export default function RootLayout({ children }) {
               </div>
             </div>
           </header>
-          
+
           <main className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
             {children}
           </main>
-          
+
           <footer className="bg-white border-t mt-auto">
             <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
               <p className="text-center text-sm text-gray-500">
