@@ -2,7 +2,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Download, Upload, Save, Eye, AlertCircle, CheckCircle, Trash, RotateCcw } from 'lucide-react';
+import { Download, Upload, Save, Eye, AlertCircle, CheckCircle, Trash, RotateCcw, Play, Settings } from 'lucide-react';
 import { defaultUniversityData, exportToJSON, importFromJSON, validateUniversityData, resetIdCounters, initializeIdCounters } from '../utils/dataStructure';
 
 import BasicInfo from './forms/BasicInfo';
@@ -22,6 +22,16 @@ export default function ResourceManager() {
   const [clearType, setClearType] = useState('all'); // 'all' or 'current'
   const [validationErrors, setValidationErrors] = useState([]);
   const [saveStatus, setSaveStatus] = useState('');
+  const [showAlgorithmSettings, setShowAlgorithmSettings] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [generationResult, setGenerationResult] = useState(null);
+  const [algorithmSettings, setAlgorithmSettings] = useState({
+    populationSize: 30,
+    generations: 50,
+    mutationRate: 0.15,
+    crossoverRate: 0.8,
+    eliteSize: 3
+  });
 
   const tabs = [
     { id: 'basicInfo', name: 'Basic Info', component: BasicInfo },
@@ -119,6 +129,49 @@ export default function ResourceManager() {
     setTimeout(() => setSaveStatus(''), 3000);
   };
 
+  const handleGenerateTimetable = async () => {
+    setIsGenerating(true);
+    setGenerationResult(null);
+    
+    try {
+      // Add algorithm settings to the data
+      const dataWithAlgorithmSettings = {
+        ...universityData,
+        algorithmSettings
+      };
+
+      const response = await fetch('http://localhost:8000/api/generate-timetable', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          universityData: universityData,
+          algorithmSettings: algorithmSettings
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      setGenerationResult(result);
+      setSaveStatus('✓ Timetable generated successfully!');
+      
+    } catch (error) {
+      console.error('Error generating timetable:', error);
+      setSaveStatus('⚠ Failed to generate timetable: ' + error.message);
+      setGenerationResult({ 
+        success: false, 
+        error: error.message 
+      });
+    } finally {
+      setIsGenerating(false);
+      setTimeout(() => setSaveStatus(''), 5000);
+    }
+  };
+
   const ActiveComponent = tabs.find(tab => tab.id === activeTab)?.component;
 
   return (
@@ -165,6 +218,23 @@ export default function ResourceManager() {
             >
               <Trash size={16} />
               Clear All
+            </button>
+
+            <button
+              onClick={() => setShowAlgorithmSettings(true)}
+              className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition-colors"
+            >
+              <Settings size={16} />
+              Algorithm Settings
+            </button>
+
+            <button
+              onClick={handleGenerateTimetable}
+              disabled={isGenerating}
+              className="flex items-center gap-2 bg-teal-600 hover:bg-teal-700 disabled:bg-gray-400 text-white px-4 py-2 rounded-lg transition-colors"
+            >
+              <Play size={16} />
+              {isGenerating ? 'Generating...' : 'Generate Timetable'}
             </button>
           </div>
           
@@ -293,6 +363,221 @@ export default function ResourceManager() {
               >
                 Clear {clearType === 'all' ? 'All' : 'Current'}
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Algorithm Settings Modal */}
+      {showAlgorithmSettings && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="p-6">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold text-gray-900">Algorithm Settings</h3>
+                <button
+                  onClick={() => setShowAlgorithmSettings(false)}
+                  className="text-gray-400 hover:text-gray-600"
+                >
+                  ✕
+                </button>
+              </div>
+              
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Population Size ({algorithmSettings.populationSize})
+                  </label>
+                  <input
+                    type="range"
+                    min="20"
+                    max="100"
+                    value={algorithmSettings.populationSize}
+                    onChange={(e) => setAlgorithmSettings(prev => ({...prev, populationSize: parseInt(e.target.value)}))}
+                    className="w-full"
+                  />
+                  <div className="text-xs text-gray-500 mt-1">Number of solutions in each generation (20-100)</div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Generations ({algorithmSettings.generations})
+                  </label>
+                  <input
+                    type="range"
+                    min="25"
+                    max="200"
+                    value={algorithmSettings.generations}
+                    onChange={(e) => setAlgorithmSettings(prev => ({...prev, generations: parseInt(e.target.value)}))}
+                    className="w-full"
+                  />
+                  <div className="text-xs text-gray-500 mt-1">Maximum number of iterations (25-200)</div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Mutation Rate ({(algorithmSettings.mutationRate * 100).toFixed(0)}%)
+                  </label>
+                  <input
+                    type="range"
+                    min="0.05"
+                    max="0.30"
+                    step="0.01"
+                    value={algorithmSettings.mutationRate}
+                    onChange={(e) => setAlgorithmSettings(prev => ({...prev, mutationRate: parseFloat(e.target.value)}))}
+                    className="w-full"
+                  />
+                  <div className="text-xs text-gray-500 mt-1">Probability of random changes (5-30%)</div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Crossover Rate ({(algorithmSettings.crossoverRate * 100).toFixed(0)}%)
+                  </label>
+                  <input
+                    type="range"
+                    min="0.60"
+                    max="0.95"
+                    step="0.01"
+                    value={algorithmSettings.crossoverRate}
+                    onChange={(e) => setAlgorithmSettings(prev => ({...prev, crossoverRate: parseFloat(e.target.value)}))}
+                    className="w-full"
+                  />
+                  <div className="text-xs text-gray-500 mt-1">Probability of combining solutions (60-95%)</div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Elite Size ({algorithmSettings.eliteSize})
+                  </label>
+                  <input
+                    type="range"
+                    min="1"
+                    max="10"
+                    value={algorithmSettings.eliteSize}
+                    onChange={(e) => setAlgorithmSettings(prev => ({...prev, eliteSize: parseInt(e.target.value)}))}
+                    className="w-full"
+                  />
+                  <div className="text-xs text-gray-500 mt-1">Number of best solutions to keep (1-10)</div>
+                </div>
+              </div>
+
+              <div className="flex gap-3 mt-6">
+                <button
+                  onClick={() => setShowAlgorithmSettings(false)}
+                  className="flex-1 px-4 py-2 text-gray-700 bg-gray-200 hover:bg-gray-300 rounded-lg transition-colors"
+                >
+                  Close
+                </button>
+                <button
+                  onClick={() => {
+                    setAlgorithmSettings({
+                      populationSize: 30,
+                      generations: 50,
+                      mutationRate: 0.15,
+                      crossoverRate: 0.8,
+                      eliteSize: 3
+                    });
+                  }}
+                  className="flex-1 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+                >
+                  Reset to Default
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Generation Results Modal */}
+      {generationResult && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="p-6">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold text-gray-900">Timetable Generation Results</h3>
+                <button
+                  onClick={() => setGenerationResult(null)}
+                  className="text-gray-400 hover:text-gray-600"
+                >
+                  ✕
+                </button>
+              </div>
+              
+              {generationResult.success ? (
+                <div className="space-y-6">
+                  <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                    <div className="flex items-center gap-2">
+                      <CheckCircle className="text-green-600" size={20} />
+                      <span className="font-medium text-green-800">Timetable Generated Successfully!</span>
+                    </div>
+                    <p className="text-green-700 mt-1">{generationResult.message}</p>
+                    <p className="text-sm text-green-600 mt-1">Execution Time: {generationResult.executionTime}</p>
+                  </div>
+
+                  {generationResult.algorithmStats && (
+                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                      <h4 className="font-medium text-blue-800 mb-2">Algorithm Statistics</h4>
+                      <div className="grid grid-cols-2 gap-4 text-sm">
+                        <div>
+                          <span className="text-blue-600">Generations Run:</span>
+                          <span className="ml-2 font-medium">{generationResult.algorithmStats.generationsRun}</span>
+                        </div>
+                        <div>
+                          <span className="text-blue-600">Final Fitness:</span>
+                          <span className="ml-2 font-medium">{generationResult.algorithmStats.finalFitness}</span>
+                        </div>
+                        <div>
+                          <span className="text-blue-600">Population Size:</span>
+                          <span className="ml-2 font-medium">{generationResult.algorithmStats.populationSize}</span>
+                        </div>
+                        <div>
+                          <span className="text-blue-600">Total Activities:</span>
+                          <span className="ml-2 font-medium">{generationResult.algorithmStats.totalActivities}</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="flex gap-3">
+                    <button
+                      onClick={() => {
+                        const dataStr = JSON.stringify(generationResult, null, 2);
+                        const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+                        const exportFileDefaultName = `timetable-complete-${new Date().toISOString().split('T')[0]}.json`;
+                        const linkElement = document.createElement('a');
+                        linkElement.setAttribute('href', dataUri);
+                        linkElement.setAttribute('download', exportFileDefaultName);
+                        linkElement.click();
+                      }}
+                      className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
+                    >
+                      <Download size={16} className="inline mr-2" />
+                      Download Timetable
+                    </button>
+                    <button
+                      onClick={() => setGenerationResult(null)}
+                      className="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+                  <div className="flex items-center gap-2">
+                    <AlertCircle className="text-red-600" size={20} />
+                    <span className="font-medium text-red-800">Generation Failed</span>
+                  </div>
+                  <p className="text-red-700 mt-1">{generationResult.error}</p>
+                  <button
+                    onClick={() => setGenerationResult(null)}
+                    className="mt-3 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors"
+                  >
+                    Close
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>

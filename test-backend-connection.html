@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Backend Connection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-6">
+        <h1 class="text-2xl font-bold mb-6">Test Backend Connection</h1>
+        
+        <div class="space-y-4">
+            <button 
+                id="test-health" 
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg"
+            >
+                Test Health Endpoint
+            </button>
+            
+            <button 
+                id="test-validate" 
+                class="w-full bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg"
+            >
+                Test Validation Endpoint
+            </button>
+            
+            <button 
+                id="test-generate" 
+                class="w-full bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg"
+            >
+                Test Timetable Generation
+            </button>
+        </div>
+        
+        <div id="results" class="mt-6 p-4 bg-gray-50 rounded-lg min-h-[100px]">
+            <p class="text-gray-600">Click a button to test the connection...</p>
+        </div>
+    </div>
+
+    <script>
+        const resultsDiv = document.getElementById('results');
+        
+        function showResult(title, data, isError = false) {
+            const bgColor = isError ? 'bg-red-50 border border-red-200' : 'bg-green-50 border border-green-200';
+            const textColor = isError ? 'text-red-800' : 'text-green-800';
+            
+            resultsDiv.innerHTML = `
+                <div class="${bgColor} rounded-lg p-4">
+                    <h3 class="font-bold ${textColor} mb-2">${title}</h3>
+                    <pre class="text-sm overflow-x-auto">${JSON.stringify(data, null, 2)}</pre>
+                </div>
+            `;
+        }
+        
+        document.getElementById('test-health').addEventListener('click', async () => {
+            try {
+                const response = await fetch('http://localhost:8000/health');
+                const data = await response.json();
+                showResult('Health Check Response', data);
+            } catch (error) {
+                showResult('Health Check Error', {error: error.message}, true);
+            }
+        });
+        
+        document.getElementById('test-validate').addEventListener('click', async () => {
+            try {
+                // Load the sample data from resources.json
+                const sampleData = {
+                    "basicInfo": {
+                        "universityName": "Test University",
+                        "academicYear": "2024-2025",
+                        "semester": "Fall",
+                        "workingDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                        "dailyPeriods": 8
+                    },
+                    "teachers": [
+                        {
+                            "id": 1,
+                            "name": "Dr. John Doe",
+                            "department": "Computer Science",
+                            "subjectsCanTeach": ["Programming 101"]
+                        }
+                    ],
+                    "subjects": [
+                        {
+                            "id": 1,
+                            "name": "Programming 101",
+                            "department": "Computer Science",
+                            "credits": 3
+                        }
+                    ],
+                    "rooms": [
+                        {
+                            "id": 1,
+                            "name": "A-101",
+                            "capacity": 50,
+                            "type": "Classroom"
+                        }
+                    ],
+                    "students": [
+                        {
+                            "id": 1,
+                            "batch": "CS-2024",
+                            "totalStudents": 45,
+                            "subjects": [1]
+                        }
+                    ],
+                    "timeSlots": [
+                        {
+                            "id": 1,
+                            "startTime": "08:00",
+                            "endTime": "09:00"
+                        }
+                    ]
+                };
+                
+                const response = await fetch('http://localhost:8000/api/validate-data', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(sampleData)
+                });
+                const data = await response.json();
+                showResult('Validation Response', data);
+            } catch (error) {
+                showResult('Validation Error', {error: error.message}, true);
+            }
+        });
+        
+        document.getElementById('test-generate').addEventListener('click', async () => {
+            try {
+                const sampleData = {
+                    "basicInfo": {
+                        "universityName": "Test University",
+                        "academicYear": "2024-2025",
+                        "semester": "Fall",
+                        "workingDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                        "dailyPeriods": 8
+                    },
+                    "teachers": [
+                        {
+                            "id": 1,
+                            "name": "Dr. John Doe",
+                            "department": "Computer Science",
+                            "subjectsCanTeach": ["Programming 101"],
+                            "maxHoursPerWeek": 20,
+                            "minHoursPerWeek": 5
+                        }
+                    ],
+                    "subjects": [
+                        {
+                            "id": 1,
+                            "name": "Programming 101",
+                            "department": "Computer Science",
+                            "credits": 3,
+                            "hoursPerWeek": 3,
+                            "duration": 60,
+                            "requiredRoomType": "Classroom"
+                        }
+                    ],
+                    "rooms": [
+                        {
+                            "id": 1,
+                            "name": "A-101",
+                            "capacity": 50,
+                            "type": "Classroom"
+                        }
+                    ],
+                    "students": [
+                        {
+                            "id": 1,
+                            "batch": "CS-2024",
+                            "totalStudents": 45,
+                            "subjects": [1]
+                        }
+                    ],
+                    "timeSlots": [
+                        {
+                            "id": 1,
+                            "startTime": "08:00",
+                            "endTime": "09:00"
+                        },
+                        {
+                            "id": 2,
+                            "startTime": "09:00",
+                            "endTime": "10:00"
+                        }
+                    ]
+                };
+                
+                const algorithmSettings = {
+                    populationSize: 30,
+                    generations: 50,
+                    mutationRate: 0.15,
+                    crossoverRate: 0.8,
+                    eliteSize: 3
+                };
+                
+                showResult('Generation Status', {message: 'Sending request to generate timetable...'});
+                
+                const response = await fetch('http://localhost:8000/api/generate-timetable', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        universityData: sampleData,
+                        algorithmSettings: algorithmSettings
+                    })
+                });
+                
+                const data = await response.json();
+                showResult('Generation Response', data);
+            } catch (error) {
+                showResult('Generation Error', {error: error.message}, true);
+            }
+        });
+    </script>
+</body>
+</html>
