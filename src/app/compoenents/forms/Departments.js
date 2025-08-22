@@ -160,7 +160,7 @@ export default function Departments({ data, onChange }) {
                   ))}
                 </div>
               ) : (
-                <p className="text-sm text-gray-500">No programs added. Click "Add Program" to add programs offered by this department.</p>
+                <p className="text-sm text-gray-500">No programs added. Click &quot;Add Program&quot; to add programs offered by this department.</p>
               )}
             </div>
           </div>
