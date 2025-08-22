@@ -24,6 +24,35 @@ export default function Departments({ data, onChange }) {
     updateDepartments([...departments, newDept]);
   };
 
+  const addProgram = (deptId) => {
+    updateDepartments(departments.map(dept => 
+      dept.id === deptId ? { 
+        ...dept, 
+        programs: [...dept.programs, ""] 
+      } : dept
+    ));
+  };
+
+  const removeProgram = (deptId, programIndex) => {
+    updateDepartments(departments.map(dept => 
+      dept.id === deptId ? { 
+        ...dept, 
+        programs: dept.programs.filter((_, index) => index !== programIndex) 
+      } : dept
+    ));
+  };
+
+  const updateProgram = (deptId, programIndex, value) => {
+    updateDepartments(departments.map(dept => 
+      dept.id === deptId ? { 
+        ...dept, 
+        programs: dept.programs.map((program, index) => 
+          index === programIndex ? value : program
+        ) 
+      } : dept
+    ));
+  };
+
   const removeDepartment = (id) => {
     updateDepartments(departments.filter(dept => dept.id !== id));
   };
@@ -93,6 +122,46 @@ export default function Departments({ data, onChange }) {
                   <Trash2 size={16} />
                 </button>
               </div>
+            </div>
+            
+            {/* Programs Section */}
+            <div className="mt-4 pt-4 border-t border-gray-200">
+              <div className="flex items-center justify-between mb-3">
+                <label className="block text-sm font-medium text-gray-700">
+                  Offered Programs ({dept.programs?.length || 0})
+                </label>
+                <button
+                  onClick={() => addProgram(dept.id)}
+                  className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                >
+                  + Add Program
+                </button>
+              </div>
+              
+              {dept.programs && dept.programs.length > 0 ? (
+                <div className="space-y-2">
+                  {dept.programs.map((program, programIndex) => (
+                    <div key={programIndex} className="flex items-center gap-2">
+                      <input
+                        type="text"
+                        value={program}
+                        onChange={(e) => updateProgram(dept.id, programIndex, e.target.value)}
+                        className="input-field flex-1"
+                        placeholder="Bachelor of Computer Science"
+                      />
+                      <button
+                        onClick={() => removeProgram(dept.id, programIndex)}
+                        className="text-red-600 hover:text-red-800 p-1"
+                        title="Remove program"
+                      >
+                        <Trash2 size={14} />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-sm text-gray-500">No programs added. Click "Add Program" to add programs offered by this department.</p>
+              )}
             </div>
           </div>
         ))}

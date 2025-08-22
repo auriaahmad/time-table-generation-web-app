@@ -27,6 +27,7 @@ export default function Students({ data, onChange, universityData }) {
       section: "A",
       totalStudents: 60,
       subjects: [],
+      programs: [],
       type: "Full-time",
       maxHoursPerDay: 8,
       preferredTimeSlots: [],
@@ -52,6 +53,21 @@ export default function Students({ data, onChange, universityData }) {
       ? currentSubjects.filter(s => s !== subjectId)
       : [...currentSubjects, subjectId];
     updateStudentGroup(id, 'subjects', newSubjects);
+  };
+
+  const toggleProgram = (id, program) => {
+    const group = students.find(g => g.id === id);
+    const currentPrograms = group.programs || [];
+    const newPrograms = currentPrograms.includes(program)
+      ? currentPrograms.filter(p => p !== program)
+      : [...currentPrograms, program];
+    updateStudentGroup(id, 'programs', newPrograms);
+  };
+
+  // Get available programs from the selected department
+  const getAvailablePrograms = (departmentName) => {
+    const department = universityData.departments?.find(d => d.name === departmentName);
+    return department?.programs || [];
   };
 
   return (
@@ -206,6 +222,41 @@ export default function Students({ data, onChange, universityData }) {
                 )}
               </div>
             )}
+            
+            {/* Program Tags Section */}
+            {group.department && getAvailablePrograms(group.department).length > 0 && (
+              <div className="mt-4 pt-4 border-t border-gray-200">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Program Tags ({group.programs?.length || 0} selected)
+                </label>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                  {getAvailablePrograms(group.department).map((program, index) => (
+                    <label key={index} className="flex items-center space-x-2 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={group.programs?.includes(program) || false}
+                        onChange={() => toggleProgram(group.id, program)}
+                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
+                      />
+                      <span className="text-sm text-gray-700">{program}</span>
+                    </label>
+                  ))}
+                </div>
+                {group.programs?.length === 0 && (
+                  <p className="text-sm text-gray-500 mt-2">
+                    Select program tags that apply to this student group.
+                  </p>
+                )}
+              </div>
+            )}
+            
+            {group.department && getAvailablePrograms(group.department).length === 0 && (
+              <div className="mt-4 pt-4 border-t border-gray-200">
+                <p className="text-sm text-gray-500">
+                  No programs available for {group.department}. Add programs to the department first.
+                </p>
+              </div>
+            )}
           </div>
         ))}
         
@@ -245,7 +296,30 @@ export default function Students({ data, onChange, universityData }) {
                 {new Set(students.map(g => g.year)).size}
               </div>
             </div>
+            <div>
+              <span className="font-medium text-gray-700">Programs:</span>
+              <div className="text-lg font-bold text-indigo-600">
+                {new Set(students.flatMap(g => g.programs || [])).size}
+              </div>
+            </div>
           </div>
+          
+          {/* Program breakdown */}
+          {students.some(g => g.programs && g.programs.length > 0) && (
+            <div className="mt-4 pt-4 border-t border-gray-200">
+              <h5 className="text-md font-medium text-gray-800 mb-2">Programs Distribution:</h5>
+              <div className="flex flex-wrap gap-2">
+                {Array.from(new Set(students.flatMap(g => g.programs || []))).map(program => {
+                  const count = students.filter(g => g.programs?.includes(program)).length;
+                  return (
+                    <span key={program} className="px-2 py-1 bg-indigo-100 text-indigo-800 text-xs rounded-full">
+                      {program} ({count} group{count !== 1 ? 's' : ''})
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>
