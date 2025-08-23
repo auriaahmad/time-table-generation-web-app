@@ -1,15 +1,22 @@
 // app/components/forms/Subjects.js
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BookOpen, Plus, Trash2 } from 'lucide-react';
 import { generateId } from '../../utils/dataStructure';
+import DepartmentProgramDropdown from '../DepartmentProgramDropdown';
 
 export default function Subjects({ data, onChange, universityData }) {
-  const [subjects, setSubjects] = useState(data || []);
+  const [subjects, setSubjects] = useState(() => {
+    return (data || []).map((subject, index) => ({
+      ...subject,
+      id: subject.id || (Date.now() + index + Math.random()),
+      program: subject.program || ""
+    }));
+  });
 
   const subjectTypes = ['Theory', 'Lab', 'Tutorial', 'Practical', 'Seminar'];
-  const departments = universityData.departments?.map(d => d.name) || [];
+  const departments = universityData.departments || [];
 
   const updateSubjects = (newSubjects) => {
     setSubjects(newSubjects);
@@ -18,10 +25,11 @@ export default function Subjects({ data, onChange, universityData }) {
 
   const addSubject = () => {
     const newSubject = {
-      id: generateId(),
+      id: Date.now() + Math.random(),
       name: "",
       code: "",
       department: "",
+      program: "",
       credits: 3,
       type: "Theory",
       hoursPerWeek: 3,
@@ -43,9 +51,10 @@ export default function Subjects({ data, onChange, universityData }) {
   };
 
   const updateSubject = (id, field, value) => {
-    updateSubjects(subjects.map(subject => 
+    const newSubjects = subjects.map(subject => 
       subject.id === id ? { ...subject, [field]: value } : subject
-    ));
+    );
+    updateSubjects(newSubjects);
   };
 
   return (
@@ -66,8 +75,8 @@ export default function Subjects({ data, onChange, universityData }) {
 
       <div className="space-y-4">
         {subjects.map((subject, index) => (
-          <div key={subject.id} className="card">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+          <div key={`subject-${subject.id}-${index}`} className="card">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Subject Name</label>
                 <input
@@ -89,19 +98,6 @@ export default function Subjects({ data, onChange, universityData }) {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Department</label>
-                <select
-                  value={subject.department}
-                  onChange={(e) => updateSubject(subject.id, 'department', e.target.value)}
-                  className="input-field"
-                >
-                  <option value="">Select Department</option>
-                  {departments.map(dept => (
-                    <option key={dept} value={dept}>{dept}</option>
-                  ))}
-                </select>
-              </div>
-              <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Type</label>
                 <select
                   value={subject.type}
@@ -113,6 +109,16 @@ export default function Subjects({ data, onChange, universityData }) {
                   ))}
                 </select>
               </div>
+            </div>
+            
+            <div className="mb-4">
+              <DepartmentProgramDropdown
+                departments={departments}
+                selectedDepartment={subject.department}
+                selectedProgram={subject.program || ''}
+                onDepartmentChange={(dept) => updateSubject(subject.id, 'department', dept)}
+                onProgramChange={(prog) => updateSubject(subject.id, 'program', prog)}
+              />
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-5 gap-4">

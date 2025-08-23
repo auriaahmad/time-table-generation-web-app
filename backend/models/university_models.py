@@ -55,6 +55,7 @@ class Subject(BaseModel):
     name: str
     code: str
     department: str
+    program: str = ""
     credits: int = 3
     type: str = "Theory"  # Theory, Lab, Tutorial, Practical
     hoursPerWeek: int = 3
