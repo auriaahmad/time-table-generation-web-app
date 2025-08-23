@@ -1,0 +1,176 @@
+Lab and Computing Facilities
+The Total Number of Computing Lab in FSCE is 12 naming:
+ 
+1.	Cyber Security Lab
+2.	Data Analytic Lab
+3.	Artificial Intelligence
+4.	Intelligent computing and Research Laboratory (ICAR)
+5.	High Performance Computing (HPC) Lab
+6.	Digital System (DS) Lab
+7.	System Architecture (SA) Lab
+8.	PC Lab
+9.	Software Engineering (SE) Lab
+10.	AR/VR Lab
+11.	Embed Systems and IC (ESIC) Design Lab
+12.	PSD Lab
+ 
+The lab facilities of each lab is as follows.
+1.	Cyber Security Lab
+Total Number of PCs	53
+PC Model	HP All in One
+Processor	Intel Core i7 12th Gen
+RAM	32 GB
+Storage	1TB Nvme SSD
+Softwars installed	Windows with virtualization tools of installation of various OSs
+Networking	Ubiquity LR Wireless Access Point with WIFI 6 supporting upto 350+ connections.
+Student to Computer Ratio	1:1
+Location	NAB Ground Floor
+
+2.	Software Enginerering
+Total Number of PCs	53
+PC Model	Lenovo
+Processor	Core i7 9th Gen
+RAM	16 GB DDR4
+ Storage	512 GB Nvme SSD
+Softwars installed	Windows with virtualization tools of installation of various OSs
+Networking	All PCs are Connected Through wired Connection.
+Student to Computer Ratio	1:1
+Location	FCSE Ground Floor
+
+
+
+3.	System Architecture Lab
+Total Number of PCs	 19
+PC Model	DELL Optiplex 9020
+Processor	Core i7 4790
+RAM	8 GB
+Storage	1 TB HDD
+Softwars installed	Windows with virtualization tools of installation of various OSs
+Networking	All PCs are Connected Through wired Connection.
+Student to Computer Ratio	1:2
+Location	Faculty of Basic Sciences 1st Floor
+
+4.	Digital System Lab
+Total Number of PCs	 19
+PC Model	DELL Optiplex 7040 X10
+Dell Optiplex 9020 x9
+Processor	Core i7 4th Gen x9
+Core I7 6th Gen x10
+RAM	8 GB
+Storage	1 TB HDD (9020)
+500 GB HDD (7040)
+Softwars installed	Windows with virtualization tools of installation of various OSs
+Networking	All PCs are Connected Through wired Connection.
+Student to Computer Ratio	1:2
+Location	Faculty of Basic Sciences 1st Floor
+
+5.	Artificial Intelligence Lab
+Total Number of PCs	 54
+PC Model	Apple IMac All in One
+Processor	IMac M1
+RAM	16 GB
+Storage	500 nvme SSD
+Softwars installed	All PCs are installed with Mac OS
+Networking	All PCs are Connected Through wired Connection.
+Student to Computer Ratio	1:2
+Location	NAB 1st Floor
+
+
+6.	PC Lab
+Total Number of PCs	 100
+PC Model	Custom PC
+Processor	Core i7 4790
+RAM	4 GB
+Storage	1 TB HDD
+Softwars installed	Windows with virtualization tools of installation of various OSs
+Networking	2x Ubiquity LR Wireless Access Point with WIFI 6 supporting upto 350+ connections.
+Student to Computer Ratio	1:1
+Location	Faculty of Basic Sciences 1st Floor
+
+
+7.	Intelligent computing and Research Laboratory (ICAR) Lab
+MID End Workstations
+Total Number of PCs	 15
+PC Model	Dell Precission 5820 Tower Workstation
+Processor	Intel Xeon W-2275
+Graphics	Nvidia RTX A2000 12 GB VRAM
+RAM	32 GB
+Storage	1 TB nvme SSD
+Softwars installed	Linux OS
+Networking	All PCs are Connected Through wired Connection.
+Student to Computer Ratio	1:1
+High End Workstations
+Total Number of PCs	16
+PC Model	Thunder Tizona Case With MSI Mother Board
+Processor	Intel Core i9 1400KF
+Graphics	Nvidia RTX 4090 TI 24 GB VRAM
+RAM	64 GB
+Storage	1 TB nvme SSD
+Softwars installed	A mix of Windows and LInux
+Networking	Ubiquity LR Wireless Access Point with WIFI 6 supporting upto 350+ connections.
+
+Student to Computer Ratio	1:1
+Location	NAB 2nd Floor
+
+8.	Data Analytics (DA) Lab
+Total Number of PCs	55
+PC Model	Dell All in One
+Processor	Intel Core i7 11th Gen
+RAM	16 GB
+Storage	500 GB Nvme SSD
+Softwars installed	Windows with virtualization tools of installation of various OSs
+Networking	2x Ubiquity LR Wireless Access Point with WIFI 6 supporting upto 350+ connections.
+Student to Computer Ratio	1:1
+Location	NAB 2nd Floor
+
+9.	High Performance Computing (HPC) Lab
+Total Number of PCs	1 
+PC Model	Dell All in One
+Processor	Intel Xeon 160 CPU Cores
+GPU	Nvida 1024 GPU Cores
+RAM	640 GB 
+Storage	500 GB Nvme SSD
+Softwar installed	Windows with virtualization tools of installation of various OSs
+Networking	10 GB Ethernet Connection
+Student to Computer Ratio	Depends on virtualization.
+Location	FCSE Ground Floor
+
+10.	Embed Systems and IC (ESIC) Design Lab
+Total Number of PCs	20 
+PC Model	Dell OptiPlex Tower Plus 7020
+Processor	Intel Core i9 14th Gen
+RAM	134 GB 
+Storage	1Tb Nvme SSD and 2TB HDD
+Software installed	Red Hat Enterprise Linux 8 (RHEL 8)
+with 50 Licenses for Cadence Tools
+Networking	10 GB Ethernet Connection and Ubiquity U6 AC Pro
+Student to Computer Ratio	1:2
+Hardware Tools	Nexys A7 FPGA (Trainer Boards) x25
+Zybo Z7 Zynq 7000 (ARM/FPGA SoCs) x6
+Location	NAB 3rd Floor
+
+11.	AR/VR
+Total Number of PCs	16
+PC Model	Thunder Tizona Case With MSI Mother Board
+Processor	Intel Core i9 1400KF
+GPU	Nvidia RTX 4090 TI 24 GB VRAM
+RAM	64 GB
+Storage	1 TB nvme SSD
+Networking	Ubiquity LR Wireless Access Point with WIFI 6 supporting upto 350+ connections.
+Student to Computer Ratio	1:2
+AAR VR Headset	Meta Quest Pro x25
+Location	NAB 1st Floor
+
+12.	PSD Lab
+Total Number of PCs	50
+PC Model	Dell 9020
+Dell 7040
+Processor	Core i7 3rd Gen x21
+Core i5 2nd Gen x29
+RAM	8 GB
+Storage	1 TB HDD
+Softwars installed	Windows with virtualization tools of installation of various OSs
+Networking	2x Ubiquity LR Wireless Access Point with WIFI 6 supporting upto 350+ connections.
+Student to Computer Ratio	1:1
+Location	Faculty of Basic Sciences 1st Floor
+

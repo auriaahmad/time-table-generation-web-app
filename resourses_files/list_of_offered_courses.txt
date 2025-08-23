@@ -1,0 +1,406 @@
+Code Course Title CH Section For Instructor
+AF453 Investment and Portfolio Management 3 MGS Dr. Shariq
+AF454 Financial Risk Management 3 MGS Dr. Shahid
+AI102 Python Programming and Freelancing Essentials 1 A BME
+AI102 Python Programming and Freelancing Essentials 1 B CVE
+AI102 Python Programming and Freelancing Essentials 1 C CME+MTE
+AI102 Python Programming and Freelancing Essentials 1 D BEE I
+AI102 Python Programming and Freelancing Essentials 1 E BEE II
+AI102 Python Programming and Freelancing Essentials 1 F BAI
+AI102 Python Programming and Freelancing Essentials 1 G1 CYS
+AI102 Python Programming and Freelancing Essentials 1 G2 SWE
+AI102 Python Programming and Freelancing Essentials 1 H BCS
+AI102 Python Programming and Freelancing Essentials 1 I BDS
+AI102 Python Programming and Freelancing Essentials 1 J BCE+BES
+AI202 Trends and Techniques in AI 2 BAI Prof. Dr. S. M. Hasan Zaidi
+AI305L Associate in AI training Lab 1 BAI
+AI309 Deep Reinforcement Learning (Breadth Elective) 3 BAI Hafiz Syed Muhammad Qasim
+AI319 Computer Vision 3 BAI Dr. Khurram Jadoon
+AI319 Computer Vision Lab 1 BAI
+AI361 Natural Language Processing 3 BAI Dr. Khurram Jadoon
+AI361 Natural Language Processing Lab 1 BAI
+AI407L PBL for AI Lab 3 BAI
+AI420 Medical Image Processing (elective) 3 Mr. Talha Ashfaq
+CE222 Computer Organization and Assembly Language 3 A BAI Mr. Usama Manzoor
+CE222 Computer Organization and Assembly Language 3 B BCE Dr. Rashid Jillani
+CE222 Computer Organization and Assembly Language 3 C BCS Dr. Fahad Bin Muslim
+CE222 Computer Organization and Assembly Language 3 D BDS Mr. Usama Manzoor
+CE222 Computer Organization and Assembly Language 3 E CYS Mr. Salman Ashraf
+CE222 Computer Organization and Assembly Language 3 F SWE Mr. Salman Ashraf
+CE222L Computer Organization and Assembly Language Lab 1 A BAI
+CE222L Computer Organization and Assembly Language Lab 1 B BCE
+CE222L Computer Organization and Assembly Language Lab 1 C BCS
+CE222L Computer Organization and Assembly Language Lab 1 D BDS
+CE222L Computer Organization and Assembly Language Lab 1 E CYS
+CE222L Computer Organization and Assembly Language Lab 1 F SWE
+CE231 Electronics 1 3 BCE Dr. Adnan Shah
+CE231L Electronics 1 Lab 1 BCE
+CE318 Introduction to Digital Image Processing (Elective) 3 Dr. Muhammad Hanif
+CE324 Microprocessor Interfacing 3 BCE Dr. Fahad Bin Muslim
+CE339 Introduction to Data Science (Elective) 3 Dr. Adnan Shah
+CE3xx L Specilaization Elective Lab 1
+CE3xx L Specialization Elective Lab 1
+CE3xx L Specialization Elective Lab 1
+CE413 Computer Networks 3 BAI Dr. Qamar Abbas
+CE436 Digital System Design 3 BCE Dr. Waqar Ahmad
+CE436L Digital System Design Lab 1 BCE
+CE475/EE425 Embedded Systems (Elective) 3 Dr. Waqar Ahmad
+CH101 Chemistry, Environment and climate change 2 F BAI Engr. Abdul Wahab
+CH101 Chemistry, Environment and climate change 2 G CYS, SWE Engr. Fazal Wahab
+CH101 Chemistry, Environment and climate change 2 H BCS Engr. Abdul Wahab
+CH101 Chemistry, Environment and climate change 2 I BDS Engr. Fazal Wahab
+CH161 Occupational heath and safety 1 F BAI Dr. Usman Farooq
+CH161 Occupational heath and safety 1 G CYS, SWE Engr. Hamza Nasir
+CH161 Occupational heath and safety 1 H BCS Dr. Usman Farooq
+CH161 Occupational heath and safety 1 I BDS Engr. Hamza Nasir
+CH201 Inorganic & Organic Chemistry 3 CME Engr. Hamza Nasir
+CH212 Energy Engineering 3 CME Dr. Javaid Rabbani khan
+CH214 Chemical Engineering Thermodynamics-I 3 CME Dr. Khurram Imran Khan
+CH241 Fluid Mechanics-I 3 CME Dr. Hammad Amjad Khan
+CH252 Lab Energy and Thermodynamics Lab 1 CME Dr. Usman Farooq
+CH253 Lab Fluid Mechanics Lab 1 CME Dr. Hammad Khan
+CH322 Reaction Kinetics & Reactor Design 3 CME Engr. Abdul Wahab
+CH331 Process Modelling and Simulation 2 CME Dr. Khurram Imran
+CH342 Fluid Mechanics-II 2 CME Dr. Hammad Khan
+CH353 Lab Environmental and Reaction Engineering Lab 1 CME Engr. Hamza Nasir
+CH361 Environmental Engineering 2 CME Engr. Hamza Nasir
+CH412 Transport Phenomena 3 CME Dr. M. Shozab Mehdi
+CH420 Biochemical Engineering 3 CME Dr. Usman FarooqCH421 Product Design 3 CME Dr .Usman Farooq
+CH441 Chemical Engineering Plant Design 3 CME Dr. M. Usman Farooq
+CH452 L Process Modelling and Simulation Lab 1 CME Dr. Khurram Imran
+CH482 Senior Design Project II 3 CME All Faculty Members
+CS101 Computing and AI (Repeator) 2 Dr. Ali Imran Sandhu
+CS112 Object Oriented Programming and Design 2 A BME Mr. Abdullah Bin Zarshaid
+CS112 Object Oriented Programming and Design 2 B CVE Mr. Qasim Riaz
+CS112 Object Oriented Programming and Design 2 C CME+MTE Mr. Talha Ashfaq
+CS112 Object Oriented Programming and Design 2 D BEE I Hafiz Syed Muhammad Qasim
+CS112 Object Oriented Programming and Design 2 E BEE II Dr. Sarah Iqbal
+CS112 Object Oriented Programming and Design 2 F BAI Ms. Beenish Urooj
+CS112 Object Oriented Programming and Design 2 G1 CYS Mr. Badre Munir
+CS112 Object Oriented Programming and Design 2 G2 SWE Mr. Ahmed Nawaz
+CS112 Object Oriented Programming and Design 2 H BCS Mr. Sajid Ali
+CS112 Object Oriented Programming and Design 2 I BDS Ms. Nazia Shahzadi
+CS112 Object Oriented Programming and Design 2 J BCE+BES Mr. Huzaifa Shah
+CS112 L Object Oriented Programming and Design Lab 1 A BME Mr. Abdullah Bin Zarshaid
+CS112 L Object Oriented Programming and Design Lab 1 B CVE Mr. Qasim Riaz
+CS112 L Object Oriented Programming and Design Lab 1 C CME+MTE Mr. Talha Ashfaq
+CS112 L Object Oriented Programming and Design Lab 1 D BEE I Mr. Israr
+CS112 L Object Oriented Programming and Design Lab 1 E BEE II
+CS112 L Object Oriented Programming and Design Lab 1 F BAI Ms. Beenish Urooj
+CS112 L Object Oriented Programming and Design Lab 1 G1 CYS Mr. Badre Munir
+CS112 L Object Oriented Programming and Design Lab 1 G2 SWE Mr. Ahmed Nawaz
+CS112 L Object Oriented Programming and Design Lab 1 H BCS Mr. Sajid Ali
+CS112 L Object Oriented Programming and Design Lab 1 I BDS Ms. Nazia Shahzadi
+CS112 L Object Oriented Programming and Design Lab 1 J BCE+BES
+CS224 Formal Languages and Automata Theory 3 BCS Mr. Sajid Ali
+CS232 Database Managament System 3 A BAI Mr. Qasim Riaz
+CS232 Database Managament System 3 B BCE Engr. Ahsan Shah
+CS232 Database Managament System 3 C BCS Ms. Abinta Mehmood
+CS232 Database Managament System 3 D BDS Ms. Abinta Mehmood
+CS232 Database Managament System 3 E CYS Mr. Said Nabi
+CS232 Database Managament System 3 F SWE Mr. Said Nabi
+CS232L Database Managament System Lab 1 A BAI
+CS232L Database Managament System Lab 1 B BCE Engr. Ahsan Shah
+CS232L Database Managament System Lab 1 C BCS
+CS232L Database Managament System Lab 1 D BDS Ms. Abinta Mehmood
+CS232L Database Managament System Lab 1 E CYS
+CS232L Database Managament System Lab 1 F SWE Mr. Said Nabi
+CS312 System Programming (Elective) 3 Mr. Badre Munir
+CS317 Parallel Processing 3 Mr. Waheed Ahmed
+CS317L Parallel Processing Lab 1 Mr. Waheed Ahmed
+CS323 Object Oriented Analysis and Design (Breadth Elective) 3 A BAI Mr. Israr
+CS325 Software Engineering 3 B BCE Ms. Beenish
+CS325 Software Engineering 3 C BCS Engr. Ahsan Shah
+CS325 Software Engineering 3 D BDS Hafiz Syed Muhammad Muslim
+CS325 Software Engineering 3 E CYS Hafiz Syed Muhammad Muslim
+CS329 Fundamental of Cyber Security (Breadth Elective) 3 Dr. Salman Ahmed
+CS329 Fundamental of Cyber Security (Breadth Elective) 3 Dr. Qadeer ul Hassan
+CS329 Fundamental of Cyber Security (Breadth Elective) 3 Dr. Qadeer ul Hassan
+CS342 Numerical Analysis and Computational Methods 3 Dr. Ali Imran Sandhu
+CS342 Numerical Analysis and Computational Methods 3 BCS Ms. Nayab Khan
+CS378 Design and Analysis of Algorithms 3 Ms. Nazia Shahzadi
+CS3xx Development Lab 1 Ms. Safia Baloch
+CS419 Applied Image Processing 3 Dr. Muhammad Hanif
+CS424 Compiler Construction 3 BCS Mr. Waheed Ahmed
+CS424L Comipler Construction Lab 1 BCS
+CS426 Software Testing and Quality Engineering 3 Mr. Israr
+CS437 Data Warehousing and Data Mining 3 Dr. Ayaz Umer
+CS452 Artificial Neural Network 3 Dr. Sarah Iqbal
+CS455 NLP for Deep Learning 3 Dr. Ahmar Rashid
+CS464 Data Network Security 3 A BAI Dr. Zain Siddiqui
+CS464 Data and Network Security 3 C BCS Dr. Zain Siddiqui
+CS464 Data and Network Security 3 D BDS Dr. Rashid Jillani
+CS482 Senior Design Project 3 A BAI Hafiz Syed Muhammad Muslim
+CS482 Senior Design Project 3 B BCE Hafiz Syed Muhammad Muslim
+CS482 Senior Design Project 3 C BCS Hafiz Syed Muhammad MuslimCS482 Senior Design Project 3 D BDS Hafiz Syed Muhammad Muslim
+CV202 Advanced Surveying 1 A CVE Engr. Zeeshan
+CV202 Advanced Surveying 1 B CVE Engr. Zeeshan
+CV202L Advanced Surveying Lab 1 A1 CVE Engr. Azeem
+CV202L Advanced Surveying Lab 1 A2 CVE Dr. Shiraz Ahmad
+CV202L Advanced Surveying Lab 1 B1 CVE Engr. Azeem
+CV202L Advanced Surveying Lab 1 B2 CVE Dr. Shiraz Ahmad
+CV212 Mechanics of Solid-II 2 A CVE Engr. Haider Ali
+CV212 Mechanics of Solid-II 2 B CVE Engr. Haider Ali
+CV212L Mechanics of Solid Lab 1 A1 CVE Engr. Haider Ali
+CV212L Mechanics of Solid Lab 1 A2 CVE Engr. Azeem
+CV212L Mechanics of Solid Lab 1 A2 CVE Engr. Shehzad Ahmed
+CV212L Mechanics of Solid Lab 1 B1 CVE Engr. Haider Ali
+CV213 Basic Structure Analysis 3 A CVE Engr. Azeem
+CV213 Basic Structure Analysis 3 B CVE Engr. Haider Ali
+CV231 Soil Mechanics 3 A CVE Engr. Aizaz Haider
+CV231 Soil Mechanics 3 B CVE Engr. Aizaz Haider
+CV231L Soil Mechanics Lab 1 A1 CVE Engr. Aizaz Haider
+CV231L Soil Mechanics Lab 1 A2 CVE Engr. Aizaz Haider
+CV231L Soil Mechanics Lab 1 B1 CVE Engr. Aizaz Haider
+CV231L Soil Mechanics Lab 1 B2 CVE Engr. Aizaz Haider
+CV241 Transportation Engineering 3 A CVE Dr. Shiraz Ahmad
+CV241 Transportation Engineering 3 B CVE Dr. Shiraz Ahmad
+CV305 Geo Informatics 1 A CVE Engr. Zeeshan
+CV305L Geo Informatics Lab 1 A CVE Engr. Zeeshan
+CV314 Reinforced Concrete Design-I 3 A CVE Engr. Azeem
+CV324 Engineering Hydraulics 3 A CVE Engr. Zeeshan
+CV351 Construction Engineering 2 A CVE Engr. Shehzad Ahmed
+CV361 Environmental Engineering I 3 A CVE Dr. M. Ashraf Tanoli
+CV361L Environmental Engineering Lab 1 A CVE Dr Arsalan Khan
+CV361L Environmental Engineering Lab 1 B CVE Dr. M. Waseem
+CV412 Design of Steel Structure 3 A CVE Dr. Ahmad Waqas
+CV413 Matrix Methods of Structure Analysis 3 A CVE Dr. Faisal Javed
+CV425 Irrigation Engineering 3 A CVE Dr. M. Waseem
+CV433 Slope Stability 3 A CVE Dr Mehtab Alam
+CV443 Traffic Engineering 3 A CVE Dr Arsalan Khan
+CV457 Contract Management 3 A CVE Engr. Shehzad Ahmed
+CY201 Cyber Security Principle and Concepts 3 CYS Mr. Abdullah Bin Zarshaid
+CY321 Secure Software Design and Engineering 3 CYS Dr. Zubair (New Hire)
+CY321 Secure Software Design and Engineering Lab 1 CYS
+CY341 Digital Forensics 3 CYS Dr. Shahab (New Hire)
+CY341 Digital Forensics Lab 1 CYS
+CY381 Senior Design Project (Part 1) 3 CYS Hafiz Syed Muhammad Muslim
+CY3xx Digital Image Processing 3 CYS Dr. Muhammad Hanif
+CY3xx Development Operations 3 CYS Mr. Ahmad Nawaz
+DS211 Theory of Data Science 2 BDS Dr. Farhan Khan
+DS341 Data Mining 3 BDS Dr. Ayaz Umer
+DS341 Data Mining Lab 1 BDS
+DS3xx Introduction to Cloud Computing (Elective) 3 BDS Ms. Safia Baloch
+DS4xx Generative AI with Large Language Models (IDE Elective) 2 BDS Dr. Shahab Ansari
+DS4xx Information Retrievel 3 BDS Ms. Safia Baloch
+DS4xx Data Engineering 3 BDS Dr. Farhan Khan
+DS4xxL Generative AI with Large Language Models Lab 1 BDS Dr. Shahab Ansari
+EE212 Electrical Network Analysis (A) 3 A BEE I Mazhar Javed-1
+EE212 Electrical Network Analysis (B) 3 B BEE II Mazhar Javed-2
+EE212 Electrical Network Analysis (C) 3 C BEE III Engr. Umar Waleed-1
+EE223 Microprocessor Systems (A) 3 A BEE I Dr. Memoon Sajid-1
+EE223 Microprocessor Systems (B) 3 B BEE II Dr. Memoon Sajid-2
+EE223 Microprocessor Systems (C) 3 C BEE III Dr. Memoon Sajid-3
+EE223L Microprocessor Systems Lab 1 BEE Engr. Sameena
+EE231 Electronic Devices & Circuits (A) 3 A BEE I Dr. Shahid Alam-1
+EE231 Electronic Devices & Circuits (B) 3 B BEE II Dr. Waleed Sethi-1
+EE231 Electronic Devices & Circuits (C) 3 C BEE III Dr. Nisar Ahmed-1
+EE231L Electronic Devices & Circuits Lab 1 BEE Engr. Aqib Safi
+EE314 Electrical Instrumentation & Measurement (A) 2CH 2 A BEE I + C1 Engr. Umar Waleed-2
+EE314 Electrical Instrumentation & Measurement (B) 2CH 2 B BEE II +C2 Engr. Umar Waleed-3
+EE314L Instrumentation Lab 1 BEE Engr. Abdul Haseeb
+EE332 Power Electronics (A) 3 A BEE I + C1 Dr. Hadeed Ahmed Sher-1EE332 Power Electronics (B) 3 B BEE II +C2 Dr. Attique-ur-Rehman-1
+EE332L Power Electronics Lab 1 BEE Engr. M. Adeel
+EE351 Linear Control Systems (A) 3 A BEE I + C1 Dr. Dur-e-Zehra Baig-1
+EE351 Linear Control Systems (B) 3 B BEE II +C2 Prof. Dr. Nisar Ahmed-2
+EE351L Linear Control Systems Lab 1 BEE Engr. Saleem Ullah Khan
+EE361 Communication Systems (A) 3 A BEE I + C1 Dr. Ahmad Kamal-1
+EE361 Communication Systems (B) 3 B BEE II +C2 Dr. Waleed Tariq Sethi-2
+EE361L Communication Systems Lab 1 BEE Engr. Asad Khaliq
+EE371 Electromagnetic Field Theory (A) 3 A BEE I + C1 Dr. Husnul Maab-1
+EE371 Electromagnetic Field Theory (B) 3 B BEE II +C2 Dr. Arbab Abdur Rahim-1
+EE413 High Voltage Engineering (EEP-C) 3 C EEP Dr. Shahid Alam-2
+EE413L High Voltage Engineering Lab 1 C EEP Engr. Usman Anjum
+EE421 Programming Tools for Optimization (EEE-A) 2CH 2 A EEE I Dr. Zaiwar Ali-1 (2-CH)
+EE421 Programming Tools for Optimization (EEE-B) 2CH 2 B EEE II Dr. Zaiwar Ali-2 (2-CH)
+EE421 Programming Tools for Optimization (EEP-C) 2CH 2 C EEP Dr. Zaiwar Ali-3 (2-CH)
+EE425 Embedded Systems Elective for EE offered by CE 3 FCSE
+EE451 Introduction to Robotics (Elective Both) 3 Dr. Adnan Noor-1
+EE452 Industrial Process Control (Elective Both) 3 Dr. Dur-e-Zehra Baig-2
+EE462 AI Enabled Digital Communication (Elective EEE) 3 BEE Dr. Ahmad Kamal-2
+EE486 Power System Operation & Control (Elective Power) 3 Dr. Ammar Arshad-1
+EE488 AI Applications for Smart Grid (Elective Both) 3 Dr. Attique Ur Rehman-2
+EM433 Corporate Entrepreneurship and Innovation 3 MGS Dr. Sajid Khan
+EM434 Services Marketing 3 MGS Dr. Shakir Sardar
+ES111 Probability & Statistics (Section I) 3 A BME+CME Dr Babar Zaman
+ES111 Probability & Statistics (Section II) 3 B CVE+MTE Mr. Mutti ur Rahman
+ES111 Probability & Statistics (Section III) 3 C CME+MTE Mr. Mutti ur Rahman
+ES111 Probability & Statistics 3 D BEE I Prof. Dr. Zia Ul Haq Abbas-1
+ES111 Probability & Statistics 3 E BEE II Prof. Dr. Zia Ul Haq Abbas-2
+ES111 Probability & Statistics (Section IV) 3 F+H BAI+BCS Dr Omer Bin Saeed
+ES111 Probability & Statistics (Section V) 3 G CYS+SWE Dr Omer Bin Saeed
+ES111 Probability & Statistics (Section VI) 3 I BDS Dr Zahid Ahmad
+ES111 Probability & Statistics (Section VII) 3 J BCE+BES Dr Tahir Naseem
+ES205 Advanced Linear Algebra (Section I) 3 A BAI+BCE Mr. Asif Ahmad
+ES205 Advanced Linear Algebra (Section II) 3 B BCS+BDS Dr Asad Mehmood
+ES205 Advanced Linear Algebra (Section III) 3 C CYS+SWE Mr. Asif Ahmad
+ES213 Computer Architecture 3 BES Engr Muhammad Sadiq
+ES213L Computer Architecture Lab 1 BES Engr Muhammad Sadiq
+ES214 Circuit Analysis II 3 BES Engr Muhammad Sadiq
+ES221 Data Structure and Algorithms 3 BES Dr. Zubair (New Hire)
+ES231 Electronics I 3 BES Engr. Muhammad Saqib
+ES231L Electronics I Lab 1 BES Engr. Muhammad Saqib
+ES322 Instrumentation 3 BES Engr. Muhammad Saqib
+ES322L Instrumentation Lab 1 BES Engr. Muhammad Saqib
+ES325 Advanced Statistics 3 BES Dr Babar Zaman
+ES341 Numerical Analysis (Section I) 3 A BES Mr. Aamir Shahzad
+ES341 Numerical Analysis (Section II) 3 B CME+MTE Mr. Hasan Ali
+ES341 Numerical analysis 3 MTM, MTN FES
+ES341/CS342 Numerical Analysis 3 CME By FES/FME
+ES341L Numerical Analysis Lab 1 BES Mr. Aamir Shahzad
+ES361 Solid State Electronics 3 BES Dr Muhammad Usman
+ES361L Solid State Electronics Lab 1 BES Dr Muhammad Usman
+ES371 Engineering Electromagnetics 3 BES Dr Tahir Naseem
+ES446 Heat transfer and Modeling 3 BES Dr Zahir Iqbal
+ES447 Financial Engineering Models 3 BES Dr Fahd Sikandar Khan
+ES447L Financial Engineering Models Lab 1 BES Dr Fahd Sikandar Khan
+ES474 Optoelectronics 3 BES Dr Usman Habib
+ES475 Optical Communication and Computing 3 BES Dr Nasir Javed
+ES482 Senior Design Project Part II 3 BES Dr. Omer Bin Saeed
+HM102 Critical Thinking and Expository Writing 2 A BME Mr. Abrar Ahmad
+HM102 Critical Thinking and Expository Writing 2 B CVE Mr. Abrar Ahmad
+HM102 Critical Thinking and Expository Writing 2 C CME+MTE Mr. Abrar Ahmad
+HM102 Critical Thinking and Expository Writing 2 D BEE I Mr. Abrar Ahmad
+HM102 Critical Thinking and Expository Writing 2 E BEE II Mr. Atta Ur Rehman Jadoon
+HM102 Critical Thinking and Expository Writing 2 F BAI Mr. Atta Ur Rehman Jadoon
+HM102 Critical Thinking and Expository Writing 2 G CYS+SWE Mr. Haseeb Ahsan
+HM102 Critical Thinking and Expository Writing 2 H BCS Mr. Haseeb Ahsan
+HM102 Critical Thinking and Expository Writing 2 I BDS Ms Tayyaba Zulfiqar
+HM102 Critical Thinking and Expository Writing 2 J BCE+BES Ms Tayyaba ZulfiqarHM102 Critical Thinking and Expository Writing 2 K MGS I Ms Hira Ahad
+HM102 Critical Thinking and Expository Writing 2 L MGS I Ms Hira Ahad
+HM102-L Critical Thinking and Expository Writing Lab 1 A BME Mr. Abrar Ahmad
+HM102-L Critical Thinking and Expository Writing Lab 1 B CVE Mr. Abrar Ahmad
+HM102-L Critical Thinking and Expository Writing Lab 1 C CME+MTE Mr. Abrar Ahmad
+HM102-L Critical Thinking and Expository Writing Lab 1 D BEE I Mr. Abrar Ahmad
+HM102-L Critical Thinking and Expository Writing Lab 1 E BEE II Mr. Atta Ur Rehman Jadoon
+HM102-L Critical Thinking and Expository Writing Lab 1 F BAI Mr. Atta Ur Rehman Jadoon
+HM102-L Critical Thinking and Expository Writing Lab 1 G CYS+SWE Mr. Haseeb Ahsan
+HM102-L Critical Thinking and Expository Writing Lab 1 H BCS Mr. Haseeb Ahsan
+HM102-L Critical Thinking and Expository Writing Lab 1 I BDS Ms Tayyaba Zulfiqar
+HM102-L Critical Thinking and Expository Writing Lab 1 J BCE+BES Ms Tayyaba Zulfiqar
+HM102-L Critical Thinking and Expository Writing Lab 1 K MGS II Ms Hira Ahad
+HM102-L Critical Thinking and Expository Writing Lab 1 L MGS II Ms Hira Ahad
+HM112 Idealogy and Constitution of Pakistan 2 A+B MGS Mr. Fida Ur Rahman
+HM121 Civics and Community Engagement 2 A+B MGS Dr. Rubeena Slamat
+HM211 Pakistan and Islamic Studies 3 A BAI+BCE+BCS Mr. Fida Ur Rahman
+HM211 Pakistan and Islamic Studies 3 B BDS+CYS+SWE Mr. Fida Ur Rahman
+HM211 Pakistan and Islamic Studies 3 C BME+CVE Mr. Fida Ur Rahman
+HM222 Psychology 3 A+B MGS Mr. Abrar Ahmad
+HM223 Anthropology 3 A+B MGS Dr. Rubeena Slamat
+HM304 Advance Communication Skills 3 A BAI Ms Tayyaba Zulfiqar
+HM321 Sociology and Human Behaviour 3 BME Dr. Rubeena Slamat
+HM322 Corporate Law and Professional Ethics 3 A BAI+BCE+BCS Mr. Izhar Ali
+HM322 Corporate Law and Professional Ethics 3 B BDS+BES+CYS Mr. Izhar Ali
+HM322 Corporate Law and Professional Ethics 3 C CME+CVE+MTE Mr. Izhar Ali
+HM324 Sociology 3 MGS Mr. Aymen
+HM404 Advance Oral Communication 3 MGS Mr. Atta Ur Rehman Jadoon
+IF102 Innovation and Makers Lab II 1 A BME Engr Fahim Ahmed
+IF102 Innovation and Makers Lab II 1 B CVE Engr Fahim Ahmed
+IF102 Innovation and Makers Lab II 1 C CME+MTE Engr Fahim Ahmed
+IF102 Innovation and Makers Lab II 1 D BEE I Engr Fahim Ahmed
+IF102 Innovation and Makers Lab II 1 E BEE II Engr Fahim Ahmed
+IF102 Innovation and Makers Lab II 1 F BAI Engr Fahim Ahmed
+IF102 Innovation and Makers Lab II 1 G CYS+SWE Engr Fahim Ahmed
+IF102 Innovation and Makers Lab II 1 H BCS Engr Fahim Ahmed
+IF102 Innovation and Makers Lab II 1 I BDS Engr Fahim Ahmed
+IF102 Innovation and Makers Lab II 1 J BCE+BES Engr Fahim Ahmed
+IF102-L Innovation and Makers Lab 2 1 K MGS I Engr Fahim Ahmed
+IF102-L Innovation and Makers Lab 2 1 L MGS II Engr Fahim Ahmed
+ME203 Circuits and Electronic Devices 3 A BME I Dr. Abid Imran
+ME203 Circuits and Electronic Devices 3 B BME II Dr. Abid Imran
+ME212 Dynamics 3 A BME I Mr. Hamza Abbas
+ME212 Dynamics 3 B BME II Mr. Hamza Abbas
+ME213 Mechanics of Solids I 3 A BME I Dr. Khalid Rahman
+ME213 Mechanics of Solids I 3 B BME II Dr. Khalid Rahman
+ME232 Thermodynamics II 3 A BME I Dr. Ahmad Abbas
+ME232 Thermodynamics II 3 B BME II Dr. Ahmad Abbas
+ME243 Electronics and Instrumentation Lab 1 A BME I Dr. Abid Imran
+ME315 Mechanical Vibration 3 A BME I Dr. Taimoor Hassan
+ME315 Mechanical Vibration 3 B BME II Dr. Taimoor Hassan
+ME316 Computer Aided Engineering 1 A BME I Dr. Muhammad Qasim Zafar
+ME316 Computer Aided Engineering 1 B BME II Dr. Muhammad Qasim Zafar
+ME322 Fluid Mechanics II 3 A BME I Mr. Muhammad Shoaib Ijaz
+ME322 Fluid Mechanics II 3 B BME II Mr. Muhammad Shoaib Ijaz
+ME333 Heat Transfer 3 A BME I Dr. Taqi Cheema
+ME333 Heat Transfer 3 B BME II Dr. Taqi Cheema
+ME347 Thermo-Fluid Lab-II 1 A BME Mr. Muhammad Shoaib Ijaz
+ME364 Design of Machine Element II 2 A BME I Dr. Shahzad Ahmad
+ME364 Design of Machine Element II 2 B BME II Dr. Shahzad Ahmad
+ME404 Artificial Intelligence for Mechanical Engineers (Elective)* 3 A BME Dr. Arsalan Arif
+ME419 Fundamental of Composite Materials (Elective)* 3 A BME Dr. Shahzad Ahmad
+ME453 Additive Manufacturing (Elective)* 3 A BME Dr. Muhammad Qasim Zafar
+ME467 Finite Element Analysis 2 A BME I Mr. Faisal Iqbal
+ME467 Finite Element Analysis 2 B BME II Mr. Faisal Iqbal
+ME468 Mechanical Engineering Design (Elective)* 3 A BME Dr. Massab Junaid
+ME471 Power Plant (Elective)* 3 A BME Mr. Faheem Ahmad
+ME474 Internal Combustion Engines (Elective)* 3 A BME Dr. Ali Turab JafryME482 Senior Design Project (Part-II) 3 A BME I Dr. Muhammad Qasim Zafar
+ME494 Flight Dynamics and Control (Elective) 3 A BME Dr. Mansoor Janjua
+MM101 Materials and Nanotechnology 2 A BME Dr Shanza Rehan
+MM101 Materials and Nanotechnology 2 B CVE Dr Shanza Rehan
+MM101 Materials and Nanotechnology 2 J BCE, BES Dr Shanza Rehan
+MM141 Materials Lab. I 1 A BME Engr. Abdullah
+MM141 Materials Lab. I 1 B CVE Engr. Abdullah
+MM141 Materials Lab. I 1 J BCE, BES Engr. Abdullah
+MM201 Materials Chemistry 3 MTM, MTN Dr Hamza
+MM222 Strength of Materials 3 MTM, MTN Dr. Rashid Ali
+MM232 Phase Equilibria and Microstructures 3 MTM, MTN Dr. Imran Khan
+MM233 Alloy Production 3 MTM, MTN Dr. Tauheed Shehbaz
+MM243L Materials Lab-III 1 Engr. Umair Naseer
+MM244L Computational tools in Materials Science 1 Engr. Umair Naseer
+MM345L Materials Lab-V (M) 1 MTM Engr. Umair Naseer
+MM345L Materials Lab-V (N) 1 MTN Engr. Umair Naseer
+MM352 Manufacturing Process - 1 3 MTM Dr. Fahd
+MM353 Smart and Functional Materials E 3 MTM Dr. Imran
+MM362 Ceramics and Glasses 3 MTM, MTN Dr Hamza
+MM365 Polymers and Composites 3 MTM, MTN Dr Ramzan
+MM392 Nano Mat. & Nano Tech. 3 MTN Dr. Mohsin
+MM393 Electronic and magnetic Materials 3 MTN Dr Hamza
+MM447L Materials Lab-VII (M) 1 MTM Engr. Abdullah
+MM447L Materials Lab-VII (N) 1 MTN Engr. Abdullah
+MM451 Manufacturing Process II 3 MTM Dr. Zameer
+MM455 Finite Element Methods + Lab(E) 3 MTM, MTN Dr. Rashid Ali
+MM469 Automobile Engg. and Materials (E) 3 MTM, MTN Dr. Tauheed
+MM482 Senior Design Project (Part-II) 3 MTM, MTN All Faculty Members
+MM495 Nano Systems and Devices 3 MTN Engr. Umair Naseer
+MM497 Biomaterials 3 MTM, MTN Engr. Abdullah
+MM499 Nano technology for energy 3 MTN Dr. Mohsin Ali Marwat
+MS102 Business Statistics 3 A MGS I Dr. Ubaid Ullah
+MS102 Business Statistics 3 B MGS II Dr. Ubaid Ullah
+MS141 Microeconomics 3 A MGS I Ms. Umme Rabab
+MS141 Microeconomics 3 B MGS II Ms. Umme Rabab
+MS151 Financial Accounting 3 A MGS I Dr. Shahid
+MS151 Financial Accounting 3 B MGS II Dr. Shahid
+MS224 International Business 3 A MGS I Mr. Haroon Rashid
+MS224 International Business 3 B MGS II Mr. Haroon Rashid
+MS232 Marketing Management 3 A MGS I Ms. Naveen
+MS232 Marketing Management 3 B MGS II Ms. Naveen
+MS253 Business Finance 3 A MGS I Dr. Noshaba Zulfiqar
+MS253 Business Finance 3 B MGS II Dr. Noshaba Zulfiqar
+MS254 Cost and Management Accounting 3 A MGS I Dr. Shariq
+MS254 Cost and Management Accounting 3 B MGS II Dr. Shariq
+MS291 Engineering Economics 3 A BEE Dr. M. Sabir
+MS291 Engineering Economics 3 B CME+MTE Dr. M. Sabir
+MS303 Business Research Methods 3 MGS Dr. Saima Aftab
+MS333 Consumer Behaviour 3 MGS Dr. Shakir Sardar
+MS356 Money and Banking 3 MGS Mr. Umer Saeed
+MS357 Financial Econometrics-Elective III 3 MGS Mr. Umer Saeed
+MS361 Operations and Production Management-Elective IV 3 MGS Dr. Ubaid Ullah
+MS434 Entrepreneurship and Marketing 3 A MTM Mr. Aymen
+MS472 Research Project II 3 MGS Dr. Sami Farooq
+MS494 Total Quality Management 3 A Mr. Hassaan Tariq
+MS494 Total Quality Management 3 B Mr. Hassaan Tariq
+MS496 Project Management 3 A CVE Dr. Suhaib
+MT102 Differential Equations & Linear Algebra I (Section I) 3 A+C1 BME+CME Dr Mahnoor
+MT102 Differential Equations & Linear Algebra I (Section II) 3 B+C2 CVE+MTE Dr Mahnoor
+MT102 Differential Equations & Linear Algebra I(Section III) 3 D+E BEE Dr Nasir Javed
+MT102 Differential Equations & Linear Algebra I(Section IV) 3 F+H BAI+BCS Dr Sheharyar Pervaiz
+MT102 Differential Equations & Linear Algebra I(Section V) 3 G CYS+SWE Dr Minhaj Zaheer
+MT102 Differential Equations & Linear Algebra I (Section VI) 3 I BDS Dr Minhaj Zaheer
+MT102 Differential Equations & Linear Algebra I (Section VII) 3 J BCE+BES Dr Zahid Ahmad
+MT203 Complex Variables and Transforms 3 BEE+BES Dr Sirajul Haq
+PH101 Applied Physics (Section II) 3 C CME+MTE Dr Fahd Sikandar Khan
+PH101 Applied Physics (Section I) 3 D+E BEE Dr Zahir Iqbal
+PH101L Applied Physics Lab (Section II) 1 C CME+MTE Dr Fahd Sikandar KhanPH101L Applied Physics Lab (Section I) 1 D+E BEE Dr Zahir Iqbal
+SC463 Sustainability in Supply Chain Management 3 MGS Dr. Sami Farooq
+SC464 Lean & Six Sigma in Supply Chain Management 3 MGS Mr. Hassaan Tariq
+SE211 Software Requirement Engineering 3 Mr. Huzaifa Shah

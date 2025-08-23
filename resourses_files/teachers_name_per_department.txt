@@ -1,0 +1,183 @@
+BACHELOR'S DEGREE PROGRAM IN ARTIFICIAL INTELLIGENCE (AI)
+
+Faculty
+
+· Dr. Khurram Jadoon Khan, PhD (Hanyang University, Seoul, South Korea)
+
+· Dr. Ali Imran Sandhu, PhD (KAUST, Thuwal, KSA)
+
+· Dr. Sarah Iqbal, PhD (Universiti Malaya, Kuala Lumpur, Malaysia)
+
+· Mr. Qasim Riaz, MS (NUST, Islamabad, Pakistan)
+
+· Mr. Beenish Urooj, MS (CUI, Islamabad, Pakistan)
+
+· Mr. Muhammad Talha Ashfaq, MS (CUI, Islamabad, Pakistan)
+
+· Mr. Hafiz Syed Ahmed Qasim, MS (NUST, Islamabad, Pakistan)
+
+On Leave
+
+· Dr. Raja Hashim Ali, PhD (Kungliga Tekniska Hogskola, Stockholm, Sweden)
+
+Lab Engineer and Graduate Assistant List
+
+· Mr. Asim Shah, BS Information Technology (University of Agriculture, Peshawar, Pakistan)
+
+· Mr. Muhammad Ishaq, BS Artificial Intelligence (GIK Institute, Topi, Pakistan)
+
+
+BACHELORS DEGREE PROGRAM IN COMPUTER ENGINEERING (CE)
+
+Faculty
+
+· Prof. Dr. Qadeer ul Hassan, Dean FCSE, PhD (Boston University, Boston, USA)
+
+· Prof. Dr. Ahmar Rashid, PhD (Jeju National University, Jeju, South Korea)
+
+· Dr. Shahabuddin Ansari, PhD (GIK Institute, Topi, Pakistan)
+
+· Dr. Muhammad Hanif, PhD (Australian National University, Canberra, Australia)
+
+· Dr. Waqar Ahmad, PhD (Sabanci University, Istanbul, Turkey)
+
+· Dr. Fahad Bin Muslim, PhD (Politecnico di Torino, Italy)
+
+· Badre Munir, MS (GIK Institute, Topi, Pakistan)
+
+· Usama Manzoor, MS (GIK Institute, Topi, Pakistan)
+
+Lab Engineer and Graduate Assistant List
+
+· Engr. Muhammad Abu Bakar, BS Electrical (Computer) Engineering (CUI, Wah, Pakistan)
+
+· Engr. Irfanullah, BS Computer Systems Engineering (UET, Peshawar, Pakistan)
+
+· Engr. Muhammad Shakaib Khan, BS Electrical (Telecommunication) Engineering (CUI, Islamabad, Pakistan)
+
+· Engr. Zaheer Ahmed, BS Electrical (Computer) Engineering (CUI, Islamabad, Pakistan)
+
+· Engr. Mehran Ali, BS Electrical Engineering (UET, Peshawar, Pakistan)
+
+· Engr. Abbas Khan, MS Electrical Engineering (Institute of Space Technology, Islamabad, Pakistan)
+
+
+BACHELORS DEGREE PROGRAM IN COMPUTER SCIENCE (CS)
+
+Faculty
+
+· Dr. Salman Ahmed, PhD (University of Alberta, Edmonton, Canada)
+
+· Dr. Qamar Abbas, PhD (NUST, Islamabad, Pakistan)
+
+· Dr. Taj Muhammad Khan, PhD (University of Grenoble, Grenoble, France)
+
+· Dr. Fahd Sikandar Khan, PhD (University of Tokyo, Japan)
+
+· Dr. Usman Habib, PhD (University of Kent, UK)
+
+· Engr. Ahsan Shah, MS (GIK Institute, Topi, Pakistan)
+
+· Mr. Sajid Ali, MS (NUCES, Islamabad, Pakistan)
+
+· Mr. Waheed Ahmad, MS (NUST, Islamabad, Pakistan)
+
+· Mr. Israr Ahmad, MS (NUST, Islamabad, Pakistan)
+
+On Leave
+
+· Prof. Dr. Zahid Halim, PhD (NUCES, Islamabad, Pakistan)
+
+Lab Engineer and Graduate Assistant List
+
+· Ms. Eisha Ter Razzia Mir, BS Software Engineering (Fatima Jinnah Women University, Rawalpindi, Pakistan)
+
+· Mr. Muhammad Naeem, MS Computer Science (GIK Institute, Topi, Pakistan)
+
+· Mr. Waheed Iqbal, BS Software Engineering (Virtual University Lahore, Pakistan)
+
+· Mr. Abu Bakar Siddidue, MS (GIK Institute, Topi, Pakistan)
+
+BACHELORS DEGREE PROGRAM IN CYBER SECURITY (CyS)
+
+Faculty list
+
+· Prof. Dr. Ghulam Abbas, PhD (University of Liverpool, Liverpool, UK)
+
+· Dr. Rashad Maqbool Jillani, PhD (Florida Atlantic University, Boca Raton, USA)
+
+· Dr. Muhammad Zain Siddiqi, PhD (Tsinghua University, Beijing, China)
+
+· Dr. Zubair Ahmad, PhD (University of Venice, Venice, Italy)
+
+· Dr. Shahab Haider, PhD (GIK Institute, Topi, Pakistan)
+
+· Mr. Ahmad Nawaz, MS (CUI, Islamabad, Pakistan)
+
+· Mr. Abdullah Bin Zarshaid (NUCES, Karachi Pakistan)
+
+
+Lab Engineer and Graduate Assistant List
+
+· Ms. Arooba Saeed, MS Software Engineering (CUI, Islamabad, Pakistan)
+
+· Mr. Khizar Khan BS Computer Science (Abdul Wali Khan University, Mardan, Pakistan)
+
+· Ms. Jazia Sajid, BS Cyber Security (Air University, Islamabad, Pakistan)
+
+BACHELORS DEGREE PROGRAM IN DATA SCIENCE (DS)
+
+Faculty list
+
+· Prof. Dr. Masroor Hussain, PhD (GIK Institute, Topi, Pakistan)
+
+· Dr. Ayaz Umer, PhD (University of South Australia, Adelaide, Australia)
+
+· Ms. Nazia Shehzadi, MS (CUI, Islamabad, Pakistan)
+
+· Ms. Safia Baloch, MS (FAST NUCES, Karachi, Pakistan)
+
+· Mr. Hafiz Syed Muhammad Muslim, MS (NUST, Islamabad, Pakistan)
+
+On Leave
+
+· Dr. Farhan Khan, PhD (Bilkent Univeristy, Bilkent, Turkey)
+
+
+Lab Engineer and Graduate Assistant List
+
+· Ms. Anmol Sanaullah Khan, BS Data Science (Institute of Management Sciences, Peshawar, Pakistan)
+
+· Ms. Basma Nasir, MS Computer Science (CUI, Islamabad, Pakistan)
+
+· Ms. Umme Rubab. BS Computer Science (UET, Taxila, Pakistan)
+
+· Mr. Iqra Mueed, BS Artificial Intelligence (GIK Institute Topi, Pakistan)
+
+· Mr. Adnan Haider, MS (GIK Institute, Topi, Pakistan)
+
+BACHELORS DEGREE PROGRAM IN SOFTWARE ENGINEERING (SE)
+
+Faculty
+
+· Dr. Adnan Shah, PhD (Australian National University, Canberra, Australia)
+
+· Ms. Laraib Afzal, MS (CUI, Islamabad, Pakistan)
+
+· Mr. Said Nabi, MS (CUI, Islamabad, Pakistan)
+
+· Mr. Salman Ashraf, MS (GIK Institute, Topi, Pakistan)
+
+· Mr. Huzaifa Shah, MS (GIK Institute, Topi, Pakistan)
+
+Lab Engineer and Graduate Assistant List
+
+· Ms. Laraib Noor, MS Software Engineering (Bahria University Islamabad, Pakistan)
+
+· Ms. Mah Rukh, BS Computer Software Engineering (UET, Mardan, Pakistan)
+
+Personal Secretary to Dean
+
+· Farhad Gul, MSc Mathematics (Univ. of Peshawar) and MCS (Virtual University)
+
+

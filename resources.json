@@ -9,7 +9,9 @@
     "periodDuration": 60,
     "breakDuration": 15,
     "lunchBreakStart": "12:00",
-    "lunchBreakEnd": "13:00"
+    "lunchBreakEnd": "13:00",
+    "shortBreakStart": "10:00",
+    "shortBreakEnd": "10:30"
   },
   "timeSlots": [
     {
@@ -24,13 +26,13 @@
     },
     {
       "id": 3,
-      "startTime": "10:00",
-      "endTime": "11:00"
+      "startTime": "10:30",
+      "endTime": "11:30"
     },
     {
       "id": 4,
-      "startTime": "11:00",
-      "endTime": "12:00"
+      "startTime": "11:30",
+      "endTime": "12:30"
     },
     {
       "id": 5,
@@ -72,7 +74,7 @@
       "id": 3,
       "name": "Mathematics",
       "code": "MATH",
-      "head": "Dr. Emily Rodriguez",
+      "head": "Prof. Emily Rodriguez",
       "programs": ["BS Mathematics", "BS Applied Mathematics"]
     },
     {
@@ -93,8 +95,8 @@
       "email": "sarah.johnson@techuni.edu",
       "phone": "+1-555-0101",
       "qualifications": ["PhD Computer Science", "MS Software Engineering"],
-      "subjectsCanTeach": ["Data Structures", "Algorithms", "Software Engineering", "Database Systems"],
-      "maxHoursPerWeek": 9,
+      "subjectsCanTeach": ["Data Structures", "Database Systems"],
+      "maxHoursPerWeek": 12,
       "minHoursPerWeek": 6,
       "preferredTimeSlots": [],
       "unavailableSlots": [],
@@ -112,9 +114,9 @@
       "email": "michael.chen@techuni.edu",
       "phone": "+1-555-0102",
       "qualifications": ["PhD Electrical Engineering", "MS Electronics"],
-      "subjectsCanTeach": ["Circuit Analysis", "Digital Logic", "Microprocessors", "Control Systems"],
+      "subjectsCanTeach": ["Circuit Analysis"],
       "maxHoursPerWeek": 12,
-      "minHoursPerWeek": 8,
+      "minHoursPerWeek": 6,
       "preferredTimeSlots": [],
       "unavailableSlots": [],
       "preferredDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
@@ -131,9 +133,9 @@
       "email": "emily.rodriguez@techuni.edu",
       "phone": "+1-555-0103",
       "qualifications": ["PhD Mathematics", "MS Applied Mathematics"],
-      "subjectsCanTeach": ["Calculus I", "Calculus II", "Linear Algebra", "Statistics", "Discrete Mathematics"],
-      "maxHoursPerWeek": 8,
-      "minHoursPerWeek": 5,
+      "subjectsCanTeach": ["Calculus I", "Linear Algebra"],
+      "maxHoursPerWeek": 14,
+      "minHoursPerWeek": 7,
       "preferredTimeSlots": [],
       "unavailableSlots": [],
       "preferredDays": ["Monday", "Wednesday", "Friday"],
@@ -150,9 +152,9 @@
       "email": "ahmed.hassan@techuni.edu",
       "phone": "+1-555-0104",
       "qualifications": ["PhD Business Administration", "MBA Finance"],
-      "subjectsCanTeach": ["Financial Management", "Marketing", "Operations Management", "Business Ethics"],
-      "maxHoursPerWeek": 11,
-      "minHoursPerWeek": 7,
+      "subjectsCanTeach": ["Financial Management"],
+      "maxHoursPerWeek": 6,
+      "minHoursPerWeek": 3,
       "preferredTimeSlots": [],
       "unavailableSlots": [],
       "preferredDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
@@ -169,9 +171,9 @@
       "email": "lisa.wang@techuni.edu",
       "phone": "+1-555-0105",
       "qualifications": ["PhD Computer Science", "MS Artificial Intelligence"],
-      "subjectsCanTeach": ["Programming Fundamentals", "Object Oriented Programming", "Web Development", "Machine Learning"],
-      "maxHoursPerWeek": 15,
-      "minHoursPerWeek": 10,
+      "subjectsCanTeach": ["Programming Fundamentals", "Machine Learning"],
+      "maxHoursPerWeek": 18,
+      "minHoursPerWeek": 12,
       "preferredTimeSlots": [],
       "unavailableSlots": [],
       "preferredDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
@@ -188,9 +190,9 @@
       "email": "john.smith@techuni.edu",
       "phone": "+1-555-0106",
       "qualifications": ["MS Computer Science", "BS Software Engineering"],
-      "subjectsCanTeach": ["Programming Fundamentals", "Computer Networks", "Operating Systems"],
-      "maxHoursPerWeek": 18,
-      "minHoursPerWeek": 14,
+      "subjectsCanTeach": ["Programming Fundamentals", "Programming Lab", "Data Structures Lab"],
+      "maxHoursPerWeek": 21,
+      "minHoursPerWeek": 15,
       "preferredTimeSlots": [],
       "unavailableSlots": [],
       "preferredDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
@@ -225,7 +227,7 @@
       "department": "Computer Science",
       "credits": 1,
       "type": "Lab",
-      "hoursPerWeek": 3,
+      "hoursPerWeek": 1,
       "duration": 180,
       "semester": 1,
       "year": 1,
@@ -279,7 +281,7 @@
       "department": "Computer Science",
       "credits": 1,
       "type": "Lab",
-      "hoursPerWeek": 3,
+      "hoursPerWeek": 1,
       "duration": 180,
       "semester": 1,
       "year": 2,
@@ -430,7 +432,7 @@
       "building": "Technical Block B",
       "floor": 1,
       "type": "Laboratory",
-      "capacity": 30,
+      "capacity": 35,
       "equipment": ["Computer", "Projector", "Lab Equipment"],
       "isAccessible": true,
       "hasAC": true,
@@ -444,7 +446,7 @@
       "building": "Technical Block B",
       "floor": 1,
       "type": "Laboratory",
-      "capacity": 25,
+      "capacity": 30,
       "equipment": ["Computer", "Lab Equipment"],
       "isAccessible": true,
       "hasAC": true,
@@ -472,7 +474,7 @@
       "building": "Academic Block A",
       "floor": 3,
       "type": "Seminar Room",
-      "capacity": 25,
+      "capacity": 40,
       "equipment": ["Projector", "Whiteboard"],
       "isAccessible": false,
       "hasAC": true,
@@ -588,7 +590,18 @@
       "noClashRooms": true,
       "respectWorkingHours": true,
       "roomCapacityCheck": true,
-      "teacherQualificationCheck": true
+      "teacherQualificationCheck": true,
+      "roomTypeCheck": true,
+      "respectBreakTimes": true,
+      "penaltyWeights": {
+        "teacherConflict": 50000,
+        "studentConflict": 50000,
+        "roomConflict": 50000,
+        "capacityViolation": 25000,
+        "qualificationViolation": 30000,
+        "roomTypeViolation": 35000,
+        "breakTimeViolation": 20000
+      }
     },
     "soft": {
       "teacherPreferences": 0.8,
@@ -598,7 +611,15 @@
       "evenDistribution": 0.8,
       "lunchBreakRespect": 0.9,
       "maxConsecutiveHours": 0.8,
-      "buildingChangeMinimize": 0.7
+      "buildingChangeMinimize": 0.7,
+      "penaltyWeights": {
+        "workloadViolation": 100,
+        "consecutiveViolation": 50,
+        "gapPenalty": 30,
+        "lunchViolation": 40,
+        "preferenceViolation": 20,
+        "researchDayViolation": 80
+      }
     }
   },
   "algorithmSettings": {
@@ -606,13 +627,16 @@
     "generations": 50,
     "mutationRate": 0.15,
     "crossoverRate": 0.8,
-    "eliteSize": 3
+    "eliteSize": 3,
+    "tournamentSize": 4,
+    "convergenceThreshold": 0.95,
+    "maxStagnationGenerations": 20
   },
   "metadata": {
     "createdAt": "2024-08-20T11:30:00.000Z",
     "lastModified": "2024-08-20T11:30:00.000Z",
     "version": "1.0",
     "createdBy": "System Administrator",
-    "notes": "Sample university resource configuration for Tech University of Excellence"
+    "notes": "Sample university resource configuration for Tech University of Excellence - Fixed teacher qualifications and resource allocation"
   }
 }

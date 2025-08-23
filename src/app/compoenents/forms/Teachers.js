@@ -4,6 +4,7 @@
 import { useState } from 'react';
 import { Users, Plus, Trash2, Edit2, Save, X } from 'lucide-react';
 import { generateId } from '../../utils/dataStructure';
+import DepartmentProgramDropdown from '../DepartmentProgramDropdown';
 
 export default function Teachers({ data, onChange, universityData }) {
   const [teachers, setTeachers] = useState(data || []);
@@ -27,11 +28,9 @@ export default function Teachers({ data, onChange, universityData }) {
     const newTeacher = {
       id: generateId('teachers'),
       name: "",
-      employeeId: "",
       department: "",
+      program: "",
       designation: "Lecturer",
-      email: "",
-      phone: "",
       qualifications: [],
       subjectsCanTeach: [],
       maxHoursPerWeek: 18,
@@ -173,7 +172,7 @@ function TeacherCard({
   workingDays,
   universityData 
 }) {
-  const departments = universityData.departments?.map(d => d.name) || [];
+  const departments = universityData.departments || [];
   const subjects = universityData.subjects?.map(s => s.name) || [];
 
   if (isEditing) {
@@ -204,31 +203,6 @@ function TeacherCard({
           </div>
           
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Employee ID</label>
-            <input
-              type="text"
-              value={teacher.employeeId}
-              onChange={(e) => onUpdate('employeeId', e.target.value)}
-              className="input-field"
-              placeholder="Employee ID"
-            />
-          </div>
-          
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Department</label>
-            <select
-              value={teacher.department}
-              onChange={(e) => onUpdate('department', e.target.value)}
-              className="input-field"
-            >
-              <option value="">Select Department</option>
-              {departments.map(dept => (
-                <option key={dept} value={dept}>{dept}</option>
-              ))}
-            </select>
-          </div>
-          
-          <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Designation</label>
             <select
               value={teacher.designation}
@@ -243,25 +217,13 @@ function TeacherCard({
             </select>
           </div>
           
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-            <input
-              type="email"
-              value={teacher.email}
-              onChange={(e) => onUpdate('email', e.target.value)}
-              className="input-field"
-              placeholder="email@university.edu"
-            />
-          </div>
-          
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
-            <input
-              type="tel"
-              value={teacher.phone}
-              onChange={(e) => onUpdate('phone', e.target.value)}
-              className="input-field"
-              placeholder="Phone number"
+          <div className="md:col-span-2">
+            <DepartmentProgramDropdown
+              departments={departments}
+              selectedDepartment={teacher.department}
+              selectedProgram={teacher.program || ''}
+              onDepartmentChange={(dept) => onUpdate('department', dept)}
+              onProgramChange={(prog) => onUpdate('program', prog)}
             />
           </div>
         </div>
@@ -389,6 +351,7 @@ function TeacherCard({
             </h4>
             <p className="text-sm text-gray-600">
               {teacher.designation} • {teacher.department || 'No Department'}
+              {teacher.program && ` • ${teacher.program}`}
             </p>
           </div>
         </div>

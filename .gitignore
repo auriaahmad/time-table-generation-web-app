@@ -41,7 +41,7 @@ yarn-error.log*
 next-env.d.ts
 
 # backend files
-/backend/
+# /backend/
 *.pyc
 __pycache__/
 *.pyo

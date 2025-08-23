@@ -1,0 +1,50 @@
+Time Table FCSE Lecture Halls 													
+		08:00-08:50	09:00-09:50	10:00-10:30	10:30-11:20	11:30-12:20	12:30-13:20	13:30-14:20	14:30-15:20	15:30-16:20	16:30-17:20		
+Monday	CS LH1			BREAK				Lunch/Prayer Break					
+	CS LH2												
+	CS LH3												
+	AcB LH4												
+	AcB LH5												
+	AcB LH6												
+	AcB LH8												
+	AcB MLH2												
+Tuesday	CS LH1												
+	CS LH2												
+	CS LH3												
+	AcB LH4												
+	AcB LH5												
+	AcB LH6												
+	AcB LH8												
+	AcB MLH2												
+Wednesday	CS LH1						Wednesday Seminar		Wednesday Seminar				
+	CS LH2												
+	CS LH3												
+	AcB LH4												
+	AcB LH5												
+	AcB LH6												
+	AcB LH8												
+	AcB MLH2												
+Thursday	CS LH1												
+	CS LH2												
+	CS LH3												
+	AcB LH4												
+	AcB LH5												
+	AcB LH6												
+	AcB LH8												
+	AcB MLH2												
+		08:00-08:50	09:00-09:50	10:00-10:50	11:00-11:50	12:00-12:50			14:30-15:20	15:30-16:20	16:30-17:20		
+Friday	CS LH1												
+	CS LH2												
+	CS LH3												
+	AcB LH4												
+	AcB LH5												
+	AcB LH6												
+	AcB LH8												
+	AcB MLH2												
+													
+					 SEC A	AI							
+					SEC B	CE							
+					SEC C	CS							
+					SEC D	DS							
+					SEC E	CyS							
+					SEC F	SE							

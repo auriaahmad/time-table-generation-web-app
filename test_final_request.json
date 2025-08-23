@@ -1,0 +1,103 @@
+{
+  "universityData": {
+    "basicInfo": {
+      "universityName": "FCSE - Faculty of Computer Science and Engineering",
+      "academicYear": "2024-2025",
+      "semester": "Fall",
+      "totalWeeks": 16,
+      "workingDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "dailyPeriods": 9,
+      "periodDuration": 50,
+      "breakDuration": 10
+    },
+    "timeSlots": [
+      {"id": 1, "startTime": "08:00", "endTime": "08:50"},
+      {"id": 2, "startTime": "09:00", "endTime": "09:50"},
+      {"id": 3, "startTime": "10:30", "endTime": "11:20"},
+      {"id": 4, "startTime": "11:30", "endTime": "12:20"},
+      {"id": 5, "startTime": "13:30", "endTime": "14:20"}
+    ],
+    "teachers": [
+      {
+        "id": 1,
+        "name": "Mr. Qasim Riaz",
+        "subjectsCanTeach": ["CS101", "Computing and AI"],
+        "maxHoursPerWeek": 18,
+        "minHoursPerWeek": 12
+      },
+      {
+        "id": 2,
+        "name": "Ms. Beenish Urooj", 
+        "subjectsCanTeach": ["CS112", "Object Oriented Programming and Design"],
+        "maxHoursPerWeek": 16,
+        "minHoursPerWeek": 10
+      },
+      {
+        "id": 3,
+        "name": "Dr. Ali Imran Sandhu",
+        "subjectsCanTeach": ["CE221", "Digital Logic Design"],
+        "maxHoursPerWeek": 16,
+        "minHoursPerWeek": 10
+      }
+    ],
+    "subjects": [
+      {
+        "id": 1,
+        "name": "Computing and AI",
+        "code": "CS101",
+        "type": "Theory",
+        "hoursPerWeek": 2,
+        "duration": 50,
+        "requiredRoomType": "Classroom"
+      },
+      {
+        "id": 2,
+        "name": "Object Oriented Programming and Design",
+        "code": "CS112",
+        "type": "Theory",
+        "hoursPerWeek": 2,
+        "duration": 50,
+        "requiredRoomType": "Classroom"
+      },
+      {
+        "id": 12,
+        "name": "Digital Logic Design",
+        "code": "CE221",
+        "type": "Theory",
+        "hoursPerWeek": 3,
+        "duration": 50,
+        "requiredRoomType": "Classroom"
+      }
+    ],
+    "rooms": [
+      {
+        "id": 1,
+        "name": "CS-LH1",
+        "type": "Lecture Hall",
+        "capacity": 80
+      },
+      {
+        "id": 2,
+        "name": "CS-LH2", 
+        "type": "Lecture Hall",
+        "capacity": 75
+      }
+    ],
+    "students": [
+      {
+        "id": 1,
+        "batch": "AI-2024",
+        "section": "A",
+        "totalStudents": 50,
+        "subjects": [1, 2, 12]
+      },
+      {
+        "id": 2,
+        "batch": "CE-2024",
+        "section": "B", 
+        "totalStudents": 45,
+        "subjects": [1, 2, 12]
+      }
+    ]
+  }
+}

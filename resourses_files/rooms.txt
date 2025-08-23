@@ -1,0 +1,9 @@
+ROOMS
+Lecture Hall-01, FCSE Building
+Lecture Hall-02, FCSE Building
+Lecture Hall-03, FCSE Building
+Lecture Hall-04, New Academic Block
+Lecture Hall-05, New Academic Block
+Lecture Hall-06, New Academic Block
+Lecture Hall-08, New Academic Block
+MLH-2, New Academic Block

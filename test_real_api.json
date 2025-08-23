@@ -1,0 +1,103 @@
+{
+  "universityData": {
+    "basicInfo": {
+      "universityName": "FCSE - Faculty of Computer Science and Engineering",
+      "academicYear": "2024-2025",
+      "semester": "Fall",
+      "totalWeeks": 16,
+      "workingDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "dailyPeriods": 9,
+      "periodDuration": 50,
+      "breakDuration": 10,
+      "lunchBreakStart": "12:30",
+      "lunchBreakEnd": "13:20",
+      "shortBreakStart": "10:00",
+      "shortBreakEnd": "10:30"
+    },
+    "timeSlots": [
+      {
+        "id": 1,
+        "startTime": "08:00",
+        "endTime": "08:50"
+      },
+      {
+        "id": 2,
+        "startTime": "09:00",
+        "endTime": "09:50"
+      }
+    ],
+    "teachers": [
+      {
+        "id": 1,
+        "name": "Dr. Khurram Jadoon Khan",
+        "employeeId": "EMP001",
+        "department": "Artificial Intelligence",
+        "designation": "Assistant Professor",
+        "email": "khurram.jadoon@fcse.edu",
+        "phone": "+92-300-0000001",
+        "qualifications": ["PhD (Hanyang University, Seoul, South Korea)"],
+        "subjectsCanTeach": ["AI311", "AI319", "AI361", "CS351", "Artificial Intelligence"],
+        "maxHoursPerWeek": 14,
+        "minHoursPerWeek": 10,
+        "preferredTimeSlots": [2, 3, 4, 5, 6],
+        "unavailableSlots": [],
+        "preferredDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "researchDays": [],
+        "maxConsecutiveHours": 2,
+        "maxGapHours": 2
+      }
+    ],
+    "subjects": [
+      {
+        "id": 1,
+        "name": "Artificial Intelligence",
+        "code": "CS351",
+        "department": "Computer Science",
+        "credits": 3,
+        "type": "Theory",
+        "hoursPerWeek": 3,
+        "duration": 60,
+        "semester": 4,
+        "year": 3,
+        "isElective": false,
+        "prerequisites": ["CS221", "CS231"],
+        "maxStudents": 35,
+        "requiredRoomType": "Classroom",
+        "equipmentRequired": ["Projector", "Computer"],
+        "description": "Introduction to artificial intelligence concepts and applications"
+      }
+    ],
+    "rooms": [
+      {
+        "id": 1,
+        "name": "CS-LH1",
+        "building": "FCSE Building",
+        "floor": 1,
+        "type": "Lecture Hall",
+        "capacity": 80,
+        "equipment": ["Projector", "Whiteboard", "Audio System"],
+        "isAccessible": true,
+        "hasAC": true,
+        "unavailableSlots": [],
+        "preferredFor": ["Theory"],
+        "maintenanceSlots": []
+      }
+    ],
+    "students": [
+      {
+        "id": 1,
+        "batch": "AI-2024",
+        "department": "Artificial Intelligence",
+        "year": 1,
+        "semester": 1,
+        "section": "A",
+        "totalStudents": 50,
+        "subjects": [1],
+        "type": "Full-time",
+        "maxHoursPerDay": 8,
+        "preferredTimeSlots": [],
+        "unavailableSlots": []
+      }
+    ]
+  }
+}

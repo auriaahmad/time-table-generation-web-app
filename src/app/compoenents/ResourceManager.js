@@ -2,7 +2,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Download, Upload, Save, Eye, AlertCircle, CheckCircle, Trash, RotateCcw, Play, Settings } from 'lucide-react';
+import { Download, Upload, Save, Eye, AlertCircle, CheckCircle, Trash, RotateCcw, Play, Settings, FileText } from 'lucide-react';
 import { defaultUniversityData, exportToJSON, importFromJSON, validateUniversityData, resetIdCounters, initializeIdCounters } from '../utils/dataStructure';
 
 import BasicInfo from './forms/BasicInfo';
@@ -13,6 +13,8 @@ import Rooms from './forms/Rooms';
 import Students from './forms/Students';
 import TimeSlots from './forms/TimeSlots';
 import FileUpload from './FileUpload';
+import PDFExportModal from './PDFExportModal';
+import PDFTestButton from './PDFTestButton';
 
 export default function ResourceManager() {
   const [universityData, setUniversityData] = useState(defaultUniversityData);
@@ -25,6 +27,7 @@ export default function ResourceManager() {
   const [showAlgorithmSettings, setShowAlgorithmSettings] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
   const [generationResult, setGenerationResult] = useState(null);
+  const [showPDFExport, setShowPDFExport] = useState(false);
   const [algorithmSettings, setAlgorithmSettings] = useState({
     populationSize: 30,
     generations: 50,
@@ -69,14 +72,25 @@ export default function ResourceManager() {
   }, []);
 
   const handleDataChange = (section, newData) => {
-    setUniversityData(prev => ({
-      ...prev,
-      [section]: newData,
-      metadata: {
-        ...prev.metadata,
-        lastModified: new Date().toISOString()
-      }
-    }));
+    setUniversityData(prev => {
+      const now = new Date();
+      const isoString = now.getFullYear() + '-' + 
+        String(now.getMonth() + 1).padStart(2, '0') + '-' + 
+        String(now.getDate()).padStart(2, '0') + 'T' +
+        String(now.getHours()).padStart(2, '0') + ':' +
+        String(now.getMinutes()).padStart(2, '0') + ':' +
+        String(now.getSeconds()).padStart(2, '0') + '.000Z';
+      
+      return {
+        ...prev,
+        [section]: newData,
+        metadata: {
+          ...prev.metadata,
+          lastModified: isoString,
+          createdAt: prev.metadata.createdAt || isoString
+        }
+      };
+    });
   };
 
   const handleFileUpload = async (file) => {
@@ -156,6 +170,11 @@ export default function ResourceManager() {
       }
 
       const result = await response.json();
+      console.log('Backend Response:', result);
+      console.log('Backend Response Keys:', Object.keys(result));
+      if (result.schedule) console.log('Schedule Length:', result.schedule.length);
+      if (result.timetable) console.log('Timetable Length:', result.timetable.length);
+      
       setGenerationResult(result);
       setSaveStatus('✓ Timetable generated successfully!');
       
@@ -235,6 +254,16 @@ export default function ResourceManager() {
             >
               <Play size={16} />
               {isGenerating ? 'Generating...' : 'Generate Timetable'}
+            </button>
+
+            <button
+              onClick={() => setShowPDFExport(true)}
+              disabled={!generationResult || !generationResult.success}
+              className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-400 text-white px-4 py-2 rounded-lg transition-colors"
+              title={!generationResult ? 'Generate a timetable first' : 'Export timetable to PDF'}
+            >
+              <FileText size={16} />
+              Export PDF
             </button>
           </div>
           
@@ -544,7 +573,11 @@ export default function ResourceManager() {
                       onClick={() => {
                         const dataStr = JSON.stringify(generationResult, null, 2);
                         const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-                        const exportFileDefaultName = `timetable-complete-${new Date().toISOString().split('T')[0]}.json`;
+                        const now = new Date();
+                        const dateString = now.getFullYear() + '-' + 
+                          String(now.getMonth() + 1).padStart(2, '0') + '-' + 
+                          String(now.getDate()).padStart(2, '0');
+                        const exportFileDefaultName = `timetable-complete-${dateString}.json`;
                         const linkElement = document.createElement('a');
                         linkElement.setAttribute('href', dataUri);
                         linkElement.setAttribute('download', exportFileDefaultName);
@@ -553,7 +586,14 @@ export default function ResourceManager() {
                       className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"
                     >
                       <Download size={16} className="inline mr-2" />
-                      Download Timetable
+                      Download JSON
+                    </button>
+                    <button
+                      onClick={() => setShowPDFExport(true)}
+                      className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+                    >
+                      <FileText size={16} className="inline mr-2" />
+                      Export as PDF
                     </button>
                     <button
                       onClick={() => setGenerationResult(null)}
@@ -582,6 +622,17 @@ export default function ResourceManager() {
           </div>
         </div>
       )}
+
+      {/* PDF Export Modal */}
+      <PDFExportModal
+        isOpen={showPDFExport}
+        onClose={() => setShowPDFExport(false)}
+        timetableData={generationResult}
+        universityData={universityData}
+      />
+
+      {/* PDF Test Button - Hidden */}
+      {false && <PDFTestButton />}
     </div>
   );
 }

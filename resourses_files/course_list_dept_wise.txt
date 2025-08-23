@@ -1,0 +1,105 @@
+Artificial Intelligence (Section A)			
+Code	Title	CH 	Instructor
+CS101	Computing and AI	2	Mr. Qasim Riaz
+CE221	Digital Logic Design	3	Dr. Ali Imran Sandhu
+CS202  	Information & Communication Technologies	2	Mr. Talha Ashfaq
+CS221	Data Structures & Algorithms 	3	Mr. Qasim Riaz
+CS231 	Discrete Mathematics 	3	Mr. Hafiz Qasim
+ES205	Advance Linear Algebra	3	Other Faculty
+AI311	Knowledge Representation and Problem Solving	2	Dr. Khurram
+AI321	Machine Learning	3	Dr. Ali Imran Sandhu
+CS311	Operating Systems	3	Dr. Sarah
+CS325 	Software Engineering	3	Ms. Beenish
+CS391	Entrepreneurship and Technology Commercialization	3	New Hire 1
+CE413	Computer Communications and Networks	3	Dr Sarah
+CS417	Parallel Processing and Distributed Computing	3	Dr. Taj
+CS478	Design and Analysis of Algorithms	3	Mr. Ahsan Shah
+AI4xx	Elective 1:	3	Mr. Hafiz Qasim
+AI4xx	Elective 2: Data Science	3	Mr. Talha Ashfaq
+CS481	Senior Design Project 1	3	Mr. Israr
+			
+Computer Engineering (Section B)			
+Code	Title	CH 	Instructor
+CS101	Computing and AI	2	Mr. Usama Manzoor
+CE221	Digital Logic Design	3	Dr. Waqar Ahmad
+CS202  	Information & Communication Technologies	2	Prof. Dr. S. M. Hasan Zaidi
+CS221	Data Structures & Algorithms 	3	Prof. Dr. Ahmar Rashid
+CS231 	Discrete Mathematics 	3	Mr. Badre Munir
+CE211	Circuit Analysis	3	Dr. Fahad Bin Muslim
+CE324	Microprocessor Interfacing	3	Dr. Fahad Bin Muslim
+CE341	Signals and Systems	3	Dr. Muhammad Hanif
+CS311	Operating Systems	3	New Hire 2 (Nazia Rep.)
+CS325 	Software Engineering	3	New Hire 1
+CS391	Entrepreneurship and Technology Commercialization	3	Mr. Usama Manzoor
+CE436	Digital System Design	3	Dr. Waqar Ahmad
+CE442 	Computational Methods and Techniques	3	Dr. Shahab Ansari
+CE461	Digital Signal Processing	3	Dr. Shahab Ansari
+XX4xx	IDE Elective	3	Other Faculty
+			
+Computer Science (Section C)			
+CS101	Computing and AI Sec 1	2	Mr. Sajid
+CS101	Computing and AI Sec 2	2	Mr. Sajid
+CE221	 Digital Logic Design	3	Mr. Ahsan Shah
+CS202  	Information & Communication Technologies	2	Mr. Talha Ashfaq
+CS221	Data Structures & Algorithms 	3	Dr. Qamar Abbas
+CS231 	Discrete Mathematics 	3	Mr. Hafiz Qasim
+ES205	Advance Linear Algebra	3	Other Faculty
+CS351	Artificial Intelligence	3	Dr. Khurram
+CS361	Computer Architecture	3	Mr. Waheed
+CS311	Operating Systems	3	Dr. Taj
+CS325 	Software Engineering	3	Mr. Israr
+CS391	Entrepreneurship and Technology Commercialization	3	New Hire 1
+MS4xx	Management Elective	3	Other Faculty
+CS478	Design and Analysis of Algorithms	3	Mr. Ahsan Shah
+CS413	Elective 1: Internet of Things	3	Dr. Qamar Abbas
+CS423	Elective 2: DevOps	3	Mr. Sajid
+CS429	Elective 3: Software Project Management 	3	Mr. Israr
+			
+Data Science (Section D)			
+CS101	Computing and AI	2	Ms. Safia Baloch
+CE221	Digital Logic Design	3	Prof. Dr. Qadeer ul Hasan
+CS202  	Information & Communication Technologies	2	New Hire 2 (Nazia Rep.)
+CS221	Data Structures & Algorithms 	3	Mr. Badre Munir
+CS231 	Discrete Mathematics 	3	Mr. Badre Munir
+ES205	Advance Linear Algebra	3	Other Faculty
+CS311	Operating Systems	3	Prof. Dr. Masroor Hussain
+CS331	Software Engineering and Project Management	3	New Hire 1
+CS351	Artificial Intelligence	3	Dr. Ayaz Umer
+CS391	Entrepreneurship and Technology Commercialization	3	Mr. Hafiz S.M. Muslim
+DS341	Data Mining 	3	Dr. Ayaz Umer
+DS4xx	Data Visualization	2	Ms. Fatima Khalid
+DS461	Big Data Analytics	3	Ms. Safia Baloch
+DS4xx	DS Specilization Elective 1	3	Engr. Asima Sarwar
+DS4xx	DS Specilization Elective 2	3	Mr. Hafiz S.M. Muslim
+MS490	Engineering Economics and Management	3	Other Faculty
+			
+Cyber Security (Section E)			
+CS101	Computing and AI	2	Dr. Rashid Jillani
+CE221	 Digital Logic Design	3	Dr. Sahab Haider
+CS202  	Information & Communication Technologies	2	Dr. Zain
+CS221	Data Structures & Algorithms 	3	Dr. Zubair
+CS231 	Discrete Mathematics 	3	Mr. Salman Ashraf
+ES205	Advance Linear Algenra	3	Other Faculty
+CS351	Artificial Intelligence	3	Mr. Ahmed Nawaz
+CY331	Information Assurance	3	Dr. Zain
+CS311	Operating Systems	3	Mr. Huzaifa
+CS325 	Software Engineering	3	Ms. Laraib Afzal
+CS391	Entrepreneurship and Technology Commercialization	3	New Hire 1
+CE408	Cloud and Distributed Computing	3	New Hire 1
+CS461	Elective I (Computer Architecture)	3	Prof. Dr. Ghulam Abbas
+CY4xx	Cyber Security Elective I (Depth)	3	Dr. Zubair
+MS4xx	Management Elective	3	Other Faculty
+CY451	Vulnerability Assessment	3	Mr. Ahmed Nawaz
+			
+Software Engineering (Section F)			
+CS101	Computing and AI	2	Dr. Shahab Haider
+CE221	 Digital Logic Design	3	Dr. Adnan Shah
+CS202  	Information & Communication Technologies	2	Mr. Huzaifa
+CS221	Data Structures & Algorithms 	3	Mr. Said Nabi
+CS231 	Discrete Mathematics 	3	Mr. Salman Ashraf
+SE201	Software Engineering	3	Ms. Laraib Afzal
+CS351	Artificial Intelligence	3	Mr. Ahmed Nawaz
+CS311	Operating Systems	3	Mr. Huzaifa
+CS372	HCI and UI/UX Graphics	3	Mr. Salman Ashraf
+SE322	Software Design and Architecture	3	Mr. Said Nabi
+CS391	Entrepreneurship and Technology Commercialization	3	New Hire 1

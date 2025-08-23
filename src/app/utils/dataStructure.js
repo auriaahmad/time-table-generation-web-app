@@ -49,8 +49,8 @@ export const defaultUniversityData = {
   },
   
   metadata: {
-    createdAt: new Date().toISOString(),
-    lastModified: new Date().toISOString(),
+    createdAt: "",  // Will be set when data is actually created
+    lastModified: "", // Will be set when data is actually modified
     version: "1.0",
     createdBy: "",
     notes: ""
@@ -73,8 +73,10 @@ export const generateId = (type = 'general') => {
     idCounters[type]++;
     return idCounters[type];
   }
-  // For general use, return timestamp-based but shorter
-  return Date.now();
+  // For general use, return a consistent counter-based ID
+  if (!idCounters.general) idCounters.general = 0;
+  idCounters.general++;
+  return idCounters.general;
 };
 
 // Reset ID counters
@@ -85,7 +87,8 @@ export const resetIdCounters = () => {
     rooms: 0,
     students: 0,
     departments: 0,
-    timeSlots: 0
+    timeSlots: 0,
+    general: 0
   };
 };
 
@@ -112,12 +115,24 @@ export const initializeIdCounters = (data) => {
 };
 
 export const exportToJSON = (data) => {
+  const now = new Date();
+  const isoString = now.getFullYear() + '-' + 
+    String(now.getMonth() + 1).padStart(2, '0') + '-' + 
+    String(now.getDate()).padStart(2, '0') + 'T' +
+    String(now.getHours()).padStart(2, '0') + ':' +
+    String(now.getMinutes()).padStart(2, '0') + ':' +
+    String(now.getSeconds()).padStart(2, '0') + '.000Z';
+  
+  const dateString = now.getFullYear() + '-' + 
+    String(now.getMonth() + 1).padStart(2, '0') + '-' + 
+    String(now.getDate()).padStart(2, '0');
+    
   const validatedData = {
     ...data,
     metadata: {
       ...data.metadata,
-      lastModified: new Date().toISOString(),
-      exportedAt: new Date().toISOString()
+      lastModified: isoString,
+      exportedAt: isoString
     }
   };
   
@@ -128,7 +143,7 @@ export const exportToJSON = (data) => {
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
-  link.download = `university-resources-${new Date().toISOString().split('T')[0]}.json`;
+  link.download = `university-resources-${dateString}.json`;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
