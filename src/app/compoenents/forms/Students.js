@@ -1,13 +1,27 @@
 // app/components/forms/Students.js
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { GraduationCap, Plus, Trash2 } from 'lucide-react';
 import { generateId } from '../../utils/dataStructure';
 import DepartmentProgramDropdown from '../DepartmentProgramDropdown';
 
 export default function Students({ data, onChange, universityData }) {
   const [students, setStudents] = useState(data || []);
+  const [scrollToId, setScrollToId] = useState(null);
+  const studentRefs = useRef({});
+
+  useEffect(() => {
+    if (scrollToId && studentRefs.current[scrollToId]) {
+      setTimeout(() => {
+        studentRefs.current[scrollToId]?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        });
+        setScrollToId(null);
+      }, 100);
+    }
+  }, [scrollToId, students]);
 
   const departments = universityData.departments || [];
   const subjects = universityData.subjects || [];
@@ -35,7 +49,8 @@ export default function Students({ data, onChange, universityData }) {
       preferredTimeSlots: [],
       unavailableSlots: []
     };
-    updateStudents([...students, newGroup]);
+    updateStudents([newGroup, ...students]);
+    setScrollToId(newGroup.id);
   };
 
   const removeStudentGroup = (id) => {
@@ -59,7 +74,7 @@ export default function Students({ data, onChange, universityData }) {
 
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 relative">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <GraduationCap className="text-blue-600" size={24} />
@@ -68,15 +83,32 @@ export default function Students({ data, onChange, universityData }) {
             <p className="text-gray-600">Configure student batches and their enrolled subjects</p>
           </div>
         </div>
-        <button onClick={addStudentGroup} className="flex items-center gap-2 btn-primary">
-          <Plus size={16} />
+        <button 
+          onClick={addStudentGroup} 
+          className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg transition-all duration-200 hover:shadow-lg hover:scale-[1.02] font-medium"
+        >
+          <Plus size={18} />
           Add Student Group
         </button>
       </div>
 
+      {/* Sticky Add Button */}
+      {students.length > 0 && (
+        <div className="fixed bottom-6 right-6 z-40">
+          <button
+            onClick={addStudentGroup}
+            className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-110 font-medium"
+            title="Add New Student Group"
+          >
+            <Plus size={20} />
+            <span className="hidden sm:inline">Add Student Group</span>
+          </button>
+        </div>
+      )}
+
       <div className="space-y-4">
         {students.map((group, index) => (
-          <div key={group.id} className="card">
+          <div key={group.id} className="card" ref={(el) => studentRefs.current[group.id] = el}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Batch/Class</label>

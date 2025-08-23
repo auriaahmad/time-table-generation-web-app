@@ -1,5 +1,7 @@
 // app/layout.js
 import './globals.css';
+import Link from 'next/link';
+import Navigation from './compoenents/Navigation';
 
 export const metadata = {
   title: 'University Timetable Resource Manager',
@@ -11,29 +13,21 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <div className="min-h-screen bg-gray-50">
-          <header className="bg-white shadow-sm border-b">
+          <header className="bg-white/95 backdrop-blur-sm shadow-lg sticky top-0 z-50 relative">
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-blue-200 via-purple-200 to-pink-200"></div>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex justify-between items-center py-4">
                 <div className="flex items-center">
-                  <div className="flex-shrink-0 flex items-center space-x-3">
+                  <Link href="/information" className="flex-shrink-0 hover:opacity-80 transition-opacity">
                     <img
                       src="/logo.png"
                       alt="University Logo"
                       className="h-10 w-auto object-contain"
+                      title="Click to learn more about this timetable generation system"
                     />
-                    <h1
-                      className="text-2xl font-bold text-gray-900 cursor-help"
-                      title="Configure all university resources needed for automated timetable generation. Upload existing configuration or create from scratch."
-                    >
-                      University Timetable Manager
-                    </h1>
-                  </div>
+                  </Link>
                 </div>
-                <div className="flex items-center space-x-4">
-                  <span className="text-sm text-gray-500">
-                    Resource Configuration
-                  </span>
-                </div>
+                <Navigation />
               </div>
             </div>
           </header>
@@ -42,7 +36,8 @@ export default function RootLayout({ children }) {
             {children}
           </main>
 
-          <footer className="bg-white border-t mt-auto">
+          <footer className="bg-white mt-auto relative">
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-blue-200 via-purple-200 to-pink-200"></div>
             <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
               <p className="text-center text-sm text-gray-500">
                 © 2025 University Timetable Resource Manager. Built for automated scheduling.

@@ -196,94 +196,130 @@ export default function ResourceManager() {
   return (
     <div className="space-y-6">
       {/* Action Bar */}
-      <div className="bg-white rounded-lg shadow-md p-4">
-        <div className="flex flex-wrap gap-4 items-center justify-between">
-          <div className="flex flex-wrap gap-3">
-            <button
-              onClick={() => setShowFileUpload(true)}
-              className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
-            >
-              <Upload size={16} />
-              Upload Config
-            </button>
-            
-            <button
-              onClick={handleExport}
-              className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors"
-            >
-              <Download size={16} />
-              Download Config
-            </button>
-            
-            <button
-              onClick={handleValidate}
-              className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition-colors"
-            >
-              <Eye size={16} />
-              Validate Data
-            </button>
+      <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
+        {/* Main Actions Section */}
+        <div className="bg-gradient-to-r from-blue-50 to-purple-50 px-6 py-4 border-b border-gray-100">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold text-gray-800">Resource Management</h2>
+            {saveStatus && (
+              <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 backdrop-blur-sm">
+                {saveStatus.includes('✓') ? (
+                  <CheckCircle size={16} className="text-green-600" />
+                ) : saveStatus.includes('⚠') ? (
+                  <AlertCircle size={16} className="text-orange-600" />
+                ) : (
+                  <Save size={16} className="text-gray-600" />
+                )}
+                <span className={`text-sm font-medium ${
+                  saveStatus.includes('✓') ? 'text-green-600' :
+                  saveStatus.includes('⚠') ? 'text-orange-600' : 'text-gray-600'
+                }`}>
+                  {saveStatus}
+                </span>
+              </div>
+            )}
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            {/* File Operations */}
+            <div>
+              <h3 className="text-sm font-medium text-gray-600 mb-3">File Operations</h3>
+              <div className="space-y-2">
+                <button
+                  onClick={() => setShowFileUpload(true)}
+                  className="w-full flex items-center gap-3 bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-lg transition-all duration-200 hover:shadow-lg hover:scale-[1.02]"
+                >
+                  <Upload size={18} />
+                  <span className="font-medium">Upload Config</span>
+                </button>
+                
+                <button
+                  onClick={handleExport}
+                  className="w-full flex items-center gap-3 bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-lg transition-all duration-200 hover:shadow-lg hover:scale-[1.02]"
+                >
+                  <Download size={18} />
+                  <span className="font-medium">Download Config</span>
+                </button>
+              </div>
+            </div>
 
-            <button
-              onClick={() => handleClear('current')}
-              className="flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-lg transition-colors"
-            >
-              <RotateCcw size={16} />
-              Clear Current
-            </button>
+            {/* Data Management */}
+            <div>
+              <h3 className="text-sm font-medium text-gray-600 mb-3">Data Management</h3>
+              <div className="space-y-2">
+                <button
+                  onClick={handleValidate}
+                  className="w-full flex items-center gap-3 bg-purple-600 hover:bg-purple-700 text-white px-4 py-3 rounded-lg transition-all duration-200 hover:shadow-lg hover:scale-[1.02]"
+                >
+                  <Eye size={18} />
+                  <span className="font-medium">Validate Data</span>
+                </button>
+                
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => handleClear('current')}
+                    className="flex-1 flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-3 py-3 rounded-lg transition-all duration-200 hover:shadow-lg hover:scale-[1.02]"
+                  >
+                    <RotateCcw size={16} />
+                    <span className="text-sm font-medium">Clear Tab</span>
+                  </button>
 
-            <button
-              onClick={() => handleClear('all')}
-              className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-colors"
-            >
-              <Trash size={16} />
-              Clear All
-            </button>
+                  <button
+                    onClick={() => handleClear('all')}
+                    className="flex-1 flex items-center justify-center gap-2 bg-red-500 hover:bg-red-600 text-white px-3 py-3 rounded-lg transition-all duration-200 hover:shadow-lg hover:scale-[1.02]"
+                  >
+                    <Trash size={16} />
+                    <span className="text-sm font-medium">Clear All</span>
+                  </button>
+                </div>
+              </div>
+            </div>
 
-            <button
-              onClick={() => setShowAlgorithmSettings(true)}
-              className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition-colors"
-            >
-              <Settings size={16} />
-              Algorithm Settings
-            </button>
+            {/* Generation Controls */}
+            <div>
+              <h3 className="text-sm font-medium text-gray-600 mb-3">Timetable Generation</h3>
+              <div className="space-y-2">
+                <button
+                  onClick={() => setShowAlgorithmSettings(true)}
+                  className="w-full flex items-center gap-3 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-3 rounded-lg transition-all duration-200 hover:shadow-lg hover:scale-[1.02]"
+                >
+                  <Settings size={18} />
+                  <span className="font-medium">Algorithm Settings</span>
+                </button>
 
-            <button
-              onClick={handleGenerateTimetable}
-              disabled={isGenerating}
-              className="flex items-center gap-2 bg-teal-600 hover:bg-teal-700 disabled:bg-gray-400 text-white px-4 py-2 rounded-lg transition-colors"
-            >
-              <Play size={16} />
-              {isGenerating ? 'Generating...' : 'Generate Timetable'}
-            </button>
+                <button
+                  onClick={handleGenerateTimetable}
+                  disabled={isGenerating}
+                  className="w-full flex items-center gap-3 bg-gradient-to-r from-teal-600 to-cyan-600 hover:from-teal-700 hover:to-cyan-700 disabled:from-gray-400 disabled:to-gray-500 text-white px-4 py-3 rounded-lg transition-all duration-200 hover:shadow-lg hover:scale-[1.02] disabled:hover:scale-100 disabled:cursor-not-allowed font-semibold"
+                >
+                  <Play size={18} />
+                  <span>{isGenerating ? 'Generating...' : 'Generate Timetable'}</span>
+                  {isGenerating && (
+                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin ml-auto"></div>
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
 
+        {/* Export Section */}
+        <div className="px-6 py-4 bg-gray-50">
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-sm font-medium text-gray-700">Export Options</h3>
+              <p className="text-xs text-gray-500 mt-1">Export generated timetable in various formats</p>
+            </div>
             <button
               onClick={() => setShowPDFExport(true)}
               disabled={!generationResult || !generationResult.success}
-              className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-400 text-white px-4 py-2 rounded-lg transition-colors"
+              className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-300 disabled:text-gray-500 text-white px-6 py-2.5 rounded-lg transition-all duration-200 hover:shadow-lg hover:scale-[1.02] disabled:hover:scale-100 disabled:cursor-not-allowed"
               title={!generationResult ? 'Generate a timetable first' : 'Export timetable to PDF'}
             >
               <FileText size={16} />
-              Export PDF
+              <span className="font-medium">Export PDF</span>
             </button>
           </div>
-          
-          {saveStatus && (
-            <div className="flex items-center gap-2 text-sm">
-              {saveStatus.includes('✓') ? (
-                <CheckCircle size={16} className="text-green-600" />
-              ) : saveStatus.includes('⚠') ? (
-                <AlertCircle size={16} className="text-orange-600" />
-              ) : (
-                <Save size={16} className="text-gray-600" />
-              )}
-              <span className={
-                saveStatus.includes('✓') ? 'text-green-600' :
-                saveStatus.includes('⚠') ? 'text-orange-600' : 'text-gray-600'
-              }>
-                {saveStatus}
-              </span>
-            </div>
-          )}
         </div>
       </div>
 

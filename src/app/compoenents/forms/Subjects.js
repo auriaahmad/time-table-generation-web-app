@@ -1,7 +1,7 @@
 // app/components/forms/Subjects.js
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { BookOpen, Plus, Trash2 } from 'lucide-react';
 import { generateId } from '../../utils/dataStructure';
 import DepartmentProgramDropdown from '../DepartmentProgramDropdown';
@@ -14,6 +14,8 @@ export default function Subjects({ data, onChange, universityData }) {
       program: subject.program || ""
     }));
   });
+  const [scrollToId, setScrollToId] = useState(null);
+  const subjectRefs = useRef({});
 
   const subjectTypes = ['Theory', 'Lab', 'Tutorial', 'Practical', 'Seminar'];
   const departments = universityData.departments || [];
@@ -22,6 +24,19 @@ export default function Subjects({ data, onChange, universityData }) {
     setSubjects(newSubjects);
     onChange(newSubjects);
   };
+
+  // Auto-scroll to newly created item
+  useEffect(() => {
+    if (scrollToId && subjectRefs.current[scrollToId]) {
+      setTimeout(() => {
+        subjectRefs.current[scrollToId]?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        });
+        setScrollToId(null);
+      }, 100);
+    }
+  }, [scrollToId, subjects]);
 
   const addSubject = () => {
     const newSubject = {
@@ -43,7 +58,8 @@ export default function Subjects({ data, onChange, universityData }) {
       equipmentRequired: [],
       description: ""
     };
-    updateSubjects([...subjects, newSubject]);
+    updateSubjects([newSubject, ...subjects]);
+    setScrollToId(newSubject.id);
   };
 
   const removeSubject = (id) => {
@@ -58,7 +74,7 @@ export default function Subjects({ data, onChange, universityData }) {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 relative">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <BookOpen className="text-blue-600" size={24} />
@@ -67,15 +83,36 @@ export default function Subjects({ data, onChange, universityData }) {
             <p className="text-gray-600">Configure subjects and their requirements</p>
           </div>
         </div>
-        <button onClick={addSubject} className="flex items-center gap-2 btn-primary">
-          <Plus size={16} />
+        <button 
+          onClick={addSubject} 
+          className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg transition-all duration-200 hover:shadow-lg hover:scale-[1.02] font-medium"
+        >
+          <Plus size={18} />
           Add Subject
         </button>
       </div>
 
+      {/* Sticky Add Button */}
+      {subjects.length > 0 && (
+        <div className="fixed bottom-6 right-6 z-40">
+          <button
+            onClick={addSubject}
+            className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-110 font-medium"
+            title="Add New Subject"
+          >
+            <Plus size={20} />
+            <span className="hidden sm:inline">Add Subject</span>
+          </button>
+        </div>
+      )}
+
       <div className="space-y-4">
         {subjects.map((subject, index) => (
-          <div key={`subject-${subject.id}-${index}`} className="card">
+          <div 
+            key={`subject-${subject.id}-${index}`} 
+            className="card"
+            ref={(el) => subjectRefs.current[subject.id] = el}
+          >
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Subject Name</label>

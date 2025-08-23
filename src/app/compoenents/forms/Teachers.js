@@ -1,7 +1,7 @@
 // app/components/forms/Teachers.js
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Users, Plus, Trash2, Edit2, Save, X } from 'lucide-react';
 import { generateId } from '../../utils/dataStructure';
 import DepartmentProgramDropdown from '../DepartmentProgramDropdown';
@@ -9,6 +9,8 @@ import DepartmentProgramDropdown from '../DepartmentProgramDropdown';
 export default function Teachers({ data, onChange, universityData }) {
   const [teachers, setTeachers] = useState(data || []);
   const [editingId, setEditingId] = useState(null);
+  const [scrollToId, setScrollToId] = useState(null);
+  const teacherRefs = useRef({});
 
   const designations = [
     { value: 'Lecturer', minHours: 12, maxHours: 18 },
@@ -23,6 +25,19 @@ export default function Teachers({ data, onChange, universityData }) {
     setTeachers(newTeachers);
     onChange(newTeachers);
   };
+
+  // Auto-scroll to newly created item
+  useEffect(() => {
+    if (scrollToId && teacherRefs.current[scrollToId]) {
+      setTimeout(() => {
+        teacherRefs.current[scrollToId]?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        });
+        setScrollToId(null);
+      }, 100);
+    }
+  }, [scrollToId, teachers]);
 
   const addTeacher = () => {
     const newTeacher = {
@@ -43,8 +58,9 @@ export default function Teachers({ data, onChange, universityData }) {
       maxGapHours: 2
     };
     
-    updateTeachers([...teachers, newTeacher]);
+    updateTeachers([newTeacher, ...teachers]);
     setEditingId(newTeacher.id);
+    setScrollToId(newTeacher.id);
   };
 
   const removeTeacher = (id) => {
@@ -83,7 +99,7 @@ export default function Teachers({ data, onChange, universityData }) {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 relative">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
@@ -96,12 +112,26 @@ export default function Teachers({ data, onChange, universityData }) {
         
         <button
           onClick={addTeacher}
-          className="flex items-center gap-2 btn-primary"
+          className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg transition-all duration-200 hover:shadow-lg hover:scale-[1.02] font-medium"
         >
-          <Plus size={16} />
+          <Plus size={18} />
           Add Teacher
         </button>
       </div>
+
+      {/* Sticky Add Button for when scrolling */}
+      {teachers.length > 0 && (
+        <div className="fixed bottom-6 right-6 z-40">
+          <button
+            onClick={addTeacher}
+            className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-110 font-medium"
+            title="Add New Teacher"
+          >
+            <Plus size={20} />
+            <span className="hidden sm:inline">Add Teacher</span>
+          </button>
+        </div>
+      )}
 
       {/* Teachers List */}
       <div className="space-y-4">
@@ -116,22 +146,26 @@ export default function Teachers({ data, onChange, universityData }) {
           </div>
         ) : (
           teachers.map((teacher, index) => (
-            <TeacherCard
+            <div
               key={teacher.id}
-              teacher={teacher}
-              index={index}
-              isEditing={editingId === teacher.id}
-              onEdit={() => setEditingId(teacher.id)}
-              onSave={() => setEditingId(null)}
-              onCancel={() => setEditingId(null)}
-              onRemove={() => removeTeacher(teacher.id)}
-              onUpdate={(field, value) => updateTeacher(teacher.id, field, value)}
-              onDesignationChange={(designation) => handleDesignationChange(teacher.id, designation)}
-              onToggleArrayItem={(field, item) => toggleArrayItem(teacher.id, field, item)}
-              designations={designations}
-              workingDays={workingDays}
-              universityData={universityData}
-            />
+              ref={(el) => teacherRefs.current[teacher.id] = el}
+            >
+              <TeacherCard
+                teacher={teacher}
+                index={index}
+                isEditing={editingId === teacher.id}
+                onEdit={() => setEditingId(teacher.id)}
+                onSave={() => setEditingId(null)}
+                onCancel={() => setEditingId(null)}
+                onRemove={() => removeTeacher(teacher.id)}
+                onUpdate={(field, value) => updateTeacher(teacher.id, field, value)}
+                onDesignationChange={(designation) => handleDesignationChange(teacher.id, designation)}
+                onToggleArrayItem={(field, item) => toggleArrayItem(teacher.id, field, item)}
+                designations={designations}
+                workingDays={workingDays}
+                universityData={universityData}
+              />
+            </div>
           ))
         )}
       </div>

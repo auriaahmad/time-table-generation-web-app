@@ -1,12 +1,14 @@
 // app/components/forms/Rooms.js
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { MapPin, Plus, Trash2 } from 'lucide-react';
 import { generateId } from '../../utils/dataStructure';
 
 export default function Rooms({ data, onChange }) {
   const [rooms, setRooms] = useState(data || []);
+  const [scrollToId, setScrollToId] = useState(null);
+  const roomRefs = useRef({});
 
   const roomTypes = ['Classroom', 'Laboratory', 'Auditorium', 'Seminar Room', 'Studio', 'Workshop'];
   const equipmentOptions = ['Projector', 'Computer', 'Whiteboard', 'Smartboard', 'Audio System', 'Video Camera', 'Lab Equipment'];
@@ -15,6 +17,19 @@ export default function Rooms({ data, onChange }) {
     setRooms(newRooms);
     onChange(newRooms);
   };
+
+  // Auto-scroll to newly created item
+  useEffect(() => {
+    if (scrollToId && roomRefs.current[scrollToId]) {
+      setTimeout(() => {
+        roomRefs.current[scrollToId]?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        });
+        setScrollToId(null);
+      }, 100);
+    }
+  }, [scrollToId, rooms]);
 
   const addRoom = () => {
     const newRoom = {
@@ -31,7 +46,8 @@ export default function Rooms({ data, onChange }) {
       preferredFor: [],
       maintenanceSlots: []
     };
-    updateRooms([...rooms, newRoom]);
+    updateRooms([newRoom, ...rooms]);
+    setScrollToId(newRoom.id);
   };
 
   const removeRoom = (id) => {
@@ -54,7 +70,7 @@ export default function Rooms({ data, onChange }) {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 relative">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <MapPin className="text-blue-600" size={24} />
@@ -63,15 +79,36 @@ export default function Rooms({ data, onChange }) {
             <p className="text-gray-600">Configure physical spaces and their capabilities</p>
           </div>
         </div>
-        <button onClick={addRoom} className="flex items-center gap-2 btn-primary">
-          <Plus size={16} />
+        <button 
+          onClick={addRoom} 
+          className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg transition-all duration-200 hover:shadow-lg hover:scale-[1.02] font-medium"
+        >
+          <Plus size={18} />
           Add Room
         </button>
       </div>
 
+      {/* Sticky Add Button */}
+      {rooms.length > 0 && (
+        <div className="fixed bottom-6 right-6 z-40">
+          <button
+            onClick={addRoom}
+            className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-110 font-medium"
+            title="Add New Room"
+          >
+            <Plus size={20} />
+            <span className="hidden sm:inline">Add Room</span>
+          </button>
+        </div>
+      )}
+
       <div className="space-y-4">
         {rooms.map((room, index) => (
-          <div key={room.id} className="card">
+          <div 
+            key={room.id} 
+            className="card"
+            ref={(el) => roomRefs.current[room.id] = el}
+          >
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Room Name/Number</label>

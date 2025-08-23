@@ -1,12 +1,26 @@
 // app/components/forms/TimeSlots.js
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Clock, Plus, Trash2, RotateCcw } from 'lucide-react';
 import { generateId } from '../../utils/dataStructure';
 
 export default function TimeSlots({ data, onChange, universityData }) {
   const [timeSlots, setTimeSlots] = useState(data || []);
+  const [scrollToId, setScrollToId] = useState(null);
+  const slotRefs = useRef({});
+
+  useEffect(() => {
+    if (scrollToId && slotRefs.current[scrollToId]) {
+      setTimeout(() => {
+        slotRefs.current[scrollToId]?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        });
+        setScrollToId(null);
+      }, 100);
+    }
+  }, [scrollToId, timeSlots]);
 
   const updateTimeSlots = (newSlots) => {
     setTimeSlots(newSlots);
@@ -23,7 +37,8 @@ export default function TimeSlots({ data, onChange, universityData }) {
       endTime: addMinutes(newStartTime, universityData.basicInfo?.periodDuration || 60)
     };
     
-    updateTimeSlots([...timeSlots, newSlot]);
+    updateTimeSlots([newSlot, ...timeSlots]);
+    setScrollToId(newSlot.id);
   };
 
   const removeTimeSlot = (id) => {
@@ -81,7 +96,7 @@ export default function TimeSlots({ data, onChange, universityData }) {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 relative">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
@@ -95,20 +110,34 @@ export default function TimeSlots({ data, onChange, universityData }) {
         <div className="flex gap-2">
           <button
             onClick={generateDefaultSlots}
-            className="flex items-center gap-2 btn-secondary"
+            className="flex items-center gap-2 bg-gray-600 hover:bg-gray-700 text-white px-4 py-2.5 rounded-lg transition-all duration-200 hover:shadow-lg hover:scale-[1.02] font-medium"
           >
             <RotateCcw size={16} />
             Auto Generate
           </button>
           <button
             onClick={addTimeSlot}
-            className="flex items-center gap-2 btn-primary"
+            className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg transition-all duration-200 hover:shadow-lg hover:scale-[1.02] font-medium"
           >
-            <Plus size={16} />
+            <Plus size={18} />
             Add Slot
           </button>
         </div>
       </div>
+
+      {/* Sticky Add Button */}
+      {timeSlots.length > 0 && (
+        <div className="fixed bottom-6 right-6 z-40">
+          <button
+            onClick={addTimeSlot}
+            className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-110 font-medium"
+            title="Add New Time Slot"
+          >
+            <Plus size={20} />
+            <span className="hidden sm:inline">Add Slot</span>
+          </button>
+        </div>
+      )}
 
       {/* Time Slots List */}
       <div className="card">
@@ -136,7 +165,7 @@ export default function TimeSlots({ data, onChange, universityData }) {
             {timeSlots.map((slot, index) => {
               const duration = calculateDuration(slot.startTime, slot.endTime);
               return (
-                <div key={slot.id} className="grid grid-cols-10 gap-4 items-center py-2 border-b border-gray-100 last:border-b-0">
+                <div key={slot.id} className="grid grid-cols-10 gap-4 items-center py-2 border-b border-gray-100 last:border-b-0" ref={(el) => slotRefs.current[slot.id] = el}>
                   <div className="col-span-1">
                     <span className="text-sm font-medium text-gray-600">
                       {index + 1}

@@ -1,12 +1,26 @@
 // app/components/forms/Departments.js
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Building, Plus, Trash2, Edit2 } from 'lucide-react';
 import { generateId } from '../../utils/dataStructure';
 
 export default function Departments({ data, onChange }) {
   const [departments, setDepartments] = useState(data || []);
+  const [scrollToId, setScrollToId] = useState(null);
+  const departmentRefs = useRef({});
+
+  useEffect(() => {
+    if (scrollToId && departmentRefs.current[scrollToId]) {
+      setTimeout(() => {
+        departmentRefs.current[scrollToId]?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        });
+        setScrollToId(null);
+      }, 100);
+    }
+  }, [scrollToId, departments]);
 
   const updateDepartments = (newDepartments) => {
     setDepartments(newDepartments);
@@ -21,7 +35,8 @@ export default function Departments({ data, onChange }) {
       head: "",
       programs: []
     };
-    updateDepartments([...departments, newDept]);
+    updateDepartments([newDept, ...departments]);
+    setScrollToId(newDept.id);
   };
 
   const addProgram = (deptId) => {
@@ -64,7 +79,7 @@ export default function Departments({ data, onChange }) {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 relative">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <Building className="text-blue-600" size={24} />
@@ -73,15 +88,32 @@ export default function Departments({ data, onChange }) {
             <p className="text-gray-600">Configure academic departments and programs</p>
           </div>
         </div>
-        <button onClick={addDepartment} className="flex items-center gap-2 btn-primary">
-          <Plus size={16} />
+        <button 
+          onClick={addDepartment} 
+          className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-lg transition-all duration-200 hover:shadow-lg hover:scale-[1.02] font-medium"
+        >
+          <Plus size={18} />
           Add Department
         </button>
       </div>
 
+      {/* Sticky Add Button */}
+      {departments.length > 0 && (
+        <div className="fixed bottom-6 right-6 z-40">
+          <button
+            onClick={addDepartment}
+            className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-110 font-medium"
+            title="Add New Department"
+          >
+            <Plus size={20} />
+            <span className="hidden sm:inline">Add Department</span>
+          </button>
+        </div>
+      )}
+
       <div className="space-y-4">
         {departments.map((dept, index) => (
-          <div key={dept.id} className="card">
+          <div key={dept.id} className="card" ref={(el) => departmentRefs.current[dept.id] = el}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Department Name</label>
