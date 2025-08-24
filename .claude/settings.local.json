@@ -3,7 +3,9 @@
     "allow": [
       "Bash(curl:*)",
       "Bash(cat:*)",
-      "Bash(cp:*)"
+      "Bash(cp:*)",
+      "Bash(npm install:*)",
+      "Bash(python:*)"
     ],
     "deny": [],
     "ask": []

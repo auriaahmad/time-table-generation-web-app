@@ -28,6 +28,9 @@ class EnhancedTimetableGA:
         self.rooms_dict = {r["id"]: r for r in self.rooms}
         self.time_slots_dict = {ts["id"]: ts for ts in self.time_slots}
         
+        # Create time slot ID to index mapping for arithmetic operations
+        self.time_slot_indices = {ts["id"]: idx for idx, ts in enumerate(self.time_slots)}
+        
         # Generate activities from the data
         self.activities = self.generate_activities()
         
@@ -468,19 +471,22 @@ class EnhancedTimetableGA:
         
         for activity in chromosome:
             key = (activity["teacherId"], activity["day"])
-            teacher_day_schedule[key].append(activity["timeSlotId"])
+            time_slot_id = activity["timeSlotId"]
+            # Convert time slot ID to index for arithmetic operations
+            if time_slot_id in self.time_slot_indices:
+                teacher_day_schedule[key].append(self.time_slot_indices[time_slot_id])
         
-        for (teacher_id, day), time_slots in teacher_day_schedule.items():
+        for (teacher_id, day), time_slot_indices in teacher_day_schedule.items():
             teacher = self.teachers_dict.get(teacher_id)
-            if teacher:
+            if teacher and time_slot_indices:
                 max_consecutive = teacher.get("maxConsecutiveHours", 4)
-                sorted_slots = sorted(time_slots)
+                sorted_indices = sorted(time_slot_indices)
                 
                 consecutive_count = 1
                 max_consecutive_found = 1
                 
-                for i in range(1, len(sorted_slots)):
-                    if sorted_slots[i] == sorted_slots[i-1] + 1:
+                for i in range(1, len(sorted_indices)):
+                    if sorted_indices[i] == sorted_indices[i-1] + 1:
                         consecutive_count += 1
                         max_consecutive_found = max(max_consecutive_found, consecutive_count)
                     else:
@@ -498,13 +504,16 @@ class EnhancedTimetableGA:
         
         for activity in chromosome:
             key = (activity["teacherId"], activity["day"])
-            teacher_day_schedule[key].append(activity["timeSlotId"])
+            time_slot_id = activity["timeSlotId"]
+            # Convert time slot ID to index for arithmetic operations
+            if time_slot_id in self.time_slot_indices:
+                teacher_day_schedule[key].append(self.time_slot_indices[time_slot_id])
         
-        for (teacher_id, day), time_slots in teacher_day_schedule.items():
-            if len(time_slots) > 1:
-                sorted_slots = sorted(time_slots)
-                for i in range(1, len(sorted_slots)):
-                    gap = sorted_slots[i] - sorted_slots[i-1] - 1
+        for (teacher_id, day), time_slot_indices in teacher_day_schedule.items():
+            if len(time_slot_indices) > 1:
+                sorted_indices = sorted(time_slot_indices)
+                for i in range(1, len(sorted_indices)):
+                    gap = sorted_indices[i] - sorted_indices[i-1] - 1
                     if gap > 1:  # Gap of more than 1 period
                         gap_penalty += gap
         
@@ -513,11 +522,19 @@ class EnhancedTimetableGA:
     def check_lunch_break_violations(self, chromosome: List[Dict[str, Any]]) -> int:
         """Check lunch break violations"""
         violations = 0
-        lunch_slot = 5  # Assuming slot 5 is lunch time (13:00-14:00)
+        lunch_start = self.university_data.get("basicInfo", {}).get("lunchBreakStart", "12:00")
+        lunch_end = self.university_data.get("basicInfo", {}).get("lunchBreakEnd", "13:00")
         
         for activity in chromosome:
-            if activity["timeSlotId"] == lunch_slot:
-                violations += 1
+            time_slot_id = activity["timeSlotId"]
+            time_slot = self.time_slots_dict.get(time_slot_id)
+            if time_slot:
+                start_time = time_slot.get("startTime", "")
+                end_time = time_slot.get("endTime", "")
+                # Check if this time slot overlaps with lunch break
+                if (start_time >= lunch_start and start_time < lunch_end) or \
+                   (end_time > lunch_start and end_time <= lunch_end):
+                    violations += 1
         
         return violations
     

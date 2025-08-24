@@ -140,76 +140,143 @@ export default function TimeSlots({ data, onChange, universityData }) {
       )}
 
       {/* Time Slots List */}
-      <div className="card">
-        {timeSlots.length === 0 ? (
-          <div className="text-center py-8">
-            <Clock size={48} className="mx-auto text-gray-400 mb-4" />
-            <h4 className="text-lg font-medium text-gray-900 mb-2">No Time Slots Configured</h4>
-            <p className="text-gray-600 mb-4">Add time slots manually or use auto-generate to create default slots</p>
-            <button onClick={generateDefaultSlots} className="btn-primary">
-              Generate Default Slots
-            </button>
+      <div className="bg-white shadow-lg rounded-xl border border-gray-100 overflow-hidden">
+        <div className="bg-gray-50 px-6 py-4 border-b border-gray-100">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="bg-indigo-100 p-2 rounded-lg">
+                <Clock className="text-indigo-600" size={18} />
+              </div>
+              <h4 className="text-lg font-semibold text-gray-900">Time Slots Configuration</h4>
+            </div>
+            <div className="bg-indigo-50 px-3 py-1 rounded-full">
+              <span className="text-sm text-indigo-700 font-medium">
+                {timeSlots.length} slots configured
+              </span>
+            </div>
           </div>
+        </div>
+        
+        <div className="p-6">
+          {timeSlots.length === 0 ? (
+            <div className="text-center py-12">
+              <div className="bg-blue-50 p-6 rounded-full w-24 h-24 mx-auto mb-6 flex items-center justify-center">
+                <Clock size={48} className="text-blue-500" />
+              </div>
+              <h4 className="text-xl font-semibold text-gray-900 mb-2">No Time Slots Configured</h4>
+              <p className="text-gray-600 mb-6 max-w-md mx-auto">Add time slots manually or use auto-generate to create default slots based on your schedule configuration</p>
+              <div className="flex gap-3 justify-center">
+                <button 
+                  onClick={generateDefaultSlots} 
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-200 hover:shadow-lg hover:scale-[1.02]"
+                >
+                  Generate Default Slots
+                </button>
+                <button 
+                  onClick={addTimeSlot} 
+                  className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-200 hover:shadow-lg hover:scale-[1.02]"
+                >
+                  Add Manual Slot
+                </button>
+              </div>
+            </div>
         ) : (
-          <div className="space-y-4">
-            {/* Header Row */}
-            <div className="grid grid-cols-10 gap-4 text-sm font-medium text-gray-700 border-b pb-2">
-              <div className="col-span-1">Slot #</div>
-              <div className="col-span-3">Start Time</div>
-              <div className="col-span-3">End Time</div>
-              <div className="col-span-2">Duration</div>
-              <div className="col-span-1">Actions</div>
+          <div className="space-y-6">
+            {/* Enhanced Header Row */}
+            <div className="bg-gray-50 rounded-lg p-4">
+              <div className="grid grid-cols-10 gap-4 text-sm font-semibold text-gray-800">
+                <div className="col-span-1 flex items-center">
+                  <span className="bg-indigo-100 text-indigo-800 px-2 py-1 rounded text-xs">Slot #</span>
+                </div>
+                <div className="col-span-3 flex items-center">
+                  <Clock size={14} className="text-green-600 mr-1" />
+                  <span>Start Time</span>
+                </div>
+                <div className="col-span-3 flex items-center">
+                  <Clock size={14} className="text-red-600 mr-1" />
+                  <span>End Time</span>
+                </div>
+                <div className="col-span-2 flex items-center">
+                  <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Duration</span>
+                </div>
+                <div className="col-span-1">
+                  <span>Actions</span>
+                </div>
+              </div>
             </div>
             
-            {/* Time Slot Rows */}
-            {timeSlots.map((slot, index) => {
-              const duration = calculateDuration(slot.startTime, slot.endTime);
-              return (
-                <div key={slot.id} className="grid grid-cols-10 gap-4 items-center py-2 border-b border-gray-100 last:border-b-0" ref={(el) => slotRefs.current[slot.id] = el}>
-                  <div className="col-span-1">
-                    <span className="text-sm font-medium text-gray-600">
-                      {index + 1}
-                    </span>
-                  </div>
+            {/* Enhanced Time Slot Rows */}
+            <div className="space-y-3">
+              {timeSlots.map((slot, index) => {
+                const duration = calculateDuration(slot.startTime, slot.endTime);
+                return (
+                  <div 
+                    key={slot.id} 
+                    className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-all duration-200 hover:border-indigo-300" 
+                    ref={(el) => slotRefs.current[slot.id] = el}
+                  >
+                    <div className="grid grid-cols-10 gap-4 items-center">
+                      <div className="col-span-1">
+                        <div className="bg-indigo-100 text-indigo-800 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">
+                          {index + 1}
+                        </div>
+                      </div>
                   
-                  <div className="col-span-3">
-                    <input
-                      type="time"
-                      value={slot.startTime}
-                      onChange={(e) => updateTimeSlot(slot.id, 'startTime', e.target.value)}
-                      className="input-field"
-                    />
+                      <div className="col-span-3">
+                        <div className="relative">
+                          <input
+                            type="time"
+                            value={slot.startTime}
+                            onChange={(e) => updateTimeSlot(slot.id, 'startTime', e.target.value)}
+                            className="w-full px-4 py-2 border border-green-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent bg-green-50"
+                          />
+                          <div className="absolute -top-2 left-3 bg-white px-1 text-xs text-green-600 font-medium">
+                            Start
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="col-span-3">
+                        <div className="relative">
+                          <input
+                            type="time"
+                            value={slot.endTime}
+                            onChange={(e) => updateTimeSlot(slot.id, 'endTime', e.target.value)}
+                            className="w-full px-4 py-2 border border-red-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent bg-red-50"
+                          />
+                          <div className="absolute -top-2 left-3 bg-white px-1 text-xs text-red-600 font-medium">
+                            End
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="col-span-2">
+                        <div className={`px-3 py-2 rounded-full text-center font-medium text-sm ${
+                          duration > 0 
+                            ? 'bg-blue-100 text-blue-800' 
+                            : 'bg-red-100 text-red-800'
+                        }`}>
+                          {duration > 0 ? `${duration} min` : 'Invalid'}
+                        </div>
+                      </div>
+                      
+                      <div className="col-span-1">
+                        <button
+                          onClick={() => removeTimeSlot(slot.id)}
+                          className="w-8 h-8 bg-red-100 hover:bg-red-200 text-red-600 hover:text-red-800 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
+                          title="Remove time slot"
+                        >
+                          <Trash2 size={14} />
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                  
-                  <div className="col-span-3">
-                    <input
-                      type="time"
-                      value={slot.endTime}
-                      onChange={(e) => updateTimeSlot(slot.id, 'endTime', e.target.value)}
-                      className="input-field"
-                    />
-                  </div>
-                  
-                  <div className="col-span-2">
-                    <span className="text-sm text-gray-600 font-medium">
-                      {duration > 0 ? `${duration} min` : 'Invalid'}
-                    </span>
-                  </div>
-                  
-                  <div className="col-span-1">
-                    <button
-                      onClick={() => removeTimeSlot(slot.id)}
-                      className="text-red-600 hover:text-red-800 p-1"
-                      title="Remove time slot"
-                    >
-                      <Trash2 size={16} />
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         )}
+        </div>
       </div>
 
       {/* Summary */}

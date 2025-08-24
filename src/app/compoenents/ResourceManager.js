@@ -2,7 +2,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Download, Upload, Save, Eye, AlertCircle, CheckCircle, Trash, RotateCcw, Play, Settings, FileText } from 'lucide-react';
+import { Download, Upload, Save, Eye, AlertCircle, CheckCircle, Trash, RotateCcw, Play, Settings, FileText, Info, Clock, Building, Users, BookOpen, MapPin, GraduationCap } from 'lucide-react';
 import { defaultUniversityData, exportToJSON, importFromJSON, validateUniversityData, resetIdCounters, initializeIdCounters } from '../utils/dataStructure';
 
 import BasicInfo from './forms/BasicInfo';
@@ -37,14 +37,177 @@ export default function ResourceManager() {
   });
 
   const tabs = [
-    { id: 'basicInfo', name: 'Basic Info', component: BasicInfo },
-    { id: 'timeSlots', name: 'Time Slots', component: TimeSlots },
-    { id: 'departments', name: 'Departments', component: Departments },
-    { id: 'teachers', name: 'Teachers', component: Teachers },
-    { id: 'subjects', name: 'Subjects', component: Subjects },
-    { id: 'rooms', name: 'Rooms', component: Rooms },
-    { id: 'students', name: 'Students', component: Students },
+    { 
+      id: 'basicInfo', 
+      name: 'Basic Info', 
+      component: BasicInfo, 
+      icon: Info, 
+      color: 'blue',
+      description: 'University settings',
+      priority: 1 
+    },
+    { 
+      id: 'timeSlots', 
+      name: 'Time Slots', 
+      component: TimeSlots, 
+      icon: Clock, 
+      color: 'indigo',
+      description: 'Class periods',
+      priority: 2 
+    },
+    { 
+      id: 'departments', 
+      name: 'Departments', 
+      component: Departments, 
+      icon: Building, 
+      color: 'purple',
+      description: 'Academic units',
+      priority: 3 
+    },
+    { 
+      id: 'teachers', 
+      name: 'Teachers', 
+      component: Teachers, 
+      icon: Users, 
+      color: 'green',
+      description: 'Faculty members',
+      priority: 4 
+    },
+    { 
+      id: 'subjects', 
+      name: 'Subjects', 
+      component: Subjects, 
+      icon: BookOpen, 
+      color: 'orange',
+      description: 'Courses offered',
+      priority: 5 
+    },
+    { 
+      id: 'rooms', 
+      name: 'Rooms', 
+      component: Rooms, 
+      icon: MapPin, 
+      color: 'teal',
+      description: 'Physical spaces',
+      priority: 6 
+    },
+    { 
+      id: 'students', 
+      name: 'Students', 
+      component: Students, 
+      icon: GraduationCap, 
+      color: 'pink',
+      description: 'Student groups',
+      priority: 7 
+    },
   ];
+
+  // Function to get completion status for each tab
+  const getTabCompletionStatus = (tabId) => {
+    const data = universityData[tabId];
+    switch (tabId) {
+      case 'basicInfo':
+        return data?.universityName && data?.academicYear && data?.semester ? 'complete' : 'incomplete';
+      case 'timeSlots':
+        return data?.length > 0 ? 'complete' : 'incomplete';
+      case 'departments':
+        return data?.length > 0 ? 'complete' : 'incomplete';
+      case 'teachers':
+        return data?.length > 0 ? 'complete' : 'incomplete';
+      case 'subjects':
+        return data?.length > 0 ? 'complete' : 'incomplete';
+      case 'rooms':
+        return data?.length > 0 ? 'complete' : 'incomplete';
+      case 'students':
+        return data?.length > 0 ? 'complete' : 'incomplete';
+      default:
+        return 'incomplete';
+    }
+  };
+
+  // Color mapping for tabs
+  const getTabColors = (color, isActive) => {
+    const colorMap = {
+      blue: {
+        border: isActive ? 'border-blue-500' : 'border-transparent',
+        bg: isActive ? 'bg-blue-50' : '',
+        iconBg: isActive ? 'bg-blue-100' : 'bg-gray-100',
+        iconText: isActive ? 'text-blue-600' : 'text-gray-500',
+        badgeBg: isActive ? 'bg-blue-100' : 'bg-gray-100',
+        badgeText: isActive ? 'text-blue-700' : 'text-gray-600',
+        nameText: isActive ? 'text-blue-700' : 'text-gray-700',
+        descText: isActive ? 'text-blue-600' : 'text-gray-500',
+        indicator: 'bg-blue-500'
+      },
+      indigo: {
+        border: isActive ? 'border-indigo-500' : 'border-transparent',
+        bg: isActive ? 'bg-indigo-50' : '',
+        iconBg: isActive ? 'bg-indigo-100' : 'bg-gray-100',
+        iconText: isActive ? 'text-indigo-600' : 'text-gray-500',
+        badgeBg: isActive ? 'bg-indigo-100' : 'bg-gray-100',
+        badgeText: isActive ? 'text-indigo-700' : 'text-gray-600',
+        nameText: isActive ? 'text-indigo-700' : 'text-gray-700',
+        descText: isActive ? 'text-indigo-600' : 'text-gray-500',
+        indicator: 'bg-indigo-500'
+      },
+      purple: {
+        border: isActive ? 'border-purple-500' : 'border-transparent',
+        bg: isActive ? 'bg-purple-50' : '',
+        iconBg: isActive ? 'bg-purple-100' : 'bg-gray-100',
+        iconText: isActive ? 'text-purple-600' : 'text-gray-500',
+        badgeBg: isActive ? 'bg-purple-100' : 'bg-gray-100',
+        badgeText: isActive ? 'text-purple-700' : 'text-gray-600',
+        nameText: isActive ? 'text-purple-700' : 'text-gray-700',
+        descText: isActive ? 'text-purple-600' : 'text-gray-500',
+        indicator: 'bg-purple-500'
+      },
+      green: {
+        border: isActive ? 'border-green-500' : 'border-transparent',
+        bg: isActive ? 'bg-green-50' : '',
+        iconBg: isActive ? 'bg-green-100' : 'bg-gray-100',
+        iconText: isActive ? 'text-green-600' : 'text-gray-500',
+        badgeBg: isActive ? 'bg-green-100' : 'bg-gray-100',
+        badgeText: isActive ? 'text-green-700' : 'text-gray-600',
+        nameText: isActive ? 'text-green-700' : 'text-gray-700',
+        descText: isActive ? 'text-green-600' : 'text-gray-500',
+        indicator: 'bg-green-500'
+      },
+      orange: {
+        border: isActive ? 'border-orange-500' : 'border-transparent',
+        bg: isActive ? 'bg-orange-50' : '',
+        iconBg: isActive ? 'bg-orange-100' : 'bg-gray-100',
+        iconText: isActive ? 'text-orange-600' : 'text-gray-500',
+        badgeBg: isActive ? 'bg-orange-100' : 'bg-gray-100',
+        badgeText: isActive ? 'text-orange-700' : 'text-gray-600',
+        nameText: isActive ? 'text-orange-700' : 'text-gray-700',
+        descText: isActive ? 'text-orange-600' : 'text-gray-500',
+        indicator: 'bg-orange-500'
+      },
+      teal: {
+        border: isActive ? 'border-teal-500' : 'border-transparent',
+        bg: isActive ? 'bg-teal-50' : '',
+        iconBg: isActive ? 'bg-teal-100' : 'bg-gray-100',
+        iconText: isActive ? 'text-teal-600' : 'text-gray-500',
+        badgeBg: isActive ? 'bg-teal-100' : 'bg-gray-100',
+        badgeText: isActive ? 'text-teal-700' : 'text-gray-600',
+        nameText: isActive ? 'text-teal-700' : 'text-gray-700',
+        descText: isActive ? 'text-teal-600' : 'text-gray-500',
+        indicator: 'bg-teal-500'
+      },
+      pink: {
+        border: isActive ? 'border-pink-500' : 'border-transparent',
+        bg: isActive ? 'bg-pink-50' : '',
+        iconBg: isActive ? 'bg-pink-100' : 'bg-gray-100',
+        iconText: isActive ? 'text-pink-600' : 'text-gray-500',
+        badgeBg: isActive ? 'bg-pink-100' : 'bg-gray-100',
+        badgeText: isActive ? 'text-pink-700' : 'text-gray-600',
+        nameText: isActive ? 'text-pink-700' : 'text-gray-700',
+        descText: isActive ? 'text-pink-600' : 'text-gray-500',
+        indicator: 'bg-pink-500'
+      }
+    };
+    return colorMap[color] || colorMap.blue;
+  };
 
   // Auto-save to localStorage
   useEffect(() => {
@@ -227,18 +390,18 @@ export default function ResourceManager() {
               <div className="space-y-2">
                 <button
                   onClick={() => setShowFileUpload(true)}
-                  className="w-full flex items-center gap-3 bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-lg transition-all duration-200 hover:shadow-lg hover:scale-[1.02]"
+                  className="w-full flex items-center gap-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-3 rounded-lg transition-all duration-200 hover:shadow-xl hover:scale-[1.02] font-medium shadow-lg"
                 >
                   <Upload size={18} />
-                  <span className="font-medium">Upload Config</span>
+                  <span>Upload Config</span>
                 </button>
                 
                 <button
                   onClick={handleExport}
-                  className="w-full flex items-center gap-3 bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-lg transition-all duration-200 hover:shadow-lg hover:scale-[1.02]"
+                  className="w-full flex items-center gap-3 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-4 py-3 rounded-lg transition-all duration-200 hover:shadow-xl hover:scale-[1.02] font-medium shadow-lg"
                 >
                   <Download size={18} />
-                  <span className="font-medium">Download Config</span>
+                  <span>Download Config</span>
                 </button>
               </div>
             </div>
@@ -249,27 +412,27 @@ export default function ResourceManager() {
               <div className="space-y-2">
                 <button
                   onClick={handleValidate}
-                  className="w-full flex items-center gap-3 bg-purple-600 hover:bg-purple-700 text-white px-4 py-3 rounded-lg transition-all duration-200 hover:shadow-lg hover:scale-[1.02]"
+                  className="w-full flex items-center gap-3 bg-gradient-to-r from-purple-500 to-violet-600 hover:from-purple-600 hover:to-violet-700 text-white px-4 py-3 rounded-lg transition-all duration-200 hover:shadow-xl hover:scale-[1.02] font-medium shadow-lg"
                 >
                   <Eye size={18} />
-                  <span className="font-medium">Validate Data</span>
+                  <span>Validate Data</span>
                 </button>
                 
                 <div className="flex gap-2">
                   <button
                     onClick={() => handleClear('current')}
-                    className="flex-1 flex items-center justify-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-3 py-3 rounded-lg transition-all duration-200 hover:shadow-lg hover:scale-[1.02]"
+                    className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white px-3 py-3 rounded-lg transition-all duration-200 hover:shadow-xl hover:scale-[1.02] font-medium shadow-lg"
                   >
                     <RotateCcw size={16} />
-                    <span className="text-sm font-medium">Clear Tab</span>
+                    <span className="text-sm">Clear Tab</span>
                   </button>
 
                   <button
                     onClick={() => handleClear('all')}
-                    className="flex-1 flex items-center justify-center gap-2 bg-red-500 hover:bg-red-600 text-white px-3 py-3 rounded-lg transition-all duration-200 hover:shadow-lg hover:scale-[1.02]"
+                    className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-red-500 to-rose-600 hover:from-red-600 hover:to-rose-700 text-white px-3 py-3 rounded-lg transition-all duration-200 hover:shadow-xl hover:scale-[1.02] font-medium shadow-lg"
                   >
                     <Trash size={16} />
-                    <span className="text-sm font-medium">Clear All</span>
+                    <span className="text-sm">Clear All</span>
                   </button>
                 </div>
               </div>
@@ -281,16 +444,16 @@ export default function ResourceManager() {
               <div className="space-y-2">
                 <button
                   onClick={() => setShowAlgorithmSettings(true)}
-                  className="w-full flex items-center gap-3 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-3 rounded-lg transition-all duration-200 hover:shadow-lg hover:scale-[1.02]"
+                  className="w-full flex items-center gap-3 bg-gradient-to-r from-indigo-500 to-blue-600 hover:from-indigo-600 hover:to-blue-700 text-white px-4 py-3 rounded-lg transition-all duration-200 hover:shadow-xl hover:scale-[1.02] font-medium shadow-lg"
                 >
                   <Settings size={18} />
-                  <span className="font-medium">Algorithm Settings</span>
+                  <span>Algorithm Settings</span>
                 </button>
 
                 <button
                   onClick={handleGenerateTimetable}
                   disabled={isGenerating}
-                  className="w-full flex items-center gap-3 bg-gradient-to-r from-teal-600 to-cyan-600 hover:from-teal-700 hover:to-cyan-700 disabled:from-gray-400 disabled:to-gray-500 text-white px-4 py-3 rounded-lg transition-all duration-200 hover:shadow-lg hover:scale-[1.02] disabled:hover:scale-100 disabled:cursor-not-allowed font-semibold"
+                  className="w-full flex items-center gap-3 bg-gradient-to-r from-teal-500 to-cyan-600 hover:from-teal-600 hover:to-cyan-700 disabled:from-gray-400 disabled:to-gray-500 text-white px-4 py-3 rounded-lg transition-all duration-200 hover:shadow-xl hover:scale-[1.02] disabled:hover:scale-100 disabled:cursor-not-allowed font-semibold shadow-lg"
                 >
                   <Play size={18} />
                   <span>{isGenerating ? 'Generating...' : 'Generate Timetable'}</span>
@@ -313,11 +476,11 @@ export default function ResourceManager() {
             <button
               onClick={() => setShowPDFExport(true)}
               disabled={!generationResult || !generationResult.success}
-              className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-300 disabled:text-gray-500 text-white px-6 py-2.5 rounded-lg transition-all duration-200 hover:shadow-lg hover:scale-[1.02] disabled:hover:scale-100 disabled:cursor-not-allowed"
+              className="flex items-center gap-2 bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 disabled:from-gray-300 disabled:to-gray-400 disabled:text-gray-500 text-white px-6 py-2.5 rounded-lg transition-all duration-200 hover:shadow-xl hover:scale-[1.02] disabled:hover:scale-100 disabled:cursor-not-allowed font-medium shadow-lg"
               title={!generationResult ? 'Generate a timetable first' : 'Export timetable to PDF'}
             >
               <FileText size={16} />
-              <span className="font-medium">Export PDF</span>
+              <span>Export PDF</span>
             </button>
           </div>
         </div>
@@ -361,23 +524,97 @@ export default function ResourceManager() {
         </div>
       </div>
 
-      {/* Navigation Tabs */}
-      <div className="bg-white rounded-lg shadow-md">
+      {/* Enhanced Navigation Tabs */}
+      <div className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden">
+        <div className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 px-6 py-4 border-b border-purple-200">
+          <h3 className="text-lg font-semibold text-white">Resource Configuration</h3>
+          <p className="text-sm text-purple-100 mt-1">Configure all university resources step by step</p>
+        </div>
+        
         <div className="border-b border-gray-200">
-          <nav className="flex overflow-x-auto">
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`px-6 py-3 text-sm font-medium whitespace-nowrap border-b-2 transition-colors ${
-                  activeTab === tab.id
-                    ? 'border-blue-500 text-blue-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                }`}
-              >
-                {tab.name}
-              </button>
-            ))}
+          <nav className="flex overflow-x-auto scrollbar-hide">
+            {tabs.map((tab) => {
+              const Icon = tab.icon;
+              const isActive = activeTab === tab.id;
+              const completionStatus = getTabCompletionStatus(tab.id);
+              const isComplete = completionStatus === 'complete';
+              const colors = getTabColors(tab.color, isActive);
+              
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`relative flex-1 min-w-0 px-4 py-6 text-center border-b-3 transition-all duration-200 group ${
+                    colors.border
+                  } ${
+                    colors.bg
+                  } ${
+                    !isActive ? 'hover:bg-gray-50 hover:border-gray-300' : ''
+                  }`}
+                >
+                  {/* Priority Badge */}
+                  <div className={`absolute top-2 left-2 w-6 h-6 rounded-full text-xs font-bold flex items-center justify-center ${
+                    colors.badgeBg
+                  } ${
+                    colors.badgeText
+                  }`}>
+                    {tab.priority}
+                  </div>
+                  
+                  {/* Completion Status */}
+                  <div className="absolute top-2 right-2">
+                    {isComplete ? (
+                      <CheckCircle size={16} className="text-green-500" />
+                    ) : (
+                      <div className="w-4 h-4 border-2 border-gray-300 rounded-full"></div>
+                    )}
+                  </div>
+                  
+                  {/* Icon */}
+                  <div className={`mx-auto mb-2 p-2 rounded-lg transition-colors ${
+                    colors.iconBg
+                  } ${
+                    colors.iconText
+                  } ${
+                    !isActive ? 'group-hover:bg-gray-200' : ''
+                  }`}>
+                    <Icon size={20} />
+                  </div>
+                  
+                  {/* Tab Name */}
+                  <div className={`font-medium text-sm transition-colors ${
+                    colors.nameText
+                  } ${
+                    !isActive ? 'group-hover:text-gray-900' : ''
+                  }`}>
+                    {tab.name}
+                  </div>
+                  
+                  {/* Description */}
+                  <div className={`text-xs mt-1 transition-colors ${
+                    colors.descText
+                  } ${
+                    !isActive ? 'group-hover:text-gray-700' : ''
+                  }`}>
+                    {tab.description}
+                  </div>
+                  
+                  {/* Data Count */}
+                  {tab.id !== 'basicInfo' && (
+                    <div className={`text-xs mt-1 font-semibold transition-colors ${
+                      colors.nameText
+                    }`}>
+                      {universityData[tab.id]?.length || 0} items
+                    </div>
+                  )}
+                  
+                  {/* Active Indicator */}
+                  {isActive && (
+                    <div className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 w-8 h-1 ${colors.indicator} rounded-t-full`}></div>
+                  )}
+                </button>
+              );
+            })}
           </nav>
         </div>
 

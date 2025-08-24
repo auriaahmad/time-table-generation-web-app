@@ -1,4 +1,5 @@
 // app/utils/dataStructure.js
+import { v4 as uuidv4 } from 'uuid';
 
 // Clean slate - no default values
 export const defaultUniversityData = {
@@ -57,61 +58,29 @@ export const defaultUniversityData = {
   }
 };
 
-// Global counters for consistent ID generation
-let idCounters = {
-  teachers: 0,
-  subjects: 0,
-  rooms: 0,
-  students: 0,
-  departments: 0,
-  timeSlots: 0
-};
-
-// Simple ID generator that uses incrementing numbers
+// UUID-based ID generator - much better than incremental IDs
 export const generateId = (type = 'general') => {
-  if (idCounters[type] !== undefined) {
-    idCounters[type]++;
-    return idCounters[type];
+  // Generate a UUID v4 (random UUID)
+  const uuid = uuidv4();
+  
+  // Optional: Add type prefix for better debugging/identification
+  if (type && type !== 'general') {
+    return `${type}_${uuid}`;
   }
-  // For general use, return a consistent counter-based ID
-  if (!idCounters.general) idCounters.general = 0;
-  idCounters.general++;
-  return idCounters.general;
+  
+  return uuid;
 };
 
-// Reset ID counters
+// Legacy support - these functions are no longer needed with UUIDs
+// but kept for backward compatibility
 export const resetIdCounters = () => {
-  idCounters = {
-    teachers: 0,
-    subjects: 0,
-    rooms: 0,
-    students: 0,
-    departments: 0,
-    timeSlots: 0,
-    general: 0
-  };
+  // No-op with UUIDs - each ID is already globally unique
+  console.log('resetIdCounters called - no action needed with UUIDs');
 };
 
-// Initialize ID counters based on existing data
 export const initializeIdCounters = (data) => {
-  if (data.teachers) {
-    idCounters.teachers = Math.max(0, ...data.teachers.map(t => typeof t.id === 'number' ? t.id : 0));
-  }
-  if (data.subjects) {
-    idCounters.subjects = Math.max(0, ...data.subjects.map(s => typeof s.id === 'number' ? s.id : 0));
-  }
-  if (data.rooms) {
-    idCounters.rooms = Math.max(0, ...data.rooms.map(r => typeof r.id === 'number' ? r.id : 0));
-  }
-  if (data.students) {
-    idCounters.students = Math.max(0, ...data.students.map(s => typeof s.id === 'number' ? s.id : 0));
-  }
-  if (data.departments) {
-    idCounters.departments = Math.max(0, ...data.departments.map(d => typeof d.id === 'number' ? d.id : 0));
-  }
-  if (data.timeSlots) {
-    idCounters.timeSlots = Math.max(0, ...data.timeSlots.map(t => typeof t.id === 'number' ? t.id : 0));
-  }
+  // No-op with UUIDs - no counters to initialize
+  console.log('initializeIdCounters called - no action needed with UUIDs');
 };
 
 export const exportToJSON = (data) => {

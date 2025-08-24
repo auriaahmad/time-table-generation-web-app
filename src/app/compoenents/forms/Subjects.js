@@ -10,7 +10,7 @@ export default function Subjects({ data, onChange, universityData }) {
   const [subjects, setSubjects] = useState(() => {
     return (data || []).map((subject, index) => ({
       ...subject,
-      id: subject.id || (Date.now() + index + Math.random()),
+      id: subject.id || generateId('subjects'),
       program: subject.program || ""
     }));
   });
@@ -40,7 +40,7 @@ export default function Subjects({ data, onChange, universityData }) {
 
   const addSubject = () => {
     const newSubject = {
-      id: Date.now() + Math.random(),
+      id: generateId('subjects'),
       name: "",
       code: "",
       department: "",
