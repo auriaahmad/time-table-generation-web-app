@@ -334,19 +334,32 @@ export default function ResourceManager() {
 
       const result = await response.json();
       console.log('Backend Response:', result);
-      console.log('Backend Response Keys:', Object.keys(result));
-      if (result.schedule) console.log('Schedule Length:', result.schedule.length);
-      if (result.timetable) console.log('Timetable Length:', result.timetable.length);
       
-      setGenerationResult(result);
-      setSaveStatus('✓ Timetable generated successfully!');
+      if (result.success) {
+        console.log('Backend Response Keys:', Object.keys(result));
+        if (result.schedule) console.log('Schedule Length:', result.schedule.length);
+        if (result.timetable) console.log('Timetable Length:', result.timetable.length);
+        
+        setGenerationResult(result);
+        setSaveStatus('✓ Timetable generated successfully!');
+      } else {
+        // Handle detailed error response from backend
+        console.error('Backend returned error:', result);
+        const errorMessage = result.message || result.error || 'Unknown error occurred';
+        setSaveStatus(`⚠ ${errorMessage}`);
+        setGenerationResult({
+          ...result,
+          success: false
+        });
+      }
       
     } catch (error) {
       console.error('Error generating timetable:', error);
       setSaveStatus('⚠ Failed to generate timetable: ' + error.message);
       setGenerationResult({ 
         success: false, 
-        error: error.message 
+        error: error.message,
+        message: 'Network or server error occurred'
       });
     } finally {
       setIsGenerating(false);
@@ -877,18 +890,92 @@ export default function ResourceManager() {
                   </div>
                 </div>
               ) : (
-                <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-                  <div className="flex items-center gap-2">
-                    <AlertCircle className="text-red-600" size={20} />
-                    <span className="font-medium text-red-800">Generation Failed</span>
+                <div className="space-y-4">
+                  <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+                    <div className="flex items-center gap-2">
+                      <AlertCircle className="text-red-600" size={20} />
+                      <span className="font-medium text-red-800">Generation Failed</span>
+                    </div>
+                    <p className="text-red-700 mt-2 font-medium">
+                      {generationResult.message || generationResult.error || 'Unknown error occurred'}
+                    </p>
+                    
+                    {/* Display detailed error information if available */}
+                    {generationResult.details && (
+                      <div className="mt-4 space-y-3">
+                        {/* Error Type */}
+                        {generationResult.details.errorType && (
+                          <div className="bg-red-100 border border-red-300 rounded p-3">
+                            <p className="text-sm font-medium text-red-800">
+                              Error Type: <span className="font-mono">{generationResult.details.errorType}</span>
+                            </p>
+                          </div>
+                        )}
+                        
+                        {/* Critical Issues */}
+                        {generationResult.details.criticalIssues && generationResult.details.criticalIssues.length > 0 && (
+                          <div className="bg-red-100 border border-red-300 rounded p-3">
+                            <h4 className="font-medium text-red-800 mb-2">Critical Issues:</h4>
+                            <ul className="list-disc list-inside space-y-1 text-sm text-red-700">
+                              {generationResult.details.criticalIssues.map((issue, index) => (
+                                <li key={index}>{issue}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                        
+                        {/* Validation Errors */}
+                        {generationResult.details.errors && generationResult.details.errors.length > 0 && (
+                          <div className="bg-red-100 border border-red-300 rounded p-3">
+                            <h4 className="font-medium text-red-800 mb-2">Validation Errors:</h4>
+                            <ul className="list-disc list-inside space-y-1 text-sm text-red-700">
+                              {generationResult.details.errors.map((error, index) => (
+                                <li key={index}>{error}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                        
+                        {/* Suggestions */}
+                        {((generationResult.details.suggestions && generationResult.details.suggestions.length > 0) || 
+                          (generationResult.details.recommendations && generationResult.details.recommendations.length > 0)) && (
+                          <div className="bg-yellow-50 border border-yellow-300 rounded p-3">
+                            <h4 className="font-medium text-yellow-800 mb-2">💡 Suggestions to Fix:</h4>
+                            <ul className="list-disc list-inside space-y-1 text-sm text-yellow-700">
+                              {(generationResult.details.suggestions || generationResult.details.recommendations || []).map((suggestion, index) => (
+                                <li key={index}>{suggestion}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                        
+                        {/* Statistics if available */}
+                        {generationResult.details.stats && (
+                          <div className="bg-blue-50 border border-blue-300 rounded p-3">
+                            <h4 className="font-medium text-blue-800 mb-2">Current Statistics:</h4>
+                            <div className="text-sm text-blue-700 space-y-1">
+                              {generationResult.details.stats.totalRequiredHours !== undefined && (
+                                <p>Required Hours: {generationResult.details.stats.totalRequiredHours}h/week</p>
+                              )}
+                              {generationResult.details.stats.totalAvailableHours !== undefined && (
+                                <p>Available Hours: {generationResult.details.stats.totalAvailableHours}h/week</p>
+                              )}
+                              {generationResult.details.stats.totalTimeSlots !== undefined && (
+                                <p>Time Slots: {generationResult.details.stats.totalTimeSlots} total</p>
+                              )}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                    
+                    <button
+                      onClick={() => setGenerationResult(null)}
+                      className="mt-4 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors"
+                    >
+                      Close
+                    </button>
                   </div>
-                  <p className="text-red-700 mt-1">{generationResult.error}</p>
-                  <button
-                    onClick={() => setGenerationResult(null)}
-                    className="mt-3 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors"
-                  >
-                    Close
-                  </button>
                 </div>
               )}
             </div>

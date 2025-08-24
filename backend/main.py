@@ -7,7 +7,7 @@ from datetime import datetime
 import json
 
 # Import our routers
-from routers.timetable import router as timetable_router
+from routers.timetable_modular import router as timetable_router
 
 # Create FastAPI app
 app = FastAPI(
@@ -165,10 +165,11 @@ async def get_sample_data():
 # Startup event
 @app.on_event("startup")
 async def startup_event():
-    print("🚀 University Timetable Generator API is starting...")
-    print("📖 API Documentation: http://localhost:8000/docs")
-    print("❤️  Health Check: http://localhost:8000/health")
-    print("🧪 Test Endpoint: http://localhost:8000/test")
+    print("University Timetable Generator API is starting...")
+    print("API Documentation: http://localhost:8000/docs")
+    print("Health Check: http://localhost:8000/health")
+    print("Test Endpoint: http://localhost:8000/test")
+    print("Modular Architecture: Enhanced GA v2.0")
 
 # Main entry point
 if __name__ == "__main__":

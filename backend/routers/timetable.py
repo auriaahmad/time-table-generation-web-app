@@ -738,12 +738,44 @@ async def generate_enhanced_timetable(request_data: Dict[str, Any]):
         
         # Basic validation
         if not university_data:
-            raise HTTPException(status_code=400, detail="University data is required")
+            return {
+                "success": False,
+                "error": "Missing university data",
+                "message": "Please provide university data including teachers, subjects, rooms, students, and time slots",
+                "details": {
+                    "errorType": "MISSING_DATA",
+                    "requiredFields": ["basicInfo", "teachers", "subjects", "rooms", "students", "timeSlots"]
+                }
+            }
         
-        # Validate data structure
+        # Validate data structure with detailed feedback
         validation_result = validate_university_data_structure(university_data)
         if not validation_result["valid"]:
-            raise HTTPException(status_code=400, detail=f"Data validation failed: {validation_result['errors']}")
+            return {
+                "success": False,
+                "error": "Data validation failed",
+                "message": "Your university data has validation errors that prevent timetable generation",
+                "details": {
+                    "errorType": "VALIDATION_FAILED",
+                    "errors": validation_result["errors"],
+                    "warnings": validation_result.get("warnings", []),
+                    "suggestions": generate_validation_suggestions(validation_result["errors"])
+                }
+            }
+        
+        # Additional pre-generation checks
+        pre_check_result = perform_pre_generation_checks(university_data)
+        if not pre_check_result["canGenerate"]:
+            return {
+                "success": False,
+                "error": "Pre-generation checks failed",
+                "message": "Critical issues found that prevent timetable generation",
+                "details": {
+                    "errorType": "PRE_GENERATION_FAILED",
+                    "criticalIssues": pre_check_result["criticalIssues"],
+                    "recommendations": pre_check_result["recommendations"]
+                }
+            }
         
         # Create enhanced GA instance
         ga = EnhancedTimetableGA(university_data)
@@ -807,7 +839,36 @@ async def generate_enhanced_timetable(request_data: Dict[str, Any]):
         error_traceback = traceback.format_exc()
         logging.error(f"Timetable generation error: {str(e)}")
         logging.error(f"Full traceback: {error_traceback}")
-        raise HTTPException(status_code=500, detail=f"Timetable generation failed: {str(e)}")
+        
+        # Provide meaningful error messages based on the exception
+        error_message = str(e)
+        error_type = "GENERATION_ERROR"
+        suggestions = []
+        
+        if "can only concatenate str" in error_message:
+            error_message = "Time slot format incompatibility detected"
+            error_type = "TIME_SLOT_FORMAT_ERROR"
+            suggestions = ["Ensure time slots have consistent ID format (all strings or all numbers)"]
+        elif "No qualified teacher" in error_message:
+            error_type = "TEACHER_QUALIFICATION_ERROR" 
+            suggestions = ["Add subject names/codes to teacher 'subjectsCanTeach' arrays"]
+        elif "not enough values to unpack" in error_message:
+            error_type = "DATA_STRUCTURE_ERROR"
+            suggestions = ["Check that all required fields are present in your data"]
+        elif "list index out of range" in error_message:
+            error_type = "INSUFFICIENT_DATA_ERROR"
+            suggestions = ["Ensure you have sufficient teachers, rooms, and time slots for your requirements"]
+        
+        return {
+            "success": False,
+            "error": error_message,
+            "message": f"An unexpected error occurred during timetable generation: {error_message}",
+            "details": {
+                "errorType": error_type,
+                "suggestions": suggestions,
+                "technicalDetails": error_traceback if logging.getLogger().isEnabledFor(logging.DEBUG) else None
+            }
+        }
 
 
 def format_enhanced_timetable(solution: List[Dict[str, Any]], university_data: Dict[str, Any]) -> List[Dict[str, Any]]:
@@ -1139,6 +1200,111 @@ def check_enhanced_conflicts(solution: List[Dict[str, Any]], ga: EnhancedTimetab
             })
     
     return conflicts
+
+def generate_validation_suggestions(errors: List[str]) -> List[str]:
+    """Generate helpful suggestions based on validation errors"""
+    suggestions = []
+    
+    for error in errors:
+        if "No qualified teacher found for subject:" in error:
+            subject_name = error.split(":")[-1].strip()
+            suggestions.append(f"Add '{subject_name}' to the 'subjectsCanTeach' array of qualified teachers")
+        elif "No room large enough for" in error:
+            suggestions.append("Consider adding larger capacity rooms or splitting large student groups into smaller sections")
+        elif "Lab subjects found but no laboratory rooms available" in error:
+            suggestions.append("Add rooms with type 'Laboratory' for lab subjects, or change lab subjects to theory")
+        elif "Missing required section:" in error:
+            section = error.split(":")[-1].strip()
+            suggestions.append(f"Add the '{section}' section to your university data")
+        else:
+            suggestions.append("Please review and correct the data according to the error message")
+    
+    return suggestions
+
+def perform_pre_generation_checks(university_data: Dict[str, Any]) -> Dict[str, Any]:
+    """Perform comprehensive pre-generation checks"""
+    critical_issues = []
+    recommendations = []
+    can_generate = True
+    
+    teachers = university_data.get("teachers", [])
+    subjects = university_data.get("subjects", [])
+    students = university_data.get("students", [])
+    time_slots = university_data.get("timeSlots", [])
+    working_days = university_data.get("basicInfo", {}).get("workingDays", [])
+    
+    # Check if we have enough data to generate anything
+    if not teachers:
+        critical_issues.append("No teachers defined - cannot generate timetable without faculty")
+        can_generate = False
+    
+    if not subjects:
+        critical_issues.append("No subjects defined - cannot generate timetable without courses")
+        can_generate = False
+        
+    if not students:
+        critical_issues.append("No student groups defined - cannot generate timetable without students")
+        can_generate = False
+        
+    if not time_slots:
+        critical_issues.append("No time slots defined - cannot generate timetable without time periods")
+        can_generate = False
+        
+    if not working_days:
+        critical_issues.append("No working days defined - cannot generate timetable without schedule days")
+        can_generate = False
+    
+    # Check teacher qualifications
+    total_required_hours = 0
+    total_available_hours = 0
+    total_time_slots = 0
+    
+    if can_generate:
+        unqualified_subjects = []
+        for subject in subjects:
+            subject_name = subject.get("name", "")
+            subject_code = subject.get("code", "")
+            qualified_teachers = [
+                t for t in teachers 
+                if subject_name in t.get("subjectsCanTeach", []) or subject_code in t.get("subjectsCanTeach", [])
+            ]
+            if not qualified_teachers:
+                unqualified_subjects.append(f"{subject_name} ({subject_code})")
+        
+        if unqualified_subjects:
+            critical_issues.append(f"No qualified teachers for: {', '.join(unqualified_subjects)}")
+            recommendations.append("Go to Teachers section and add subject names/codes to 'subjectsCanTeach' arrays")
+            can_generate = False
+        
+        # Check workload feasibility
+        for subject in subjects:
+            hours_per_week = subject.get("hoursPerWeek", 3)
+            enrolled_groups = len([sg for sg in students if subject["id"] in sg.get("subjects", [])])
+            total_required_hours += hours_per_week * enrolled_groups
+        
+        total_available_hours = sum(teacher.get("maxHoursPerWeek", 20) for teacher in teachers)
+        
+        if total_required_hours > total_available_hours:
+            critical_issues.append(f"Insufficient teacher capacity: need {total_required_hours}h/week, available {total_available_hours}h/week")
+            recommendations.append("Either reduce course hours, add more teachers, or increase teacher working hours")
+            can_generate = False
+        
+        # Check time slot capacity
+        total_time_slots = len(time_slots) * len(working_days)
+        if total_required_hours > total_time_slots * 0.9:  # 90% utilization threshold
+            critical_issues.append("Time slot capacity nearly exceeded - high risk of scheduling conflicts")
+            recommendations.append("Consider adding more time slots per day or additional working days")
+    
+    return {
+        "canGenerate": can_generate,
+        "criticalIssues": critical_issues,
+        "recommendations": recommendations,
+        "stats": {
+            "totalRequiredHours": total_required_hours,
+            "totalAvailableHours": total_available_hours,
+            "totalTimeSlots": total_time_slots
+        }
+    }
 
 @router.post("/validate-enhanced-data")
 async def validate_enhanced_university_data(request_data: Dict[str, Any]):

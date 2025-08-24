@@ -1,0 +1,29 @@
+{
+  "universityData": {
+    "basicInfo": {
+      "universityName": "GIKI",
+      "academicYear": "2024-2025",
+      "semester": "Fall",
+      "workingDays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "dailyPeriods": 8
+    },
+    "teachers": [
+      {
+        "id": "teachers_1",
+        "name": "Tanveer",
+        "subjectsCanTeach": []
+      }
+    ],
+    "subjects": [
+      {
+        "id": "subjects_1",
+        "name": "DLD",
+        "code": "DLDL101",
+        "hoursPerWeek": 3
+      }
+    ],
+    "rooms": [{"id": "room_1", "name": "A-102", "capacity": 60, "type": "Laboratory"}],
+    "students": [{"id": "student_1", "batch": "CS-2025", "subjects": ["subjects_1"], "totalStudents": 50}],
+    "timeSlots": [{"id": "slot_1", "startTime": "08:00", "endTime": "09:00"}]
+  }
+}
