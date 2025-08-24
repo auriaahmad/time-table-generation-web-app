@@ -33,4 +33,36 @@
   .card {
     @apply bg-white rounded-lg shadow-md p-6;
   }
+  
+  .slider {
+    @apply h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer;
+  }
+  
+  .slider::-webkit-slider-thumb {
+    @apply appearance-none w-5 h-5 bg-blue-600 rounded-full cursor-pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+  }
+  
+  .slider::-webkit-slider-thumb:hover {
+    @apply bg-blue-700 transform scale-110;
+  }
+  
+  .slider::-moz-range-thumb {
+    @apply w-5 h-5 bg-blue-600 rounded-full cursor-pointer border-none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+  }
+  
+  .slider::-moz-range-thumb:hover {
+    @apply bg-blue-700 transform scale-110;
+  }
+  
+  .slider:focus {
+    @apply outline-none;
+  }
+  
+  .slider:focus::-webkit-slider-thumb {
+    @apply ring-2 ring-blue-300;
+  }
 }

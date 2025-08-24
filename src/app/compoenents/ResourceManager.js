@@ -15,6 +15,7 @@ import TimeSlots from './forms/TimeSlots';
 import FileUpload from './FileUpload';
 import PDFExportModal from './PDFExportModal';
 import PDFTestButton from './PDFTestButton';
+import Tooltip from './Tooltip';
 
 export default function ResourceManager() {
   const [universityData, setUniversityData] = useState(defaultUniversityData);
@@ -233,6 +234,30 @@ export default function ResourceManager() {
       }
     }
   }, []);
+
+  // Handle ESC key to close modals
+  useEffect(() => {
+    const handleEscKey = (event) => {
+      if (event.key === 'Escape') {
+        if (showAlgorithmSettings) {
+          setShowAlgorithmSettings(false);
+        } else if (showFileUpload) {
+          setShowFileUpload(false);
+        } else if (showClearConfirm) {
+          setShowClearConfirm(false);
+        } else if (generationResult) {
+          setGenerationResult(null);
+        } else if (showPDFExport) {
+          setShowPDFExport(false);
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleEscKey);
+    return () => {
+      document.removeEventListener('keydown', handleEscKey);
+    };
+  }, [showAlgorithmSettings, showFileUpload, showClearConfirm, generationResult, showPDFExport]);
 
   const handleDataChange = (section, newData) => {
     setUniversityData(prev => {
@@ -653,7 +678,7 @@ export default function ResourceManager() {
 
       {/* Clear Confirmation Modal */}
       {showClearConfirm && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-20 backdrop-blur-sm flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg max-w-md w-full p-6">
             <div className="flex items-center gap-3 mb-4">
               <AlertCircle className="text-red-600" size={24} />
@@ -685,11 +710,17 @@ export default function ResourceManager() {
 
       {/* Algorithm Settings Modal */}
       {showAlgorithmSettings && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-20 backdrop-blur-sm flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             <div className="p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-gray-900">Algorithm Settings</h3>
+              <div className="flex items-center justify-between mb-6">
+                <Tooltip
+                  title="How Algorithm Settings Work"
+                  content="These settings control the genetic algorithm that generates your timetable. Hover over the info icons below for detailed explanations. For quick results, use lower values. For better quality solutions, increase population size and generations."
+                  placement="bottom"
+                >
+                  <h3 className="text-lg font-semibold text-gray-900">Algorithm Settings</h3>
+                </Tooltip>
                 <button
                   onClick={() => setShowAlgorithmSettings(false)}
                   className="text-gray-400 hover:text-gray-600"
@@ -698,41 +729,65 @@ export default function ResourceManager() {
                 </button>
               </div>
               
-              <div className="space-y-4">
+              <div className="space-y-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Population Size ({algorithmSettings.populationSize})
-                  </label>
+                  <Tooltip
+                    title="Population Size"
+                    content="Controls how many different timetable solutions are generated and tested in each iteration. Higher values (50-100) provide more diverse solutions and better quality results, but take longer to compute. Lower values (20-40) run faster but may miss optimal solutions. Recommended: 30-50 for most cases."
+                    placement="right"
+                  >
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Population Size ({algorithmSettings.populationSize})
+                    </label>
+                  </Tooltip>
                   <input
                     type="range"
                     min="20"
                     max="100"
                     value={algorithmSettings.populationSize}
                     onChange={(e) => setAlgorithmSettings(prev => ({...prev, populationSize: parseInt(e.target.value)}))}
-                    className="w-full"
+                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
                   />
-                  <div className="text-xs text-gray-500 mt-1">Number of solutions in each generation (20-100)</div>
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>20 (Fast)</span>
+                    <span>100 (Thorough)</span>
+                  </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Generations ({algorithmSettings.generations})
-                  </label>
+                  <Tooltip
+                    title="Generations (Iterations)"
+                    content="Number of evolution cycles the algorithm runs. More generations (100-200) allow the algorithm to find better solutions by refining them over time, but increase computation time. Fewer generations (25-50) finish faster but may not find the optimal solution. The algorithm may stop early if it finds a perfect solution."
+                    placement="right"
+                  >
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Generations ({algorithmSettings.generations})
+                    </label>
+                  </Tooltip>
                   <input
                     type="range"
                     min="25"
                     max="200"
                     value={algorithmSettings.generations}
                     onChange={(e) => setAlgorithmSettings(prev => ({...prev, generations: parseInt(e.target.value)}))}
-                    className="w-full"
+                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
                   />
-                  <div className="text-xs text-gray-500 mt-1">Maximum number of iterations (25-200)</div>
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>25 (Quick)</span>
+                    <span>200 (Exhaustive)</span>
+                  </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Mutation Rate ({(algorithmSettings.mutationRate * 100).toFixed(0)}%)
-                  </label>
+                  <Tooltip
+                    title="Mutation Rate"
+                    content="Percentage of random changes applied to solutions to explore new possibilities. Higher rates (20-30%) help escape local optima and find diverse solutions but can disrupt good patterns. Lower rates (5-10%) preserve good solutions but may get stuck. Recommended: 10-20% for balanced exploration."
+                    placement="right"
+                  >
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Mutation Rate ({(algorithmSettings.mutationRate * 100).toFixed(0)}%)
+                    </label>
+                  </Tooltip>
                   <input
                     type="range"
                     min="0.05"
@@ -740,15 +795,24 @@ export default function ResourceManager() {
                     step="0.01"
                     value={algorithmSettings.mutationRate}
                     onChange={(e) => setAlgorithmSettings(prev => ({...prev, mutationRate: parseFloat(e.target.value)}))}
-                    className="w-full"
+                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
                   />
-                  <div className="text-xs text-gray-500 mt-1">Probability of random changes (5-30%)</div>
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>5% (Conservative)</span>
+                    <span>30% (Exploratory)</span>
+                  </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Crossover Rate ({(algorithmSettings.crossoverRate * 100).toFixed(0)}%)
-                  </label>
+                  <Tooltip
+                    title="Crossover Rate"
+                    content="Probability of combining two good solutions to create new ones. Higher rates (80-95%) favor combining successful patterns, leading to faster convergence but potentially missing novel solutions. Lower rates (60-75%) rely more on individual mutations. Recommended: 70-85% for most scenarios."
+                    placement="right"
+                  >
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Crossover Rate ({(algorithmSettings.crossoverRate * 100).toFixed(0)}%)
+                    </label>
+                  </Tooltip>
                   <input
                     type="range"
                     min="0.60"
@@ -756,24 +820,36 @@ export default function ResourceManager() {
                     step="0.01"
                     value={algorithmSettings.crossoverRate}
                     onChange={(e) => setAlgorithmSettings(prev => ({...prev, crossoverRate: parseFloat(e.target.value)}))}
-                    className="w-full"
+                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
                   />
-                  <div className="text-xs text-gray-500 mt-1">Probability of combining solutions (60-95%)</div>
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>60% (Independent)</span>
+                    <span>95% (Collaborative)</span>
+                  </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Elite Size ({algorithmSettings.eliteSize})
-                  </label>
+                  <Tooltip
+                    title="Elite Size"
+                    content="Number of best solutions automatically preserved to the next generation. Higher values (5-10) ensure good solutions are never lost but may slow down evolution. Lower values (1-3) allow faster change but risk losing good patterns. Recommended: 2-5 based on population size."
+                    placement="right"
+                  >
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Elite Size ({algorithmSettings.eliteSize})
+                    </label>
+                  </Tooltip>
                   <input
                     type="range"
                     min="1"
                     max="10"
                     value={algorithmSettings.eliteSize}
                     onChange={(e) => setAlgorithmSettings(prev => ({...prev, eliteSize: parseInt(e.target.value)}))}
-                    className="w-full"
+                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
                   />
-                  <div className="text-xs text-gray-500 mt-1">Number of best solutions to keep (1-10)</div>
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>1 (Minimal)</span>
+                    <span>10 (Maximum)</span>
+                  </div>
                 </div>
               </div>
 
@@ -806,7 +882,7 @@ export default function ResourceManager() {
 
       {/* Generation Results Modal */}
       {generationResult && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div className="fixed inset-0 bg-black bg-opacity-20 backdrop-blur-sm flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
             <div className="p-6">
               <div className="flex items-center justify-between mb-4">
